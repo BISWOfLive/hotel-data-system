@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}比价目标{% endblock %}
+{% block sub %}共 {{ targets | length }} 条{% endblock %}
+{% block desc %}<p class="page-desc">
+  比价目标<b>取代旧系统的两个 txt</b>(<span class="mono">compare_hotels.txt</span> +
+  <span class="mono">price_targets.txt</span>)—— 一个会经常增删酒店的清单是<b>业务实体</b>,
+  不是「只增不改义」的领域规则,所以落库而不是放 <span class="mono">config/</span>。
+  <br><span class="mono">mode</span>:<b>batch</b> = 01:00 批量清单 ·
+  <b>cron</b> = 08:30/13:30/17:30 定时采集 · <b>both</b> = 两处都列(旧清单里确实有这样的店)。
+</p>{% endblock %}
+
+{% block content %}
+
+<div class="card" style="margin-bottom:16px">
+  <h2>新增 / 更新目标</h2>
+  <form method="post" action="/admin/targets/create">
+    <div class="form-grid">
+      <div class="field"><label>锚点酒店名 <span style="color:var(--err)">*</span></label>
+        <input type="text" name="anchor_name" required list="hotelnames" placeholder="与酒店名一致才能回填 hotel_id">
+        <datalist id="hotelnames">
+          {% for h in hotels %}<option value="{{ h.name }}">{% endfor %}
+        </datalist></div>
+      <div class="field"><label>城市</label>
+        <input type="text" name="city" placeholder="如:莱州"></div>
+      <div class="field"><label>模式</label>
+        <select name="mode">
+          <option value="batch">batch(01:00 批量)</option>
+          <option value="cron">cron(定时采集)</option>
+          <option value="both">both(两者都要)</option>
+        </select></div>
+      <div class="field"><label>平台</label>
+        <input type="text" name="platforms" value="ctrip,meituan">
+        <span class="hint">逗号分隔;未注册的名字会报错</span></div>
+      <div class="field"><label>住几晚</label>
+        <input type="number" name="nights" value="1" min="1" max="30"></div>
+      <div class="field"><label>ebk_hotel_id</label>
+        <input type="text" name="ebk_hotel_id" placeholder="留空则从酒店表回填">
+        <span class="hint">★ 有它 = 携程锚点零页面直达</span></div>
+    </div>
+    <div style="margin-top:11px"><button class="primary" type="submit">保存</button></div>
+  </form>
+</div>
+
+<div class="card" style="margin-bottom:16px">
+  <h2>从旧系统导入两个 txt</h2>
+  <form method="post" action="/admin/targets/import">
+    <div class="form-grid">
+      <div class="field"><label>旧系统根目录</label>
+        <input type="text" name="from_dir" placeholder="D:\...\hotel-data-system">
+        <span class="hint">
+          会读 <span class="mono">config/compare_hotels.txt</span>(→batch)与
+          <span class="mono">config/price_targets.txt</span>(→cron);
+          两个文件都是 <b>GBK</b> 编码,已按 GB18030 兼容读取。
+          两处都列了同一家店会合并成 <span class="mono">both</span>(否则定时采集会一个目标都没有)。
+        </span></div>
+    </div>
+    <div style="margin-top:11px"><button type="submit">导入</button></div>
+  </form>
+</div>
+
+<div class="card">
+  <h2>目标列表</h2>
+  {% if targets %}
+  <table>
+    <thead><tr><th>ID</th><th>锚点</th><th>城市</th><th>模式</th><th>平台</th><th>ebk_id</th>
+      <th>状态</th><th class="num">今日已采</th><th>操作</th></tr></thead>
+    <tbody>
+    {% for t in targets %}
+      <tr>
+        <td class="mono">{{ t.id }}</td>
+        <td><b>{{ t.anchor_name }}</b>
+          {% if not t.hotel_id %}<span class="badge warn" title="未与 core_hotels 关联,日报段按名字取数">未关联</span>{% endif %}
+        </td>
+        <td>{{ t.city or '—' }}</td>
+        <td class="mono">{{ t.mode }}</td>
+        <td class="mono">{{ t.platforms | join(',') }}</td>
+        <td class="mono">{{ t.ebk_hotel_id or '—' }}</td>
+        <td>
+          {% if t.enabled %}<span class="badge ok">启用</span>
+          {% else %}<span class="badge dim">停用</span>{% endif %}
+        </td>
+        <td class="num">{{ today_counts.get(t.anchor_name, 0) }}</td>
+        <td>
+          <form class="inline" method="post" action="/admin/targets/{{ t.id }}/toggle">
+            <button class="tiny" type="submit">{{ '停用' if t.enabled else '启用' }}</button>
+          </form>
+          <form class="inline" method="post" action="/admin/targets/{{ t.id }}/delete"
+                onsubmit="return confirm('确认删除目标「{{ t.anchor_name }}」?\n\n已采集的历史比价记录会保留。')">
+            <button class="tiny danger" type="submit">删除</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <div class="empty">还没有比价目标。用上面的表单新增,或从旧系统导入。</div>
+  {% endif %}
+</div>
+
+{% endblock %}

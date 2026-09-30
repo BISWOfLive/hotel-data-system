@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>登录 · 酒店数据系统</title>
+<link rel="stylesheet" href="/static/admin.css">
+</head>
+<body>
+<div class="login-wrap">
+  <form class="login-box" method="post" action="/admin/login">
+    <h1>酒店数据系统 · 后台</h1>
+    <div class="sub">段1 提取 · 段2 推送 · 段3 比价</div>
+
+    {% if error %}<div class="flash err">{{ error }}</div>{% endif %}
+
+    <div class="field">
+      <label for="pw">后台口令</label>
+      <input type="password" id="pw" name="password" autofocus autocomplete="current-password" required>
+    </div>
+    <button class="primary" type="submit">登录</button>
+
+    {% if not has_password %}
+      <div class="hint-box danger" style="margin-top:16px">
+        <b>尚未设置后台口令</b><br>
+        后台在未设口令时<b>拒绝一切登录</b>(安全默认,不是放行)。<br>
+        先在本机执行:<br>
+        <code>hoteldata admin passwd --set &lt;新口令&gt;</code>
+      </div>
+    {% else %}
+      <div class="hint-box" style="margin-top:16px">
+        口令为<b>统一口令</b>(总纲 §7.8:不做角色区分与权限树)。<br>
+        忘记口令:<code>hoteldata admin passwd --set &lt;新口令&gt;</code>
+      </div>
+    {% endif %}
+  </form>
+</div>
+</body>
+</html>

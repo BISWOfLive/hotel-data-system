@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}任务{% endblock %}
+{% block sub %}注册 {{ specs | length }} 个 · 调度器{{ '运行中' if scheduler else '未运行' }}{% endblock %}
+{% block desc %}<p class="page-desc">
+  <b>时刻表的唯一来源就是这张表</b>(写在 <span class="mono">src/hoteldata/jobs.py</span> 的
+  <span class="mono">@task(cron=…)</span> 里)—— <span class="mono">.env</span> 里一个时刻都没有。
+  运行历史落 <span class="mono">job_runs</span>;手动重跑用 <span class="mono">trigger=manual</span>,
+  不受"计划触发"的幂等约束。
+</p>{% endblock %}
+
+{% block content %}
+
+<div class="hint-box">
+  <b>补跑(<span class="mono">catch_up</span>)按注册表反推</b>,不是扫 <span class="mono">job_runs</span>
+  里失败的 —— 进程在触发时刻关着的话<b>那行记录根本不存在</b>,永远扫不到,而那恰是最该救的场景。
+  超过 <span class="mono">max_delay</span> 则记 <span class="mono">skipped</span> 不跑(窗口已错位,白烧风控额度)。
+</div>
+
+<div class="card" style="margin-bottom:16px">
+  <h2>注册的任务</h2>
+  <table>
+    <thead><tr><th>任务</th><th>cron</th><th>补跑</th><th>max_delay</th><th>域</th><th>说明</th><th></th></tr></thead>
+    <tbody>
+    {% for s in specs %}
+      <tr>
+        <td class="mono"><a href="/admin/tasks?task={{ s.name }}">{{ s.name }}</a></td>
+        <td class="mono">{{ s.cron }}</td>
+        <td>{% if s.catch_up %}<span class="badge ok">是</span>{% else %}<span class="badge dim">否</span>{% endif %}</td>
+        <td class="mono">{{ s.max_delay }}</td>
+        <td class="mono">{{ s.domain }}</td>
+        <td class="note">{{ s.description }}</td>
+        <td>
+          <form class="inline" method="post" action="/admin/tasks/run"
+                onsubmit="return confirm('立即手动执行 {{ s.name }}?\n\n它会真的发消息/采数据。')">
+            <input type="hidden" name="task" value="{{ s.name }}">
+            <button class="tiny" type="submit">跑一次</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>
+    最近运行
+    {% if task %}<span class="badge info">筛选:{{ task }}</span>
+      <a href="/admin/tasks" style="font-weight:400;margin-left:8px">清除</a>{% endif %}
+  </h2>
+  {% if runs %}
+  <table>
+    <thead><tr><th>任务</th><th>状态</th><th>触发</th><th>计划时刻</th><th>开始</th>
+      <th class="num">耗时</th><th>摘要 / 错误</th></tr></thead>
+    <tbody>
+    {% for r in runs %}
+      <tr>
+        <td class="mono">{{ r.task }}</td>
+        <td><span class="badge {{ {'ok':'ok','failed':'err','running':'info','skipped':'dim'}.get(r.status,'warn') }}">
+          {{ r.status }}</span></td>
+        <td class="mono">{{ r.trigger }}</td>
+        <td class="mono">{{ r.scheduled_at | dt('%m-%d %H:%M') }}</td>
+        <td class="mono">{{ r.started_at | dt('%m-%d %H:%M:%S') }}</td>
+        <td class="num">{{ (r.duration_ms | round) if r.duration_ms else '—' }}ms</td>
+        <td class="truncate" title="{{ r.summary or r.error or '' }}">
+          {% if r.error %}<span style="color:var(--err)">{{ r.error | short(70) }}</span>
+          {% elif r.summary %}<span class="note">{{ r.summary }}</span>{% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<div class="empty">最近 2 天没有任务运行记录</div>{% endif %}
+</div>
+
+{% endblock %}

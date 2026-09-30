@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% block title %}总览{% endblock %}
+{% block sub %}{{ now }}{% endblock %}
+{% block desc %}<p class="page-desc">三段运行现状。所有数字都来自数据库,不是拼接出来的。</p>{% endblock %}
+
+{% block content %}
+
+{# ---------- 顶部关键指标 ---------- #}
+<div class="grid cols-4" style="margin-bottom:16px">
+  <div class="card stat">
+    <div class="k">今日提取</div>
+    <div class="v">{{ c.collect_today.total }}</div>
+    <div class="note">
+      ok {{ c.collect_today.ok }} · degraded {{ c.collect_today.degraded }}
+      · no_data {{ c.collect_today.no_data }} · failed {{ c.collect_today.failed }}
+    </div>
+  </div>
+  <div class="card stat">
+    <div class="k">今日推送成功</div>
+    <div class="v">{{ c.push_today.rate }}%</div>
+    <div class="note">成功 {{ c.push_today.ok }} / 共 {{ c.push_today.total }}
+      {%- if c.push_today.skipped %} · 跳过 {{ c.push_today.skipped }}{% endif %}</div>
+  </div>
+  <div class="card stat">
+    <div class="k">今日预警</div>
+    <div class="v">{{ c.alert_today.total }}</div>
+    <div class="note">已送达 {{ c.alert_today.pushed }} · 送达率 {{ c.alert_today.rate }}%</div>
+  </div>
+  <div class="card stat">
+    <div class="k">今日比价</div>
+    <div class="v">{{ c.compare_today.rows }}</div>
+    <div class="note">
+      {{ c.compare_today.slots }} 次采集 · {{ c.compare_today.with_distance }} 条有距离
+      {%- if c.compare_today.rows_demo %} · 演示 {{ c.compare_today.rows_demo }}{% endif %}
+    </div>
+  </div>
+</div>
+
+{# ---------- 数据实体 ---------- #}
+<div class="grid cols-2" style="margin-bottom:16px">
+  <div class="card">
+    <h2>数据实体</h2>
+    <table>
+      <tbody>
+        <tr><td>酒店</td><td class="num">{{ c.counts.hotels }}</td>
+            <td class="note">{{ c.counts.hotels_no_ebk }} 家未登记 ebk_hotel_id</td></tr>
+        <tr><td>账号</td><td class="num">{{ c.counts.accounts }}</td>
+            <td class="note">{{ c.counts.accounts_invalid }} 个非 active</td></tr>
+        <tr><td>机器人</td><td class="num">{{ c.counts.bots }}</td>
+            <td class="note">闸值建议 {{ settings.bot.capacity_per_bot }} 群/机器人</td></tr>
+        <tr><td>群绑定</td><td class="num">{{ c.counts.bindings }}</td>
+            <td class="note">{{ c.counts.bindings_paused }} 条已暂停</td></tr>
+        <tr><td>比价目标</td><td class="num">{{ c.counts.targets }}</td>
+            <td class="note">{{ c.counts.targets_disabled }} 条已停用</td></tr>
+        <tr><td>登录态</td><td class="num">{{ c.counts.sessions }}</td>
+            <td class="note">{{ c.counts.sessions_invalid }} 个 invalid</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>子系统状态</h2>
+    <table>
+      <tbody>
+        <tr>
+          <td>数据库</td>
+          <td>{% if s.db_ok %}<span class="badge ok">可达</span>{% else %}<span class="badge err">异常</span>{% endif %}</td>
+          <td class="note mono">{{ s.db.database if s.db_ok }} · {{ s.db.tables if s.db_ok }} 表</td>
+        </tr>
+        <tr>
+          <td>调度器</td>
+          <td>{% if s.scheduler and s.scheduler.running %}<span class="badge ok">运行中</span>{% else %}<span class="badge warn">未运行</span>{% endif %}</td>
+          <td class="note">装载 {{ s.scheduler.jobs if s.scheduler else 0 }} / 注册 {{ s.tasks_registered }} 个任务</td>
+        </tr>
+        <tr>
+          <td>机器人网关</td>
+          <td>
+            {% set online = s.bots.health.values() | select | list | length if s.bots else 0 %}
+            {% if online %}<span class="badge ok">在线 {{ online }}</span>
+            {% else %}<span class="badge warn">无在线实例</span>{% endif %}
+          </td>
+          <td class="note">共 {{ s.bots.bots if s.bots else 0 }} 个实例
+            {%- if not settings.bot.enabled %} · AIBOT_ENABLED=0{% endif %}</td>
+        </tr>
+        <tr>
+          <td>推送派发器</td>
+          <td>
+            {% if s.push %}<span class="badge {{ 'ok' if s.push.dispatcher.running else 'warn' }}">
+              {{ '运行中' if s.push.dispatcher.running else '未启动' }}</span>
+            {% else %}<span class="badge dim">未构建</span>{% endif %}
+          </td>
+          <td class="note">
+            {% if s.push %}worker {{ s.push.dispatcher.workers }} · 队列 {{ s.push.dispatcher.queued }}
+              · 日报组装器 {{ '已注入' if s.push.daily_builder else '未注入' }}{% endif %}
+          </td>
+        </tr>
+        <tr>
+          <td>限频</td>
+          <td><span class="badge {{ 'ok' if s.rate_limit.rate_limit_ok else 'err' }}">
+            {{ '正常' if s.rate_limit.rate_limit_ok else '有违例' }}</span></td>
+          <td class="note mono">{{ s.rate_limit.interval_s }}s · 请求 {{ s.rate_limit.total_requests }}
+            · 最小间隔 {{ s.rate_limit.min_interval_s }}</td>
+        </tr>
+        <tr>
+          <td>浏览器池</td>
+          <td>
+            {% if s.browser %}<span class="badge {{ 'ok' if s.browser.running else 'warn' }}">
+              {{ s.browser.mode or '启动中' }}</span>
+            {% else %}<span class="badge dim">未启动</span>{% endif %}
+          </td>
+          <td class="note">
+            {% if s.browser %}context {{ s.browser.contexts | length }} / 上限 {{ s.browser.max_contexts }}{% endif %}
+          </td>
+        </tr>
+        <tr>
+          <td>视觉兜底</td>
+          <td>
+            {% if c.vision.enabled %}<span class="badge warn">已启用</span>
+            {% else %}<span class="badge dim">关闭</span>{% endif %}
+          </td>
+          <td class="note">
+            {% if c.vision.enabled %}模型 {{ c.vision.model }} · 今日 {{ c.vision.budget.used }}/{{ c.vision.budget.limit }}
+            {% else %}默认关闭:零 HTTP、零 SDK 导入{% endif %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{# ---------- 今日任务 + 最近审计 ---------- #}
+<div class="grid cols-2">
+  <div class="card">
+    <h2>今日任务 <a href="/admin/tasks" style="float:right;font-weight:400">全部 →</a></h2>
+    {% if c.tasks_today %}
+      <table>
+        <thead><tr><th>任务</th><th>状态</th><th class="num">耗时</th><th>触发</th></tr></thead>
+        <tbody>
+        {% for t in c.tasks_today %}
+          <tr>
+            <td class="mono">{{ t.task }}</td>
+            <td><span class="badge {{ t.kind }}">{{ t.status }}</span></td>
+            <td class="num">{{ t.duration_ms }}ms</td>
+            <td class="note">{{ t.trigger }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="empty">今日还没有任务记录</div>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h2>最近操作 <a href="/admin/audit" style="float:right;font-weight:400">全部 →</a></h2>
+    {% if c.audit_recent %}
+      <table>
+        <thead><tr><th>时间</th><th>动作</th><th>对象</th><th>结果</th></tr></thead>
+        <tbody>
+        {% for a in c.audit_recent %}
+          <tr>
+            <td class="mono">{{ a.created_at.strftime('%m-%d %H:%M') }}</td>
+            <td class="mono">{{ a.action }}</td>
+            <td class="truncate">{{ a.target_type or '' }}{% if a.target_id %} · {{ a.target_id }}{% endif %}</td>
+            <td><span class="badge {{ 'ok' if a.result == 'ok' else 'err' }}">{{ a.result }}</span></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="empty">还没有后台操作记录</div>
+    {% endif %}
+  </div>
+</div>
+
+{% if not settings.web.admin_password_hash %}
+<div class="hint-box danger" style="margin-top:16px">
+  <b>尚未设置后台口令</b> —— 当前能进到这一页说明会话密钥可用,但登录会被拒绝。
+  执行 <code>hoteldata admin passwd --set &lt;新口令&gt;</code> 后写入 <code>.env</code>。
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,193 @@
+{
+  "_comment": "计划书⑤ 点评采集/回复通道端点配置(2026-08-23 现场捕获版;URL/method/body/字段路径/分页均已实锤,见 docs/采集域盘点表-点评.md 与 .tmp_tests/probe_review_list.json+probe_review_responses.json;submit 为写操作,按 R5-Q3 模板审核+灰度前不补抓)",
+  "pending": {
+    "_comment": "待回复列表:restapi/soa2/26353/getCommentList,catalogTab=NotFeedBack=待回复(好评差评同列表,星级在 score.avgScoreSimple,等级在 score.commentLevel 好评/差评);分页 pageIndex/pageSize(响应 commentCount/pageCount/currentPageIndex/commentlist)",
+    "list": {
+      "ready": true,
+      "url": "https://ebooking.ctrip.com/restapi/soa2/26353/getCommentList?_fxpcqlniredt=00000000000000000000",
+      "method": "POST",
+      "body": {
+        "keyWord": "",
+        "pageIndex": "{page}",
+        "commentStatus": "",
+        "isNeedTranslate": false,
+        "sortType": 0,
+        "catalogTab": "NotFeedBack",
+        "catalogName": "待回复",
+        "pageSize": 20,
+        "needOrder": true,
+        "startDate": "",
+        "endDate": "",
+        "channelSource": "trip",
+        "header": {
+          "platform": "WEB"
+        },
+        "head": {
+          "cid": "00000000000000000000",
+          "ctok": "",
+          "cver": "1.0",
+          "lang": "01",
+          "sid": "8888",
+          "syscode": "09",
+          "auth": "",
+          "xsid": ""
+        },
+        "reqHead": {
+          "host": "ebooking.ctrip.com",
+          "pathName": "/comment/commentList",
+          "locale": "zh-CN",
+          "release": "",
+          "client": {
+            "deviceType": "PC",
+            "os": "Windows",
+            "osVersion": "Windows 10",
+            "deviceName": "Windows PC",
+            "clientId": "00000000000000000000",
+            "screenWidth": 1600,
+            "screenHeight": 1000,
+            "isIn": {
+              "ie": false,
+              "chrome": true,
+              "chrome49": false,
+              "wechat": false,
+              "firefox": false,
+              "ios": false,
+              "android": false
+            },
+            "isModernBrowser": true,
+            "browser": "Chrome",
+            "browserVersion": "151",
+            "platform": "pc",
+            "technology": "web"
+          },
+          "ubt": {
+            "pageid": "10650085973",
+            "pvid": 2,
+            "sid": 7,
+            "vid": "",
+            "fp": "",
+            "rmsToken": ""
+          },
+          "gps": {
+            "coord": "",
+            "lat": "",
+            "lng": "",
+            "cid": 0,
+            "cnm": ""
+          },
+          "protocal": "https:"
+        }
+      },
+      "referer": "https://ebooking.ctrip.com/comment/commentList?microJump=true",
+      "list_path": "commentlist",
+      "fields": {
+        "review_id": "commentId",
+        "user_name": "userName",
+        "star": "score.avgScoreSimple",
+        "content": "content",
+        "time": "addtime"
+      },
+      "sentiment_hint_path": "score.commentLevel",
+      "sentiment_hint_map": {
+        "好评": "good",
+        "差评": "bad"
+      },
+      "page_size": 20,
+      "max_pages": 20
+    }
+  },
+  "scores": {
+    "_comment": "评分/对比/趋势/计数素材(全部实锤;score body 复用 api_rules.json getCommentsScoreV2 捕获模板)",
+    "score": {
+      "ready": true,
+      "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/comment/getCommentsScoreV2",
+      "method": "POST",
+      "body": null,
+      "body_from_api_rules": "getCommentsScoreV2",
+      "referer": "https://ebooking.ctrip.com/datacenter/inland/businessreport/outline?microJump=true",
+      "payload_path": "data"
+    },
+    "competitor": {
+      "ready": true,
+      "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/comment/getCompetitorCommentStat",
+      "method": "POST",
+      "body": {},
+      "referer": "https://ebooking.ctrip.com/datacenter/inland/userbehavior/user?microJump=true",
+      "payload_path": "data"
+    },
+    "trend": {
+      "ready": true,
+      "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/comment/getCommentRateTrend",
+      "method": "POST",
+      "body": "month=6",
+      "referer": "https://ebooking.ctrip.com/datacenter/inland/userbehavior/user?microJump=true",
+      "payload_path": "data",
+      "form": true
+    },
+    "num": {
+      "ready": true,
+      "url": "https://ebooking.ctrip.com/restapi/soa2/26353/getCommentNumV2?_fxpcqlniredt=00000000000000000000",
+      "method": "POST",
+      "body": {
+        "channelSources": [
+          "trip"
+        ],
+        "header": {
+          "platform": "WEB"
+        },
+        "head": {
+          "cid": "00000000000000000000",
+          "ctok": "",
+          "cver": "1.0",
+          "lang": "01",
+          "sid": "8888",
+          "syscode": "09",
+          "auth": "",
+          "xsid": ""
+        },
+        "reqHead": {
+          "host": "ebooking.ctrip.com",
+          "pathName": "/comment/commentList",
+          "locale": "zh-CN",
+          "release": "",
+          "client": {
+            "deviceType": "PC"
+          },
+          "ubt": {
+            "pageid": "10650085973",
+            "pvid": 2,
+            "sid": 7,
+            "vid": "",
+            "fp": "",
+            "rmsToken": ""
+          },
+          "gps": {
+            "coord": "",
+            "lat": "",
+            "lng": "",
+            "cid": 0,
+            "cnm": ""
+          },
+          "protocal": "https:"
+        }
+      },
+      "referer": "https://ebooking.ctrip.com/comment/commentList?microJump=true",
+      "payload_path": ""
+    }
+  },
+  "submit": {
+    "_comment": "回复提交通道(P5-4 通道研究:提交接口未捕获→ready=false;现场证据:commentId+replyDetail.replyToken+getCommentTemplates 平台模板,详见 docs/回复通道研究结论.md 现场实锤节;按模板审核(R5-Q3)+0 灰度流程后补抓包:真实回复一次→crawl/capture_requests.py 抓提交 POST(候选 soa2/26353/replyComment 等)",
+    "ready": false,
+    "note": "提交接口未捕获,按 docs/回复通道研究结论.md §4 先补抓包;body_template 占位符:{comment_id}/{reply_token}/{content}",
+    "api": {
+      "url": "",
+      "method": "POST",
+      "referer": "https://ebooking.ctrip.com/comment/commentList?microJump=true",
+      "body_template": {}
+    },
+    "rpa": {
+      "enabled": false,
+      "note": "RPA DOM 模拟(弹层/富文本/断言需现场实测;结论见 docs/回复通道研究结论.md §2)"
+    }
+  }
+}

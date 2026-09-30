@@ -1,0 +1,42 @@
+# 段3 开工前 · 段2 代码 SHA256 基线(V82 用:证明段2 的日报组装代码未被修改)
+#
+# ★ V82 的**真正不变式**是什么(修计划书 §2.2 的措辞)
+# ==================================================
+#
+# 计划书 V82 写「段2 的日报组装代码**未被修改**」—— 但**注入动作本身**必须发生在
+# 某个装配点上,而计划书 §1.4 指定的注入方式就是「把 price_section 传进去」。
+#
+# 所以段3 把不变式**精确化**为两条:
+#
+#   ① 段2 的**领域代码与推送代码**逐字节不变(下面 4 个文件)—— 这才是
+#      「段2 一行都不用碰」的准确含义:日报内容怎么拼、图片怎么选、
+#      消息怎么投递,段3 一个字都没改;
+#   ② 唯一被改的是 **runtime.py(装配处)** —— 它是总纲 §7.2 明确允许
+#      "唯一知道所有域"的地方,注入必须在这里发生(否则 domains/report
+#      就要 import domains/compare,违反硬约束 2「域之间不互相 import」)。
+#
+# 本文件记录 ① 的 4 个文件哈希(开工前采集,2026-10-01)。
+# 验收时 scripts/verify_acceptance3.py 重新计算并比对。
+
+# ---- ① 必须逐字节不变(段2 领域 + 推送)----
+4337CBFAD39CCF867DBCB2B0970A52207D57CDF1660DAB5E26EFB1E60179D635  src/hoteldata/domains/report/daily.py
+EEC0BF32A20A8AD585770CAF5458ECF6959601288755C6792C1B8F2C99A0DAB9  src/hoteldata/push/service.py
+840E19A8A537A108688D8C1D37A78CD5B9590C3803B8EF0F1F2567856CF8E892  src/hoteldata/push/sender.py
+F6C0D7DA2D2735928445553BB11780CE5B66F9104FCEAA31EF23205DC31DEF8E  src/hoteldata/domains/report/service.py
+
+# ---- ② 装配处(允许改;开工前哈希仅作留档,不参与 V82 断言)----
+D7B730D661B6A488D0D669F8CB78708D3FE9363D0585F745C1BDCF32F379EED2  src/hoteldata/runtime.py
+
+# ---- 改动说明(runtime.py 的唯一一处)----
+# start_push() 的 _build_daily(chatid, price_section) 闭包里,在原
+#     return await build_daily_message(...)
+# **之前**插入:
+#
+#     if price_section is None and self.settings.compare.enabled:
+#         try:
+#             price_section = await self.compare().group_price_section(chatid)
+#         except Exception as exc:
+#             logger.warning("日报比价段组装失败(group={}),日报照发: {}", chatid, exc)
+#
+# 即:段3 只在"调用方没给比价段"时**补一段内容**,不改日报的组装逻辑本身;
+# 且比价段失败**不影响日报发送**(与段2「热点日历读不到不影响日报」同一纪律)。

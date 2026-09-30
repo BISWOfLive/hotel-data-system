@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}操作审计{% endblock %}
+{% block sub %}最近 {{ rows | length }} 条{% endblock %}
+{% block desc %}<p class="page-desc">
+  <b>append-only</b>:只 INSERT,不 UPDATE 不 DELETE —— 能被改写的"操作历史"不叫审计。
+  <b>失败的尝试也留痕</b>("谁试图删掉这家店但没成功"同样是需要知道的事)。
+  <br>明细是 <span class="mono">JSONB</span>(旧系统 12 列 JSON 存成 TEXT、过滤靠
+  <span class="mono">LIKE</span>)—— 现在可以直接按字段查。
+</p>{% endblock %}
+
+{% block content %}
+
+<div class="toolbar">
+  <form method="get" action="/admin/audit" class="toolbar" style="margin:0">
+    <select name="action" onchange="this.form.submit()">
+      <option value="">全部动作</option>
+      {% for a in actions %}
+        <option value="{{ a }}" {% if a == action %}selected{% endif %}>{{ a }}</option>
+      {% endfor %}
+    </select>
+    {% if action %}<a class="btn" href="/admin/audit">清除筛选</a>{% endif %}
+  </form>
+</div>
+
+{% if not rows %}
+<div class="hint-box warn">
+  还没有后台操作记录。这可能是<b>正常的</b>(后台刚上线),也可能说明
+  <span class="mono">ops_admin_audit</span> 写入失败 —— 审计写失败会
+  <span class="mono">logger.error</span> 但不阻断操作(与"预警附图失败仅告警"同一取向),
+  所以日志里能查到原因。
+</div>
+{% endif %}
+
+<div class="card">
+  {% if rows %}
+  <table>
+    <thead><tr><th>时间</th><th>操作者</th><th>动作</th><th>对象</th><th>结果</th><th>IP</th><th>明细</th></tr></thead>
+    <tbody>
+    {% for r in rows %}
+      <tr>
+        <td class="mono">{{ r.created_at | dt('%m-%d %H:%M:%S') }}</td>
+        <td class="mono">{{ r.actor }}</td>
+        <td class="mono">{{ r.action }}</td>
+        <td class="truncate">
+          {% if r.target_type %}<span class="badge dim">{{ r.target_type }}</span>{% endif %}
+          {{ r.target_id or '' }}
+        </td>
+        <td>
+          <span class="badge {{ 'ok' if r.result == 'ok' else 'err' }}">{{ r.result }}</span>
+          {% if r.error %}<div class="note" style="color:var(--err)">{{ r.error | short(60) }}</div>{% endif %}
+        </td>
+        <td class="mono">{{ r.ip or '—' }}</td>
+        <td>
+          {% if r.detail %}
+            <details><summary class="mono">查看</summary>
+              <pre>{{ r.detail | tojson(indent=2) }}</pre></details>
+          {% else %}—{% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+
+{% endblock %}

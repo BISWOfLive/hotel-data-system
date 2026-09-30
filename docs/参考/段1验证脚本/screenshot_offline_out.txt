@@ -1,0 +1,123 @@
+项目根: D:\AAAAaaaa\pypypypy\hotel-data-system
+临时 var/: D:\AAAAaaaa\pypypypy\hotel-data-system\_scratch\_tmp_offline
+
+=== 1. _wait_content 判定式(60 字 + 2 数字 / canvas / 边界)===
+输入 long_text: len=60 text='经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经经 1 2'
+  轮次=2 text_calls=2 用时=0.51s → True
+[PASS] 60 字 + 2 数字 + 连续两轮一致 → True
+输入 59 字(len=59)+2 数字 → False(超时返回 False)
+[PASS] 59 字不满足 ≥60 → 超时 False
+输入 len=60 数字=1 个 → False
+[PASS] 60 字但只有 1 个数字 → 超时 False
+输入 text='短'(len=1) canvas=1 → True
+[PASS] 短文本但容器内有 canvas → True
+
+--- ★ spinner 命中分支:last_text 不得被更新 ---
+输入 轮次=[(spinner=1,text=同下轮),(0,同文本),(0,同文本)] → ok=True 轮次=3 text_calls=2
+[PASS] spinner 轮不参与「连续两轮」→ 需 2 次非 spinner 轮文本(text_calls==2)
+
+=== 2. _wait_charts_ready vs _wait_content(漂移 D-2)===
+常量: CHART_READY_WAIT_S=8.0 CONTENT_WAIT_S=20.0
+[PASS] _wait_charts_ready 上限 8s
+[PASS] _wait_content 上限 20s
+输入 body='短文本'(len=3,数字=0) canvas=1 spinner=0 → True 用时=0.51s(连续两轮=1 个轮询间隔)
+[PASS] 短文本 + canvas → 图表就绪 True(证明本函数无 60 字判定)
+同一短文本交给 _wait_content 且无 canvas → False(超时 False)
+[PASS] _wait_content 对短文本且无 canvas → False(条件更严)
+输入 body 文本每轮变化 → False 用时=8.10s(缺省上限应为 8s)
+[PASS] 缺省上限 = 8s(7.9s <= 用时 < 9.5s)
+
+=== 3. skip_click_on 判定(weekday()==0 / day==1)===
+monday=2026-09-28(weekday=0) not_monday=2026-09-29(weekday=1) month1=2026-10-01(day=1)
+  skip_click_on=['monday', 'month1'] day=2026-09-28(weekday=0,day=28) → True(期望 True)
+[PASS] skip_click_on=['monday', 'month1'] on 2026-09-28 → True
+  skip_click_on=['month1'] day=2026-09-28(weekday=0,day=28) → False(期望 False)
+[PASS] skip_click_on=['month1'] on 2026-09-28 → False
+  skip_click_on=['monday', 'month1'] day=2026-09-29(weekday=1,day=29) → False(期望 False)
+[PASS] skip_click_on=['monday', 'month1'] on 2026-09-29 → False
+  skip_click_on=None day=2026-09-28(weekday=0,day=28) → False(期望 False)
+[PASS] skip_click_on=None on 2026-09-28 → False
+  skip_click_on=['monday', 'month1'] day=2026-10-01(weekday=3,day=1) → True(期望 True)
+[PASS] skip_click_on=['monday', 'month1'] on 2026-10-01 → True
+  skip_click_on=['monday', 'month1'] day=2026-10-02(weekday=4,day=2) → False(期望 False)
+[PASS] skip_click_on=['monday', 'month1'] on 2026-10-02 → False
+
+=== 4. require_text 未命中 → 快跳 ===
+输入 page 无「审核记录」文本 → state=missing_entry reason='页面缺入口文本「审核记录」' 用时=0.000s page.log=['locator(text=审核记录)']
+[PASS] require_text 未命中 → missing_entry(不报错)
+[PASS] 快跳:不等 30s(用时 < 0.5s)
+[PASS] 快跳:只做入口探测,不进 clicks/tabs(无 wait_for_selector)
+
+=== 5. 可见容器选取(50)/ 点击辅助(10)===
+输入 count=3 visible=[False,True,True] → 命中 nth=[0, 1]
+[PASS] 取首个可见 = nth(1)
+输入 count=60 全不可见 → loc=None 遍历下标=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49]
+[PASS] 遍历上限 min(count,50) = 0..49
+输入 20 个全不可见 → False 遍历下标=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+[PASS] _click_first_visible 上限 min(count,10) = 0..9
+输入 [不可见,可见] → True clicked=1 log=['click(timeout=5000)']
+[PASS] 点第一个可见元素
+
+=== 6. 元素截图 + 超限告警 + run() 落库回填 ===
+目标: page=经营报告 module=离店 selector="div.manage-mode:has-text('离店')" url=https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true
+repo 调用顺序:
+  · ensure_report(7,2026-09-30,经营报告,channel=screenshot,account_id=3)
+  · page_session(handle=object)
+  · link_screenshot(7,2026-09-30,经营报告,screenshot_path=None,module_screenshots={'离店': 'var/screenshots/测试酒店/20260930/经营报告_离店.jpg'})
+page_session kwargs 里的导航: ['https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true']
+  → target=经营报告/离店/昨日 status=degraded channel=screenshot raw_path=var/screenshots/测试酒店/20260930/经营报告_离店.jpg payload={'离店': 'var/screenshots/测试酒店/20260930/经营报告_离店.jpg'} error=None detail_keys=['bytes', 'collect_report_id', 'errors', 'link_error', 'link_rows', 'module', 'note', 'oversize', 'page', 'shots', 'skipped', 'urls']
+  → target=不存在的页/离店/昨日 status=failed channel=screenshot raw_path=None payload=None error=规则里没有这个页,未截图; 未知采集页 '不存在的页';已知页:['经营报告', '竞争圈动态', '市场分析', '用户行为', '广告营销', '挂牌管理', '商机中心', '点评'] detail_keys=['bytes', 'collect_report_id', 'errors', 'link_error', 'link_rows', 'module', 'note', 'oversize', 'page', 'shots', 'skipped', 'urls']
+[PASS] ensure_report 在截图**之前**被调用
+[PASS] ensure_report 带 channel=screenshot(且带 account_id)
+[PASS] link_screenshot 恒传 screenshot_path=None(COALESCE 保留旧整页图)
+[PASS] module_screenshots 是 {name: 相对路径} 字符串映射
+[PASS] 有图 → degraded(截图不是主数据通道)
+[PASS] payload 键 = screenshot_modules[*].name
+[PASS] raw_path 是相对路径
+[PASS] 未知页 → failed
+[PASS] 超限只告警:oversize 记录进 detail
+  截图落盘: ['经营报告_离店.jpg']
+  locator.screenshot 实参: {'path': 'D:\\AAAAaaaa\\pypypypy\\hotel-data-system\\_scratch\\_tmp_offline\\var\\screenshots\\测试酒店\\20260930\\经营报告_离店.jpg', 'type': 'jpeg', 'quality': 70}
+[PASS] 元素截图 type=jpeg quality=70(settings.screenshot.jpeg_quality),落 .jpg
+
+=== 7. 交互语义:tabs+click / clicks / 消弹窗安全门槛 ===
+输入 tabs=div.pyramid-comparison click='效果类数据' skip_click_on=… day=2026-09-28(周一) → switched=False sleeps=[] clicked=0
+[PASS] 周一 skip_click_on 命中 → 不点击、不 sleep、不重等
+[PASS] 周一命中时点击前 6s 也不等
+[PASS] tabs 仍按 attached/15s 定位
+输入 day=2026-09-29(非周一) → switched=True sleeps=[6.0] clicked=1
+[PASS] 非周一 → 点击前 sleep(6.0)
+[PASS] 非周一 → 点击执行且需要页签后重等
+输入 clicks=['过去7天', '昨天', '查看更多'](容器内可点)→ sleeps=[6.0, 8.0, 8.0, 8.0] clicked=3
+[PASS] clicks:前置 6.0 + 每成功步 8.0
+[PASS] clicks:三级回退第一级即命中容器内元素
+输入 容器内/页面级都无元素 → sleeps=[6.0] clicked=0
+[PASS] clicks:无可点元素不 sleep 8s(仅前置 6.0)
+输入 无「允许发送通知」但页面上有可点「关闭」→ ok=False clicked=0
+[PASS] 无通知弹窗 → 不点「关闭」(安全门槛)
+输入 有通知弹窗 → ok=True allow_clicked=1
+[PASS] 有通知弹窗 → 点「允许」并返回 True
+
+=== 8. 纯函数:dedupe_targets / aggregate_status ===
+输入 [('经营报告', '离店'), ('经营报告', '离店'), ('广告营销', '金字塔-首页')] → [('经营报告', '离店'), ('广告营销', '金字塔-首页')]
+[PASS] 去重保序
+  shots=2 errors=0 → degraded(期望 degraded)
+[PASS] aggregate_status(2,0)=degraded
+  shots=2 errors=1 → degraded(期望 degraded)
+[PASS] aggregate_status(2,1)=degraded
+  shots=0 errors=1 → failed(期望 failed)
+[PASS] aggregate_status(0,1)=failed
+  shots=0 errors=0 → no_data(期望 no_data)
+[PASS] aggregate_status(0,0)=no_data
+
+=== 9. screenshot_demand_modules(真实 push_rotation.json + api_rules.json)===
+day=2026-09-30(weekday=2) → 2 个目标: [('商机中心', '违约看板/违规中心'), ('经营报告', '离店')]
+[PASS] 2026-09-30 目标数 <= daily_count=5
+[PASS] 2026-09-30 每个目标都能在规则里反查到
+day=2026-10-01(weekday=3) → 2 个目标: [('经营报告', '离店'), ('经营报告', '预订销售数据')]
+[PASS] 2026-10-01 目标数 <= daily_count=5
+[PASS] 2026-10-01 每个目标都能在规则里反查到
+targets 显式传入(外部清单逃生口) → [('A', 'B')]
+[PASS] 显式 targets 原样去重保序
+
+===== 结果: 全部通过 =====

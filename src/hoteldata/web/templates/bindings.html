@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}群绑定{% endblock %}
+{% block sub %}{{ groups | length }} 个群 / {{ items | length }} 条绑定{% endblock %}
+{% block desc %}<p class="page-desc">
+  群 ↔ 酒店是<b>多对多</b>(支持一群多店、一店多群)。
+  <span class="mono">UNIQUE(chatid, hotel_id)</span> 保证绑定命令<b>幂等</b>。
+  <span class="mono">paused</span> 是<b>这条绑定自己的</b>暂停态,与酒店业务状态解耦 ——
+  暂停后日报/预警都不再推给这个群。
+</p>{% endblock %}
+
+{% block content %}
+
+<div class="hint-box">
+  <b>管理群白名单</b>:<span class="mono">MANAGE_CHATIDS</span>
+  {% if manage %}= 已配 {{ manage | length }} 个{% else %}= <span style="color:var(--warn)">未配置</span>
+    —— <b>11 条管理群命令一律拒绝</b>(有意的安全默认,不是 bug){% endif %}
+  <br><b>运维告警群</b>:<span class="mono">{{ ops or '(未配置)' }}</span>
+</div>
+
+<div class="card" style="margin-bottom:16px">
+  <h2>新增绑定</h2>
+  <form method="post" action="/admin/bindings/create">
+    <div class="form-grid">
+      <div class="field"><label>群 chatid <span style="color:var(--err)">*</span></label>
+        <input type="text" name="chatid" required list="grouplist" placeholder="wrdZE5bwAA…">
+        <datalist id="grouplist">
+          {% for g in groups %}<option value="{{ g }}">{% endfor %}
+        </datalist>
+        <span class="hint">重复绑定不会报错(幂等)</span></div>
+      <div class="field"><label>酒店 <span style="color:var(--err)">*</span></label>
+        <select name="hotel_id" required>
+          <option value="">(选择酒店)</option>
+          {% for h in hotels %}<option value="{{ h.id }}">{{ h.name }}</option>{% endfor %}
+        </select></div>
+    </div>
+    <div style="margin-top:11px"><button class="primary" type="submit">绑定</button></div>
+  </form>
+</div>
+
+<div class="card">
+  <h2>绑定列表</h2>
+  {% if items %}
+  <table>
+    <thead><tr><th>群 chatid</th><th>酒店</th><th>状态</th><th>创建时间</th><th>操作</th></tr></thead>
+    <tbody>
+    {% for i in items %}
+      <tr>
+        <td class="mono">{{ i.chatid }}</td>
+        <td>{{ i.hotel_name }}</td>
+        <td>
+          {% if i.paused %}<span class="badge warn">已暂停</span>
+          {% else %}<span class="badge ok">生效中</span>{% endif %}
+        </td>
+        <td class="mono">{{ i.created_at | dt('%Y-%m-%d %H:%M') }}</td>
+        <td>
+          <form class="inline" method="post" action="/admin/bindings/{{ i.id }}/pause">
+            <button class="tiny" type="submit">{{ '恢复' if i.paused else '暂停' }}</button>
+          </form>
+          <form class="inline" method="post" action="/admin/bindings/{{ i.id }}/delete"
+                onsubmit="return confirm('确认解绑?(群 {{ i.chatid }} → {{ i.hotel_name }})')">
+            <button class="tiny danger" type="submit">解绑</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <div class="empty">还没有绑定。也可以让群里的人直接发「绑定 XX酒店」。</div>
+  {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}预警{% endblock %}
+{% block sub %}送达率 {{ stats.rate }}%{% endblock %}
+{% block desc %}<p class="page-desc">
+  <b>一行 = 一个触发 × 一个收件人</b>。送达率 = 成功行 ÷ 总行,
+  <b>无管理群也计入分母</b>(写 <span class="mono">recipient='manage-none'</span>)——
+  这是计划书 §5.7 的定义,也是"出事了没人知道"(D1)的对策。
+  <br>★ <b>「连续 7 天关房」是数据判定,不是 <span class="mono">streak</span> 门槛</b>:
+  <span class="mono">unavailable_days</span> 由引擎从房态<b>逐日推导</b>,状态机里的
+  <span class="mono">streak</span> 只是展示用。
+</p>{% endblock %}
+
+{% block content %}
+
+<div class="grid cols-4" style="margin-bottom:16px">
+  <div class="card stat"><div class="k">触发×收件人</div><div class="v">{{ stats.total }}</div></div>
+  <div class="card stat"><div class="k">已送达</div><div class="v">{{ stats.delivered }}</div></div>
+  <div class="card stat"><div class="k">送达率</div><div class="v">{{ stats.rate }}%</div></div>
+  <div class="card stat"><div class="k">状态机实体</div><div class="v">{{ states | length }}</div></div>
+</div>
+
+<div class="card" style="margin-bottom:16px">
+  <h2>状态机(<span class="mono">alert_states</span>)</h2>
+  {% if states %}
+  <table>
+    <thead><tr><th>规则</th><th>酒店</th><th>实体</th><th>状态</th>
+      <th class="num">streak</th><th>最近触发</th><th>最近正常</th><th>忽略至</th></tr></thead>
+    <tbody>
+    {% for s in states %}
+      <tr>
+        <td class="mono">{{ s.rule_id }}</td>
+        <td>{{ hotels.get(s.hotel_id, s.hotel_id) }}</td>
+        <td class="mono">{{ s.entity_key | short(24) }}</td>
+        <td><span class="badge {{ {'ok':'ok','triggered':'err'}.get(s.status,'dim') }}">{{ s.status }}</span></td>
+        <td class="num">{{ s.streak }}</td>
+        <td class="mono">{{ s.last_trigger_date or '—' }}</td>
+        <td class="mono">{{ s.last_ok_date or '—' }}</td>
+        <td class="mono">
+          {% if s.ignored_until %}<span class="badge warn">{{ s.ignored_until }}</span>
+          {% else %}—{% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<div class="empty">状态机还是空的(还没有任何规则触发过)</div>{% endif %}
+</div>
+
+<div class="card">
+  <h2>最近触发记录(<span class="mono">alert_logs</span>)</h2>
+  {% if logs %}
+  <table>
+    <thead><tr><th>时间</th><th>规则</th><th>酒店</th><th>实体</th><th>收件人</th>
+      <th>送达</th><th>错误</th></tr></thead>
+    <tbody>
+    {% for l in logs %}
+      <tr>
+        <td class="mono">{{ l.created_at | dt('%m-%d %H:%M:%S') }}</td>
+        <td class="mono">{{ l.rule_id }}</td>
+        <td>{{ hotels.get(l.hotel_id, l.hotel_id) }}</td>
+        <td class="mono">{{ l.entity_key | short(22) }}</td>
+        <td class="mono">{{ l.recipient | short(18) }}</td>
+        <td>{% if l.pushed %}<span class="badge ok">是</span>
+            {% else %}<span class="badge err">否</span>{% endif %}</td>
+        <td>{{ l.error or '' }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<div class="empty">还没有预警记录</div>{% endif %}
+</div>
+
+{% endblock %}

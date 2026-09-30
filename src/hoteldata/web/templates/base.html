@@ -1,0 +1,71 @@
+{# 后台基础布局 —— 服务端渲染,零前端构建链(总纲 §7.8)
+   所有页面继承本模板;导航用 active 高亮当前页。 #}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>{% block title %}后台{% endblock %} · 酒店数据系统</title>
+<link rel="stylesheet" href="/static/admin.css">
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="brand">
+      酒店数据系统
+      <small>段1 提取 · 段2 推送 · 段3 比价</small>
+    </div>
+    <nav>
+      <a href="/admin" class="{{ 'active' if page == 'dashboard' }}">总览</a>
+
+      <div class="group">业务实体</div>
+      <a href="/admin/hotels"    class="{{ 'active' if page == 'hotels' }}">酒店</a>
+      <a href="/admin/accounts"  class="{{ 'active' if page == 'accounts' }}">账号</a>
+      <a href="/admin/bindings"  class="{{ 'active' if page == 'bindings' }}">群绑定</a>
+      <a href="/admin/bots"      class="{{ 'active' if page == 'bots' }}">机器人</a>
+
+      <div class="group">比价</div>
+      <a href="/admin/targets"   class="{{ 'active' if page == 'targets' }}">比价目标</a>
+      <a href="/admin/compare"   class="{{ 'active' if page == 'compare' }}">比价历史</a>
+
+      <div class="group">运行</div>
+      <a href="/admin/tasks"     class="{{ 'active' if page == 'tasks' }}">任务</a>
+      <a href="/admin/pushes"    class="{{ 'active' if page == 'pushes' }}">推送审计</a>
+      <a href="/admin/alerts"    class="{{ 'active' if page == 'alerts' }}">预警</a>
+      <a href="/admin/sessions"  class="{{ 'active' if page == 'sessions' }}">登录态</a>
+      <a href="/admin/audit"     class="{{ 'active' if page == 'audit' }}">操作审计</a>
+
+      <div class="group">　</div>
+      <a href="/status" target="_blank">/status (JSON)</a>
+      <a href="/docs" target="_blank">API /docs</a>
+      <a href="/admin/logout">退出登录</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+    {% if flashes %}
+      {% for kind, text in flashes %}
+        <div class="flash {{ kind }}">{{ text }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="page-head">
+      <h1>{% block heading %}{{ self.title() }}{% endblock %}</h1>
+      <span class="sub">{% block sub %}{% endblock %}</span>
+    </div>
+    {% block desc %}{% endblock %}
+
+    {% block content %}{% endblock %}
+
+    <div class="footer">
+      后台只监听本机({{ settings.web.host }}:{{ settings.web.port }})
+      {%- if not settings.web.allow_remote %} · 已拒绝非本机访问{% endif %}
+      · 所有写操作落 <span class="mono">ops_admin_audit</span>
+      · 会话 {{ settings.web.session_hours }} 小时
+    </div>
+  </main>
+</div>
+</body>
+</html>

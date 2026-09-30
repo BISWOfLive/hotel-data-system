@@ -1,0 +1,202 @@
+{
+  "recorded_at": "2026-08-23 07:15:05",
+  "walks": [
+    {
+      "label": "outline-子路由",
+      "url0": "https://ebooking.ctrip.com/datacenter/inland/businessreport/outline?microJump=true",
+      "texts": [
+        "隐欲民宿",
+        "日报",
+        "携程",
+        "携程 去哪儿",
+        "非常不满意",
+        "周报",
+        "去哪儿",
+        "学习竞争圈(2)",
+        "学习竞争圈(2) 经营提醒(2)",
+        "非常满意",
+        "经营提醒(2)",
+        "回复客人",
+        "联系携程",
+        "5 通知",
+        "通知",
+        "5",
+        "帮助学习",
+        "负责人",
+        "新消息"
+      ],
+      "clicks": []
+    },
+    {
+      "label": "beneficialdata",
+      "url0": "https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true",
+      "texts": [
+        "隐欲民宿",
+        "总平台",
+        "酒店 房型",
+        "总平台 携程 同程旅行 去哪儿",
+        "当日间夜量 1 上周 同期 0 下载数据",
+        "当日间夜量 0 上周 同期 1 下载数据",
+        "携程",
+        "同程旅行",
+        "去哪儿",
+        "回复客人",
+        "联系携程",
+        "5 通知",
+        "通知",
+        "5",
+        "帮助学习",
+        "负责人",
+        "新消息"
+      ],
+      "clicks": [
+        {
+          "kw": "离店",
+          "url": "https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true",
+          "apis": [
+            "https://ebooking.ctrip.com/ebkorderv3?micro=true",
+            "https://ebooking.ctrip.com/home?micro=true",
+            "https://ebooking.ctrip.com/comment?micro=true",
+            "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/fetchTensityOverViewV1",
+            "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryHotelOccupiedRoomTrendV1",
+            "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryHotelTensitiesV1",
+            "https://ebooking.ctrip.com/datacenter/api/dataCenter/market/getRoomOccupiedRoomTrend",
+            "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryRoomTensitiesV1",
+            "https://ebooking.ctrip.com/datacenter/api/dataCenter/sale/queryMarketRoomTensity",
+            "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryHotelMinPriceV1",
+            "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/fetchCapacityOverViewV4",
+            "https://ebooking.ctrip.com/datacenter/api/dataCenter/sale/queryMarketDetailsV1"
+          ]
+        },
+        {
+          "kw": "预订",
+          "url": "https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true",
+          "apis": []
+        },
+        {
+          "kw": "在店",
+          "url": "https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true",
+          "apis": []
+        }
+      ]
+    },
+    {
+      "label": "flowdata",
+      "url0": "https://ebooking.ctrip.com/datacenter/inland/businessreport/flowdata?microJump=true",
+      "texts": [
+        "隐欲民宿",
+        "携程",
+        "携程 去哪儿",
+        "列表页 详情页 订单页 订单提交量",
+        "访客量",
+        "去哪儿",
+        "今日实时",
+        "昨天 过去7天 过去30天 自定义",
+        "昨天",
+        "过去7天",
+        "过去30天",
+        "自定义",
+        "转化率",
+        "回复客人",
+        "联系携程",
+        "5 通知",
+        "通知",
+        "5",
+        "帮助学习",
+        "累计搜索数据",
+        "累计搜索数据 昨日搜索数据",
+        "昨日搜索数据",
+        "负责人",
+        "新消息"
+      ],
+      "clicks": [
+        {
+          "kw": "流量数据概况",
+          "url": "https://ebooking.ctrip.com/datacenter/inland/businessreport/flowdata?microJump=true",
+          "apis": [
+            "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/queryScanFlowDetailsV2?hostType=Ebooking",
+            "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/queryFlowTransforNewV1?hostType=Ebooking",
+            "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/getPictureQualityScore",
+            "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/fetchOrderOverView",
+            "https://ebooking.ctrip.com/datacenter/api/biddingajax/fetchCurrentHotelSeqInfoV1",
+            "https://ebooking.ctrip.com/datacenter/api/dataCenter/comment/getCommentsScoreV2",
+            "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryHotelMinPriceV1",
+            "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/fetchVisitorTitleV2",
+            "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryOrderTrendV1",
+            "https://ebooking.ctrip.com/ebkorderv3?micro=true",
+            "https://ebooking.ctrip.com/home?micro=true",
+            "https://ebooking.ctrip.com/comment?micro=true"
+          ]
+        },
+        {
+          "kw": "流量来源",
+          "url": "https://ebooking.ctrip.com/datacenter/inland/businessreport/flowdata?microJump=true",
+          "apis": []
+        }
+      ]
+    },
+    {
+      "label": "金字塔",
+      "url0": "https://ebooking.ctrip.com/toolcenter/cpc/pyramid?microJump=true",
+      "texts": [
+        "隐欲民宿",
+        "点击出价CNY 2.72",
+        "收益 预订金额 0 预订间夜 0",
+        "今日预算CNY 100.00",
+        "今日花费CNY 0",
+        "回复客人",
+        "今天",
+        "过去7天",
+        "联系携程",
+        "联系我们 微信公众号 微信小助手",
+        "5 通知",
+        "通知",
+        "账户余额 0",
+        "现金余额 0 红包余额 0",
+        "自动续费未开启 充值",
+        "5",
+        "帮助学习",
+        "暂无会员",
+        "负责人",
+        "新消息"
+      ],
+      "clicks": [
+        {
+          "kw": "数据报告",
+          "url": "https://ebooking.ctrip.com/toolcenter/cpc/dataReport?microJump=true",
+          "apis": [
+            "https://ebooking.ctrip.com/ebkorderv3?micro=true",
+            "https://ebooking.ctrip.com/home?micro=true",
+            "https://ebooking.ctrip.com/comment?micro=true",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/queryCampaignReportList?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/getAdMangerQrCode?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/getBannerList?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/getMessageRemind?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/diamond/queryCouponsToReceive?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/getEffectGuaranteeTip?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/getPeerComparisonInfoSum?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/getCpcDiagnosticDetails?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/hasDirectCampaigns?hostType=HE"
+          ]
+        },
+        {
+          "kw": "同行对比",
+          "url": "https://ebooking.ctrip.com/toolcenter/cpc/comparison?microJump=true",
+          "apis": [
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/queryBasePremiumFilterList?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/queryPromotionKeywords?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/queryCampaignSummaryReport?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/queryCampaignReportList?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/queryCpcClickLive?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/queryPyramidCpcDiagnosis?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/getCpcDiagnosticDetails?hostType=HE",
+            "https://ebooking.ctrip.com/toolcenter/api/cpc/getDspAccounts?hostType=HE",
+            "https://ebooking.ctrip.com/restapi/soa2/24278/getEbkResourceYellowBar",
+            "https://ebooking.ctrip.com/restapi/soa2/23270/queryMenuKey?_fxpcqlniredt=00000000000000000000&x-traceID=00000000000000000000-0000000000000-0000000",
+            "https://ebooking.ctrip.com/toolcenter/cpc/comparison?micro=true&microJump=true"
+          ]
+        }
+      ]
+    }
+  ]
+}

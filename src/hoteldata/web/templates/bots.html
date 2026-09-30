@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}机器人{% endblock %}
+{% block sub %}共 {{ bots | length }} 个实例{% endblock %}
+{% block desc %}<p class="page-desc">
+  企微智能机器人。<b>协议帧逐字节继承旧系统</b>(10 命令字 / 30s 心跳 / 连丢 2 次判死 / 512KB 分片)。
+  多机器人按 <span class="mono">md5(chatid) % n</span> 路由,故障隔离。
+  凭据加密落库,页面不回显。
+</p>{% endblock %}
+
+{% block content %}
+
+{% if not settings.bot.enabled %}
+<div class="hint-box warn"><b>AIBOT_ENABLED=0</b> —— 机器人网关未启动,推送会失败并留下审计。
+  改 <span class="mono">.env</span> 后重启 <span class="mono">hoteldata serve</span>。</div>
+{% endif %}
+
+<div class="hint-box">
+  <b>改完必须重启 serve</b> —— 长连接是在 <span class="mono">lifespan</span> 里建的
+  (<span class="mono">runtime.start_bots()</span>),本页的增删改只落库。
+  <br>当前群绑定总数 {{ total_binds }};建议每机器人承载 ≤ {{ settings.bot.capacity_per_bot }} 群
+  (超出<b>只告警不硬拦</b>,继承旧系统语义)。
+</div>
+
+<div class="card" style="margin-bottom:16px">
+  <h2>新增机器人</h2>
+  <form method="post" action="/admin/bots/create">
+    <div class="form-grid">
+      <div class="field"><label>名称 <span style="color:var(--err)">*</span></label>
+        <input type="text" name="name" required placeholder="如 bot01">
+        <span class="hint">唯一;路由按 sorted(names)[md5%n]</span></div>
+      <div class="field"><label>bot_id <span style="color:var(--err)">*</span></label>
+        <input type="text" name="bot_id" required autocomplete="off"></div>
+      <div class="field"><label>secret <span style="color:var(--err)">*</span></label>
+        <input type="password" name="secret" required autocomplete="new-password"></div>
+      <div class="field"><label>承载群数</label>
+        <input type="number" name="capacity" value="{{ settings.bot.capacity_per_bot }}" min="1"></div>
+    </div>
+    <div style="margin-top:11px"><button class="primary" type="submit">新增</button></div>
+  </form>
+</div>
+
+<div class="card">
+  <h2>机器人列表</h2>
+  {% if bots %}
+  <table>
+    <thead><tr><th>ID</th><th>名称</th><th>状态</th><th>连接</th><th>承载</th>
+      <th>凭据</th><th style="width:34%">编辑</th></tr></thead>
+    <tbody>
+    {% for b in bots %}
+      <tr>
+        <td class="mono">{{ b.id }}</td>
+        <td><b>{{ b.name }}</b></td>
+        <td><span class="badge {{ 'ok' if b.status == 'active' else 'warn' }}">{{ b.status }}</span></td>
+        <td>
+          {% if b.name in health %}
+            <span class="badge {{ 'ok' if health[b.name] else 'err' }}">
+              {{ '在线' if health[b.name] else '掉线' }}</span>
+          {% else %}
+            <span class="badge dim">未连</span>
+          {% endif %}
+        </td>
+        <td class="mono">{{ b.capacity_per_bot }} 群</td>
+        <td class="mono">{{ b.bot_id_enc | short(10) }}…
+          <span class="badge dim">已加密</span></td>
+        <td>
+          <details>
+            <summary>修改 / 删除</summary>
+            <form method="post" action="/admin/bots/{{ b.id }}/update" style="margin-bottom:8px">
+              <div class="form-grid">
+                <div class="field"><label>状态</label>
+                  <select name="status">
+                    {% for st in bot_statuses %}
+                      <option value="{{ st }}" {% if b.status == st %}selected{% endif %}>{{ st }}</option>
+                    {% endfor %}
+                  </select></div>
+                <div class="field"><label>新 secret(留空不改)</label>
+                  <input type="password" name="secret" autocomplete="new-password" placeholder="留空 = 不改动"></div>
+                <div class="field"><label>承载群数</label>
+                  <input type="number" name="capacity" value="{{ b.capacity_per_bot }}" min="1"></div>
+              </div>
+              <div style="margin-top:8px"><button class="tiny primary" type="submit">保存</button></div>
+            </form>
+            <form method="post" action="/admin/bots/{{ b.id }}/delete"
+                  onsubmit="return confirm('确认删除机器人「{{ b.name }}」?')">
+              <button class="tiny danger" type="submit">删除</button>
+            </form>
+          </details>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <div class="empty">还没有机器人。也可以直接用 CLI:
+      <span class="mono">hoteldata bots add --name bot01 --bot-id … --secret …</span></div>
+  {% endif %}
+</div>
+
+{% endblock %}

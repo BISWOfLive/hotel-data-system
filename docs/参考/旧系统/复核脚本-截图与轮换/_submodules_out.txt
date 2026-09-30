@@ -1,0 +1,133 @@
+pages 数 = 8
+pages 键（原样）: ['经营报告', '竞争圈动态', '市场分析', '用户行为', '广告营销', '挂牌管理', '商机中心', '点评']
+
+### sub_modules 全表（24 条）
+[01] page='经营报告' name='离店'
+      url='https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true'
+      fixed_daily=None scope=None windows=['昨日', '上周', '上月'] nav='经营报告→收益/销售:打开 businessreport/beneficialdata 后点击顶部页签『离店』(页面页签 预订/在店/离店;维度 总平台/酒店/房型;日期切换 日报/上周/上月)'
+      screenshot_modules 条目数=1 names=['离店']
+[02] page='经营报告' name='预订销售数据'
+      url='https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true'
+      fixed_daily=None scope=None windows=['昨日', '上周', '上月'] nav='经营报告→收益/销售:beneficialdata 页顶部页签『预订』/『在店』(维度 总平台/携程/同程旅行/去哪儿;字段 当日间夜量/上周/同期)'
+      screenshot_modules 条目数=1 names=['预订销售数据']
+[03] page='经营报告' name='热卖房型'
+      url='https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true'
+      fixed_daily=None scope=None windows=['昨日', '上周', '上月'] nav='经营报告→收益/销售:beneficialdata 页维度切换『房型』(酒店/房型 维度),页面含 房型热度/房型占用 区块(A1:归口=beneficialdata 房型维度,无独立 room* 页)'
+      screenshot_modules 条目数=1 names=['热卖房型']
+[04] page='经营报告' name='问题房型'
+      url='https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true'
+      fixed_daily=None scope=None windows=['昨日', '上周', '上月'] nav='经营报告→收益/销售:beneficialdata 页维度『房型』,问题标记=超售(overSaleWarn/hasOverSale)与高热标记(high)'
+      screenshot_modules 条目数=1 names=['问题房型']
+[05] page='经营报告' name='流量数据概况'
+      url='https://ebooking.ctrip.com/datacenter/inland/businessreport/flowdata?microJump=true'
+      fixed_daily=None scope=None windows=['昨日', '今日实时', '过去7天', '过去30天'] nav='经营报告→流量数据:businessreport/flowdata 页,区块 流量数据概况/APP流量转化/流量来源/未来30天搜索热度;窗口页签 今天/昨日/过去7天/过去30天/自定义'
+      screenshot_modules 条目数=1 names=['流量数据概况']
+[06] page='经营报告' name='流量来源分析'
+      url='https://ebooking.ctrip.com/datacenter/inland/businessreport/flowdata?microJump=true'
+      fixed_daily=None scope=None windows=['过去7天', '过去30天'] nav='经营报告→流量数据:flowdata 页『流量来源』区块(渠道来源明细/关键词/过滤词)'
+      screenshot_modules 条目数=1 names=['流量来源分析']
+[07] page='经营报告' name='未来30天搜索热度'
+      url='https://ebooking.ctrip.com/datacenter/inland/businessreport/flowdata?microJump=true'
+      fixed_daily=None scope=None windows=['未来30天'] nav='经营报告→流量数据:flowdata 页『未来30天搜索热度』区(页签 累计搜索数据/昨日搜索数据;窗口=未来30天专属 next_30d)'
+      screenshot_modules 条目数=1 names=['未来30天搜索热度']
+[08] page='经营报告' name='服务概览'
+      url='https://ebooking.ctrip.com/datacenter/inland/businessreport/outline?microJump=true'
+      fixed_daily=True scope=None windows=['昨日'] nav='经营报告→概要页(outline):收益概览/服务概览/酒店建议区块(当日+昨日概览)'
+      screenshot_modules 条目数=0 names=[]
+[09] page='竞争圈动态' name='经营对比'
+      url='https://ebooking.ctrip.com/ebkgrowth/datacenter/competition/competitionprofile?microJump=true'
+      fixed_daily=True scope=None windows=['昨日', '今日实时', '过去7天', '过去30天'] nav='数据中心→竞争圈动态→竞争圈概览:ebkgrowth/datacenter/competition/competitionprofile(页面区块 经营对比/APP流量转化对比/服务质量对比/流量来源 一次加载;窗口 昨日+今日/过去7天/过去30天)'
+      screenshot_modules 条目数=1 names=['经营对比']
+[10] page='竞争圈动态' name='APP流量转化对比'
+      url='https://ebooking.ctrip.com/ebkgrowth/datacenter/competition/competitionprofile?microJump=true'
+      fixed_daily=True scope=None windows=['昨日', '今日实时', '过去7天', '过去30天'] nav='竞争圈动态→竞争圈概览:competitionprofile 页『APP流量转化对比』区块'
+      screenshot_modules 条目数=1 names=['APP流量转化对比']
+[11] page='竞争圈动态' name='服务质量对比'
+      url='https://ebooking.ctrip.com/ebkgrowth/datacenter/competition/competitionprofile?microJump=true'
+      fixed_daily=True scope=None windows=['上周'] nav='竞争圈动态→竞争圈概览:competitionprofile 页『服务质量对比』区块'
+      screenshot_modules 条目数=1 names=['服务质量对比']
+[12] page='竞争圈动态' name='实时流失订单及去向'
+      url='https://ebooking.ctrip.com/ebkgrowth/datacenter/competition/lossanalysis?microJump=true'
+      fixed_daily=True scope=None windows=['昨日', '上周', '上月'] nav='竞争圈动态→流失分析:ebkgrowth/datacenter/competition/lossanalysis(页签:竞争圈概览/流失分析/竞争圈榜单/设置竞争圈酒店)'
+      screenshot_modules 条目数=1 names=['实时流失订单及去向']
+[13] page='竞争圈动态' name='竞争圈榜单-销售排名'
+      url='https://ebooking.ctrip.com/ebkgrowth/datacenter/competition/competitionlist?microJump=true'
+      fixed_daily=True scope=None windows=['实时'] nav='竞争圈动态→竞争圈榜单:ebkgrowth/datacenter/competition/competitionlist『销售排名』区块(酒店名称/预订订单量排名/预订销售额排名/在店间夜排名/出租率排名;接口 getCompetingRank type=1 sellRanksBO,2026-08-26 抓包实锤;页面窗口页签 实时/昨日/上周/上月/自定义,默认=上周)'
+      screenshot_modules 条目数=1 names=['竞争圈榜单-销售排名']
+[14] page='竞争圈动态' name='竞争圈榜单-流量排名'
+      url='https://ebooking.ctrip.com/ebkgrowth/datacenter/competition/competitionlist?microJump=true'
+      fixed_daily=True scope=None windows=['实时'] nav='竞争圈动态→竞争圈榜单:ebkgrowth/datacenter/competition/competitionlist『流量排名』区块(酒店名称/APP详情页访客量排名(携程/去哪儿)/APP详情页转化率排名(携程/去哪儿);接口 getCompetingRank type=2 flowRanksBO,2026-08-26 抓包实锤)'
+      screenshot_modules 条目数=1 names=['竞争圈榜单-流量排名']
+[15] page='市场分析' name='每日热度-未来14日热度'
+      url='https://ebooking.ctrip.com/ebkgrowth/datacenter/marketanalysis/marketheat?microJump=true'
+      fixed_daily=None scope=None windows=['未来14天'] nav='数据中心→市场分析→热度页:ebkgrowth/datacenter/marketanalysis/marketheat(页面:每日热度/市场热度趋势/游客出行热度/竞争圈调价趋势)'
+      screenshot_modules 条目数=1 names=['每日热度-未来14日热度']
+[16] page='用户行为' name='用户行为'
+      url='https://ebooking.ctrip.com/datacenter/inland/userbehavior/user?microJump=true'
+      fixed_daily=None scope=None windows=['昨日'] nav='数据中心→用户行为:/datacenter/inland/userbehavior/user(整页;基础属性/行为习惯/活跃度;页面另含点评区归⑤不采)'
+      screenshot_modules 条目数=1 names=['用户行为']
+[17] page='广告营销' name='金字塔-首页'
+      url='https://ebooking.ctrip.com/toolcenter/cpc/pyramid?microJump=true'
+      fixed_daily=None scope='module' windows=['今日实时', '过去7天'] nav='广告营销→金字塔【首页】(数据概览+推广计划);截图=数据概览区(DOM实锤)'
+      screenshot_modules 条目数=1 names=['金字塔-首页']
+[18] page='广告营销' name='金字塔-每日'
+      url='https://ebooking.ctrip.com/toolcenter/cpc/dataReport?microJump=true'
+      fixed_daily=None scope='module' windows=['过去7天'] nav='广告营销→金字塔→数据报告→【我的数据】页签(甲方口径: 点过去7天计算; 见效果=投产比>3)'
+      screenshot_modules 条目数=1 names=['金字塔-每日']
+[19] page='广告营销' name='金字塔-数据报告-同行对比'
+      url='https://ebooking.ctrip.com/toolcenter/cpc/comparison?microJump=true'
+      fixed_daily=None scope='module' windows=['上周', '上月'] nav='广告→金字塔→数据报告:/toolcenter/cpc/dataReport→同行对比:/toolcenter/cpc/comparison(数据报告页 计划报表;同行对比页 对比指标)'
+      screenshot_modules 条目数=2 names=['金字塔-数据报告-同行对比-效果', '金字塔-数据报告-同行对比-计划']
+[20] page='挂牌管理' name='审核记录'
+      url='https://ebooking.ctrip.com/ebkgrowth/preferredpartnerV2?microJump=true'
+      fixed_daily=None scope='module' windows=['昨日'] nav='挂牌管理→优选伙伴:/ebkgrowth/preferredpartnerV2(页签:公示内容/权益比对/挂牌通/负责人;页签元素 cls=he-trip-kit-ui-btn-link)'
+      screenshot_modules 条目数=1 names=['审核记录']
+[21] page='商机中心' name='HOS分/PSI分析'
+      url='https://ebooking.ctrip.com/toolcenter/psi/index?fromType=menu&microJump=true'
+      fixed_daily=None scope='module' windows=['实时'] nav='商机中心→PSI服务质量分:/toolcenter/psi/index?fromType=menu(商机中心子项:经营指导/PSI服务质量分/兑换商城/商家违约看板/服务市场/商旅服务后台)'
+      screenshot_modules 条目数=1 names=['HOS分/PSI分析']
+[22] page='商机中心' name='违约看板/违规中心'
+      url='https://ebooking.ctrip.com/toolcenter/psi/honestscore?fromType=menu&microJump=true'
+      fixed_daily=None scope='module' windows=['实时'] nav='商机中心→商家违约看板:/toolcenter/psi/honestscore?fromType=menu'
+      screenshot_modules 条目数=1 names=['违约看板/违规中心']
+[23] page='点评' name='点评分析'
+      url='https://ebooking.ctrip.com/comment/commentList?microJump=true'
+      fixed_daily=None scope=None windows=['实时'] nav='点评管理→点评分析:/comment/commentList(评分概览/评分趋势/点评明细列表;SOA 26353 四接口,2026-08-26 抓包实锤;页面评分概览接口未捕获,待补录)'
+      screenshot_modules 条目数=0 names=[]
+[24] page='点评' name='点评分析-列表'
+      url='https://ebooking.ctrip.com/comment/commentList?microJump=true'
+      fixed_daily=None scope=None windows=['实时'] nav='点评管理→点评分析:/comment/commentList 点评明细列表(浏览器 DOM 提取:getCommentList 直连返回空,页面真实加载渲染后 DOM 可取)'
+      screenshot_modules 条目数=0 names=[]
+
+sub_modules 总数 = 24
+
+### 每个 page 的顶层键
+page='经营报告' keys=['url', 'core_apis', 'modules', 'min_indicators', 'api_defs', 'sub_modules', 'screenshot_modules']
+page='竞争圈动态' keys=['url', 'core_apis', 'modules', 'min_indicators', 'api_defs', 'sub_modules', 'screenshot_modules']
+page='市场分析' keys=['url', 'core_apis', 'modules', 'min_indicators', 'api_defs', 'sub_modules', 'screenshot_modules']
+page='用户行为' keys=['url', 'core_apis', 'modules', 'min_indicators', 'api_defs', 'sub_modules', 'screenshot_modules']
+page='广告营销' keys=['url', 'core_apis', 'modules', 'min_indicators', 'sub_modules', 'api_defs', 'scope', 'screenshot_modules']
+page='挂牌管理' keys=['url', 'core_apis', 'modules', 'min_indicators', 'sub_modules', 'api_defs', 'scope', 'screenshot_modules']
+page='商机中心' keys=['url', 'core_apis', 'modules', 'min_indicators', 'sub_modules', 'api_defs', 'scope', 'screenshot_modules']
+page='点评' keys=['url', 'core_apis', 'modules', 'min_indicators', 'sub_modules', 'api_defs', 'screenshot_modules']
+
+### 顶层键
+['pages', '_comment', '_screenshot_comment']
+
+### _comment / 注释类键
+_comment = {'api_defs 说明': 'Phase 2 直连接口的业务接口清单（来自 2026-08 实测抓包 data/*_raw_*.json）。占位符: {date}=采集日期, {rand}=随机浮点(缓存破坏), {trace}=x-traceID, {hotel_id}=多店账号门店id。need_record=true 的 SOA 接口缺少请求 body，需用 crawl/record_apis.py 录制后回填 body 并置 need_record=false，校准前该页自动降级浏览器通道。', 'sub_modules 说明': '20 模块(计划书02 §2.2)×7 采集域:经营报告7/竞争圈动态5/市场分析1/用户行为1/广告营销3/挂牌管理1/商机中心2。节点字段:name(模块名)/nav(导航)/url(页面路由,含 ?microJump=true)/apis[].match(接口路径小写关键词)+fields[].path(取自 config/responses/*.json 实测响应)/windows(中文窗口或 next_30d)/screenshot_modules(截图选择器)/note(口径备注)。fields 已按两轮实测响应回填(第 1 轮 07:22 基础页/金字塔/挂牌 + 第 2 轮 07:31-07:33 SOA 页复录);商机中心(PSI/违约看板)按第三轮捕获(psiindex/honestscore 08:33)回填完成。', 'SOA 校准状态': 'body/query_params 样例已按 2026-08-23 实测(scan_pages*.json/recorded_apis.json)回填;2026-08-23 已按 captain 指示把已回填 body 的 26 条置 need_record=false(竞争圈 8/市场分析 6/广告 7/挂牌 5),4 个指纹占位符已替换为捕获实录静态值(竞争圈 fp=00000A-00000B-00000C,市场/广告/挂牌 fp=00000A-00000B-00000C,vid=0000000000000.xxxxxxxxxxxx 与 clientId=00000000000000000000 全域一致,rms_token=各页末次捕获 514 字符原文含 pageId/r/ip——会话级但长期有效,配合 t12 PlaceholderGuard 过期→降级不会静默错)。第二批(request_capture2.json 52 条):广告 11 条 toolcenter/api/cpc 与商机中心 8 条已按捕获完成(need_record=false,广告新增 29666×3+toolcenter×4 共 7 条 defs;至此广告 25/商机 8 全部 false)。实现口径:dict body 日期占位符化、str 表单原样保留(注意 queryPromotionKeywords/getPeerComparisonInfoSum/Detail 含硬编码 08-16~22、queryCpcClickLive 含当日 00:00~08:10 硬编码时间——窗口/时间敏感,smoke 若数据不符需下轮改 {startDate}/{endDate} 式表单);capture 为 None 的接口按浏览器原样 POST 空。日期字段已 {startDate}/{endDate} 化(竞争圈 getManagementData/getFlowData/getFlowSource/getTripartiteOrderLoss 原硬编码 2026-08-10~16 已替换);dateType 等窗口类型字段保持捕获值(未映射,待 smoke 复核各窗口值)。', '用户行为 405 转换说明': '用户行为 17 条 GET defs(smoke 全 405)→ 已按 scan_pages.json userbehavior 域实录转 POST:15 条(queyUser*/getOrderDistribution/queryOrderType)捕获即无 body(浏览器原样 POST 空,与 fetchTensityOverViewV1 同款已验证可行);getCommentsScoreV2 复用捕获 tokens body;getCommentRateTrend 为捕获原文表单字符串 "month=6"(最近6个月评分趋势,eng-cli 表单通道发送),need_record 全 false。', '经营报告子页 16 接口校准说明': 'body/query_params 按 config/request_capture.json(2026-08-23 07:53 beneficialdata+flowdata 页与页签点击实录,29 条)逐接口照抄校准,need_record=false;日期字段改为 {startDate}/{endDate} 占位符(窗口引擎替换);spiderkey/fingerPrintKeys/spiderVersion 照抄捕获值(会话级,过期需重录);form 编码 body(type=1&startDate=…,getRoomOccupiedRoomTrend/queryFlowSource/queryCityHotKeywords)已转 dict 以适配采集器 JSON 通道(smoke-3 已验证 getRoomOccupiedRoomTrend 成功);fetchTensityOverViewV1/getPictureQualityScore/fetchOrderOverView 捕获即无 body,保持无 body。若 smoke 重放失败/数据异常请回退 need_record=true 并重录(D11)。', '405 转换说明': 'smoke-3 实测 queryFlowTransforNewV1/fetchVisitorTitleV2/fetchCapacityOverViewV4 三个 Phase-2 GET defs 返回 405(Method Not Allowed,平台已改 POST-only)→ 已按 request_capture.json 转为 POST+捕获 body(日期占位符化,need_record=false)。注意:旧采集流 collect_page 重放全部 defs 且不注入窗口日期,queryFlowTransforNewV1 的 {startDate}/{endDate} 在旧流无上下文,t12 PlaceholderGuard 将拦截并降级浏览器(旧流本就 405,未见回归,等价且更安全);子模块流(主用途)日期正确;建议后续单独任务让 collect_page 也走窗口参数化。另:getRoomOccupiedRoomTrend/queryFlowSource/queryCityHotKeywords 实录为 x-www-form-urlencoded,body 采用字符串表单模板(type=1&startDate={startDate}&endDate={endDate} 等;str body→表单发送已由 t12/t13 支持;勿回退 dict——t11 实测 dict→JSON→200 但响应体 null 静默丢失);getCommentRateTrend(用户行为)同表单通道(month=6)。queryMarketDetailsV1 新增 _离店 变体(type=2)供离店页签;type=0 默认页签归预订销售数据。用户行为页 GET defs(queryUser*)未验证,若 smoke 出现 405 用同法转换。', '新页说明': '广告营销/挂牌管理/商机中心为计划书02 新增采集域:min_indicators=0(页面级旧采集流程视为截图页,结构化数据走 sub_modules/run.py collect-modules);pages=all 将由旧流程遍历 7 页——如需保持①四页 0 回归,采集入口请按 sub_modules 路径过滤(见 t2 采集器扩展)。商机中心页 url 取 PSI 首页(/toolcenter/psi/index),模块 22 违约看板为页内子路由(/toolcenter/psi/honestscore)。', '无数据口径': '审核记录(20)/违约看板(22):无记录→status=no_data,不判失败(§0.4-3/Q2-2);由 sub_module note 标明。'}
+_screenshot_comment = '模块截图规则源: pages[*].sub_modules[*].screenshot_modules(selector 经 2026-08-25 真机校准);由 05:30 Screenshoter 消费;页面级 screenshot_modules 已废弃。'
+
+### fixed_daily 子模块
+page='经营报告' name='服务概览' fixed_daily=True
+page='竞争圈动态' name='经营对比' fixed_daily=True
+page='竞争圈动态' name='APP流量转化对比' fixed_daily=True
+page='竞争圈动态' name='服务质量对比' fixed_daily=True
+page='竞争圈动态' name='实时流失订单及去向' fixed_daily=True
+page='竞争圈动态' name='竞争圈榜单-销售排名' fixed_daily=True
+page='竞争圈动态' name='竞争圈榜单-流量排名' fixed_daily=True
+
+### 点评页 sub_modules 明细
+page='点评' url='https://ebooking.ctrip.com/comment/commentList?microJump=true'
+   name='点评分析' url='https://ebooking.ctrip.com/comment/commentList?microJump=true' nav='点评管理→点评分析:/comment/commentList(评分概览/评分趋势/点评明细列表;SOA 26353 四接口,2026-08-26 抓包实锤;页面评分概览接口未捕获,待补录)' screenshot_modules=[]
+   name='点评分析-列表' url='https://ebooking.ctrip.com/comment/commentList?microJump=true' nav='点评管理→点评分析:/comment/commentList 点评明细列表(浏览器 DOM 提取:getCommentList 直连返回空,页面真实加载渲染后 DOM 可取)' screenshot_modules=[]

@@ -1,0 +1,36 @@
+# 本机 PostgreSQL 16(总纲 7.1:数据 = PostgreSQL 16 + SQLAlchemy 2 + asyncpg + Alembic,本机用 Docker 容器)
+#
+#   docker compose up -d pg
+#
+# 端口用 5433 而非 5432:避免与本机其它 PostgreSQL 实例冲突。
+# 数据落在命名卷 hoteldata_pgdata,容器重建不丢库。
+services:
+  pg:
+    image: postgres:16
+    container_name: hoteldata-pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: hoteldata
+      POSTGRES_PASSWORD: hoteldata
+      POSTGRES_DB: hoteldata
+      TZ: Asia/Shanghai
+      PGTZ: Asia/Shanghai
+    ports:
+      - "5433:5432"
+    volumes:
+      - hoteldata_pgdata:/var/lib/postgresql/data
+    command:
+      - postgres
+      - -c
+      - timezone=Asia/Shanghai
+      - -c
+      - max_connections=100
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hoteldata -d hoteldata"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  hoteldata_pgdata:
+    name: hoteldata_pgdata

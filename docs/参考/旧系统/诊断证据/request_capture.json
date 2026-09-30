@@ -1,0 +1,522 @@
+{
+  "https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata": {
+    "method": "GET",
+    "url": "https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?micro=true&microJump=true",
+    "query_params": {
+      "micro": "true",
+      "microJump": "true"
+    },
+    "body": null,
+    "content_type": ""
+  },
+  "https://ebooking.ctrip.com/datacenter/api/dataCenter/sale/queryMarketDetailsV1": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/sale/queryMarketDetailsV1",
+    "query_params": {},
+    "body": {
+      "platform": 0,
+      "startDateType": 0,
+      "startDate": "2026-08-22",
+      "endDate": "2026-08-22",
+      "type": 0,
+      "fingerPrintKeys": "",
+      "spiderkey": "1006-common-1XPwlmxBzKaTEGfJagedfYMhvAnjamw0Sw4fJtPRomwBXjk3JzNwGLxs1jznEfqwdqiBHKsawqlE8srsdJhawS9wp3En7ylkjX1J1DYP3WSyfTEpJ1YO5IcXWqtKo7RbMyFdjM8yaBEHtEGdYb7ylcE1FjkLjoXRHkyzmjZdIQy1Y66KAELZJfhK7mjOTjmtEsOyTE0zin1YHEnFYZOybEkhYgzy8TjDMJSGiMFiF0rnte0bY1axDHIq3wfojkhw9LeHME5aI3BwpBihcR1EO3YU0y95yFfEQ4jSnENOwG7jpMYQmjqUjGdwAEd3Yf8ykGe4mYLFW3HEt6YSpydEF6YlDy05JlSvgcyApezPY3ajXnyGMylhw49j9DEsQi4nwPSjkEgMYBcyLoJb3jTsY9Gj8BvLteqXw0de15EHUW43y8MEtQjNAEQEUbiNOyMdRpze37wcOwd7i7nKFLvszRLTEaE1qiXPJFNj0sws1vZLj07ycsK3bjhYthiMaRbTEAdRXNyksjPkyDOYtXWTniDMvgpEoOWzLj50jHciFtIFSysnjHajHnENneGUrUzYM1wB9iObx3Ow16EcaegSY4owAYLhvd8E1AJzaE0TJBlE14YosjBkYLAYOUJLze3SRdFiMLRpfym1ePDEn4iXHiUhvPqe3Av8dy93v5QyBbePzjFnjpkYq8EzQWzNyFmJa0jm9J5AwDNJTMw95v71KMfwnY40IOBwmdeaGwd7ykPYbcw46jpbwAFY8TwOAW9hKBDJoYmcEAyLawN0YD1EMTxDE6QYdYMMKHPiOqJoGvZheDmYPAi1XYa5iB9wBjnY1XrGnyZ1xBzeUAElUjkBWDtYZdyLqINYAPrT1y75yHdrQ6Kp9egSEN1WS9w5Lx4geDYZAJ89IQXJ3lRdfwXfWo0WkpedARSlWkXWq6Wmpxk7rUbwdYOmRGfYtqYzhR89wokW1aWOAePkRHDWgTWoAWnFwpTeTFENYPMrpNY9HjFHiXMJSsJt0rgGYBhxaY60JqOr76E7HKacj1bJHky8GwUzeLpx17jZTwkgW84Rk1xBYmj5LvDaxn7JlMIdFroUWzYtyQ1JXPvtqj9HwO6v6sjoarHfjZdY6YdJnbjg7walY4bx83JdGJcYDZIsJXELojqAwG6vO8jbOwHQIUSKmYOgWcEpFidqRtbWpFWmaY97IZbRtY5tIfdrOHJanjc3IcjtYc9YT5jGAKLAR8TWoTw4bJh9WBpWSbyk6j9GYSzwTfWatw38ILbj8Yhfj5cROBj48RZOwFnWh7WfHedLR5kWO5Wg9WNtifNEQlWhY5Uxc7JBZWcXRGOwUQWZ0WGAetZRBqWdzWQFWO8jfAY3G",
+      "spiderVersion": "2.0"
+    },
+    "content_type": "application/json"
+  },
+  "https://ebooking.ctrip.com/ebkorderv3": {
+    "method": "GET",
+    "url": "https://ebooking.ctrip.com/ebkorderv3?micro=true",
+    "query_params": {
+      "micro": "true"
+    },
+    "body": null,
+    "content_type": ""
+  },
+  "https://ebooking.ctrip.com/home": {
+    "method": "GET",
+    "url": "https://ebooking.ctrip.com/home?micro=true",
+    "query_params": {
+      "micro": "true"
+    },
+    "body": null,
+    "content_type": ""
+  },
+  "https://ebooking.ctrip.com/comment": {
+    "method": "GET",
+    "url": "https://ebooking.ctrip.com/comment?micro=true",
+    "query_params": {
+      "micro": "true"
+    },
+    "body": null,
+    "content_type": ""
+  },
+  "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/fetchTensityOverViewV1": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/fetchTensityOverViewV1",
+    "query_params": {},
+    "body": null,
+    "content_type": ""
+  },
+  "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryHotelOccupiedRoomTrendV1": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryHotelOccupiedRoomTrendV1",
+    "query_params": {},
+    "body": {
+      "isTodayOnly": false
+    },
+    "content_type": "application/x-www-form-urlencoded; charset=UTF-8"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryHotelTensitiesV1": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryHotelTensitiesV1",
+    "query_params": {},
+    "body": {},
+    "content_type": "application/x-www-form-urlencoded; charset=UTF-8"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/dataCenter/market/getRoomOccupiedRoomTrend": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/market/getRoomOccupiedRoomTrend",
+    "query_params": {},
+    "body": "type=1&startDate=2026-08-23&endDate=2026-09-21",
+    "content_type": "application/x-www-form-urlencoded; charset=UTF-8"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryRoomTensitiesV1": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryRoomTensitiesV1",
+    "query_params": {},
+    "body": {},
+    "content_type": "application/x-www-form-urlencoded; charset=UTF-8"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/dataCenter/sale/queryMarketRoomTensity": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/sale/queryMarketRoomTensity",
+    "query_params": {},
+    "body": {
+      "platform": 0,
+      "startDateType": 0,
+      "startDate": "2026-08-22"
+    },
+    "content_type": "application/json"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryHotelMinPriceV1": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryHotelMinPriceV1",
+    "query_params": {},
+    "body": {
+      "fingerPrintKeys": "",
+      "spiderkey": "1006-common-8X7I1qjfQeape1TrmLEgHYfOW9qyXLJzcwclYhdJ0XybOySdEZoEG4KdPi1mr5tvsqRdHJF8yPljOTvgSi8ZWm8yzNYnNwfXwQZyaGRz6JgzKktjfhrpYZ0xgtyM9RbqR90yofjngyqNEZlEbdY39yMgyGsEFSjqfE6ki47RsjsmrdYOpKmPRDnJgDKOXj3OISMEh4ytEcdiQ3YkEA8YzFyhEOcYp9ycfj7gJZAiMHiqlrtle5ZYUcxnAIoqwkHj07w3heDtEZzIXawOciSHRmEnlYzUyfMyhaEkUj9XEfXwn9jgaYa6jFfjXhwcEf3Y6DyZlecqYldWmqEpSY8QyTEgdYqTy6UJ84vLqyZSeFTYdlj7Tyq6yohwctj1oEMniHZwU3joEdMY08ygAvTZWdZiQpKtMy81EgZjBfEUEgfi9myhkRLFeAawZbwg5ikGKA0vPLRSTEoENdiSHJUDjQNw4mvldjlDyo0JZzI4YoqeQtis7K5FRfXyMXjfhyU0YH6WnbikBv97EmnWX7j6Hjgdi5LI8qy5cjU9jm5EdZeMArMgYXUw3LiHzxgmw1XEfHvcmIBEaYpzY05Jz4JLGJpGWQsRp9ElGjpQjGti5SyM7eL5y60ykzWL1iaTe17E83Jb7v8Gy1OeXkvfzE0XJkcEDTeSoYpkRgdwhHw6ZRH0vXkv4XE80E8Dy0zvscyT6WNDvPqYzYMUWA5jcPWFqwl4y4pYHlwh5jUcw3hY3ow7DrUZrUBe7YDDxdOrqtJbaY5gEQFwT9YqMjHYhlKgzvaBiZov0Mea3Y3FiP5YT1E8UiP7JXY9ZxpnR1qwD3eT1EFljkqWSynUjpPvhY8sYfpYOTIU9rLGK4deLqEl9WooKPnJQ7vDYpdwXqeAGRg7RTpwoPWGnWZBeG0R5NWQXWzQWLLKmgYhkeqYDHY5ayOHegURMLwsTWPBW1OeHqRTNWhcW83W90y8SR9lEcY5DrGHxSwHFiAdJ4fJtyFnvqPr9YGOx3ays3EXDKmNjnHJFqysOw6geZsxoXjkfwB5WT6Ek3wHY7HJldvGGx95JGOrMlxNqvMYBNyF1vN0YGhjNmwlQvA6jD0JnME1tiUYTOJ58YUavbnYT7iqcYNPWqYpjANWpDEcnjLowZ0vStjUUxXqydjtYlw1fiGlJUBY8LJOdWgmibnJ7kvbYF3y5kra4ilbeDBI6UxHYp7rOdEhPyDcRf7WDfwadJqDWNqW8tyQMjdZYDZwtGYS6vs4xksWMYSByBDJn0ez5RgUwmdWAaWqLeABRU1WcnW1sWt4ITsYgkWTYgAWmAv90RhfRMGwQZWs3W0me16RcDW90WNAWAMrLkjSS",
+      "spiderVersion": "2.0"
+    },
+    "content_type": "application/json;charset=UTF-8"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/fetchCapacityOverViewV4": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/fetchCapacityOverViewV4",
+    "query_params": {},
+    "body": {
+      "fingerPrintKeys": "",
+      "spiderkey": "1006-common-qPGEgwLZIGgwO6JTLj5NE1GwSGYPmvh6JqgvT6igBJMHwaBj95vNDR5sETtE9qY3fYfFwqZvAFY9avB1y4QEqfwQ8J07Jf5wANE9nv3aipPyMOW0GI4Y0E06jMmwGlRnXy0MjcUyBlED0EMoYoFy5DEncj9twQGj5cwkcKZZx7bicY8lrAwH3yQ6K6MjMmjUQE0GIFEzLifnYzESDYs3ySEOSY85y0Dj9gJhZiFoin4rNXeq1Y1PxLFIBswcAj4Swg4eMSE86ItnwUoiQZRXEA8Y8Byz1y7BEf7jmzE9ownlj7ZYAcjczj7awMEltYNTyUqefcYo3WFDENSYSly5ESDYO9yHcJsPvdnyUZetbYX0j40ycHy3owsPjpnESTihDwcqjUEg3Yn3yTMJh9jFoYBsjN7v81ez5wsMebAEX5WlBytGE6GjLfESEb5iXByaPRQPeOtwPSw97iqMKTmvlkRMfEdE4MiAkJoQjlTwn8vbqjGHib6jNAx4YmkyMEzDEMsRfaydQjgAySkYGZWfPilmvQbEPhWNBjphj8mi9qIdGyq3jDOjAGESbeF0rZHYclwqfiNhxnhwUcEs4vBNJnAIzYpmxbkiDzy4pwM5isqw1UyO0vq7EhowSPJUfePLwGFvmZEtFW8beSnEbBJ4hvTkJo7e9DJNAJ0pESLiLMephE9nEnMw13vLpytQJmAwo1wA5yMgjozwlbRaTKoSRGnW8YabRkdwfsjMBwqTy4bYQbw9LjlhwsXYZGwm5yqyA6EtYpPyG3ro4vDXYqXEtdW44xpceHYT3vPGWDHxPOvpZekAYUFiONYkNWULe5XwsYLqrh4rZE3Ues9EZhjn1W7nRQGyOAJGYAJXoKqoraqrl9K6NedfEBXWXce1AraBwBYkNKBkr8cYzXRkMwFtWoHWmteZXRHtWBqWz4WXMKAZy3Bw7Yb1J9NKc5vX4RA8w3BWbOWFXeD7RSnWn1WlBWUNIF7IHQKGY66Kd1y8PR9aiUGJtBJAPK1hWPowoY7FRaSRPlRl1K6zjNAJGFy87wmAeSdxmFjDgw4HjOAJh1ydYStw1SR4QW0XJk5v3XjTqW9Y96jN5EZdxtpj7Lwq1votj66xU0vqprLY3cvzFiL0i1BY4pE3gYNzjMYHTI67RdwN8jF1wAdvDMjlaYHaRNURSYa6IMMKnOvPcRSkWp7WngxXJLNjNYTmWA3yacEm4Rh8YNFKSYDaY9UeFgEpSR6gWN9w3aJPDWOzWZBy9Pjb0YSdwknWNAJgJHfJ9YlBj6MEt3rPmRDawG6WT7W8nenmRH1W3cWqQWHmrnAjntrNYlpxkmicawkURDLwf5WFLWB5eBURcMWm7WpSW08vtnvFp",
+      "spiderVersion": "2.0"
+    },
+    "content_type": "application/json;charset=UTF-8"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryOrderTrendV1": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/queryOrderTrendV1",
+    "query_params": {},
+    "body": {
+      "includeCanceled": false,
+      "fingerPrintKeys": "",
+      "spiderkey": "1006-common-ctbjpayFUvnqwhOyPLRncw8HRtnw7Nyb5E5QvA7EdhEcMJ0LYs4RzkiZzyS1YhGjM7rakvOAekbyNlylXiDTY0ARS0W47eMTEtZJtfvGsyBgIqZJM7e0YZteOUyXsyX6R3Ay84jbcyPDEB7Eb7YogySmypZE4Lj8ajcSvqaY78E8OicY5TWb5w9gRkmKl4jhfjsDE9by7EHni40Y0ET4Ym8yAEOqYX8yg1jZhJPtioPi6Grf6eFBYqFxG4IO6wk7jB4wh3egaEsaIXTwU4iDMROEmqYAtymDyo4EGAjBGEXkwBMj53YltjXgjPqwbEpkYflyOFeNOYBHW5PEm5Ybdy1EQ9YDfyTMJnovqtyQMeFUYfoj1UyL1y50wS5jHQEZ1iDdwGZjkE8AYFPyA6v1cWmGidoKFTyfHEn9j3cE7EnBiBLy8lRgqedPw65wZ5iqdKTtv0tROcEFEtGipqJdljMHwXFv4Zjmbyg8JsprfYLSrLSrkLKDbRG8yDhjATyfnY1sWL9i1FvT1EZHWAzjq6jD7ilqI4lyBHjUojmbEs5e8Or3HYBcwUDiLXxPHwQNEMsvGbiksRsYSlxB1IhlxcOvLkEODyfljZbvOQvacRlkWcFe5fJBkE4ayfkvXHeFLEfoJhPiAnwHDedMJpZE8fELDEPleB4EghWBkwTgJnswBLvoAwtni5gyOdYBDwANv4DKfMvhnWpYhpYmNRnGyPbw59ymzYpAwAnjk8w5kYnMw9MYhNycZeFYZwPge0jscYGoEhfxF6j5kR0YOdidzxG0rn6vMFe1hYXZisXYz8iPzjByXYcGw0lxZ0raAe9fELTjQ7WbZK9zIkTEOYmByPXihgyDtromKPneDAEm5WfQWaPE63JSY6nx0zjmhjazRALw94WldWafe9nR6ZW8DWtzWLPr6deqsIAYSFwbtKQhJfARGPwthW7MWp0eU6Ro9WdUWnXWcjFbrtQKDYknwTHx9mETfi7fJ0HJpzrOsIf4jcYa1jbaWAsIS4KFUj9pJghyL5w9leTMx6djBHwkgwDPEzFrOY10I9XxkhrtaJQ1wkmxUSR6Y7kvnLvPqiNOjcqw6BvPqjozrh6WdzEGY3ysox3v57Yqdw4Pvp0joYacKSPi1OrFbjkZwZpvlQjBtIzjzUe9YbLWOme8siPLY8dJzBWdE6MIBAelYF3egPEO6x0PwXwOpRmYgaK4tW8cwzsRGgWtNw41JmnWhzWqpyzdj7zYpAwZDYfTeAnR5ZI1YtfWs5eflIA1RtmwktWMlWazetMRnFWz6W1TWNLjcdx3GKDYcAiXmydDJX3RzkwqLWZ1WmQegnRapWLFWhaWztRbXeb9",
+      "spiderVersion": "2.0"
+    },
+    "content_type": "application/json"
+  },
+  "https://ebooking.ctrip.com/restapi/soa2/24521/createNewConversation": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/restapi/soa2/24521/createNewConversation?_fxpcqlniredt=00000000000000000000&x-traceID=00000000000000000000-0000000000000-0000000",
+    "query_params": {
+      "_fxpcqlniredt": "00000000000000000000",
+      "x-traceID": "00000000000000000000-0000000000000-0000000"
+    },
+    "body": {
+      "reqHead": {
+        "host": "ebooking.ctrip.com",
+        "pathName": "/datacenter/inland/businessreport/beneficialdata",
+        "locale": "zh-CN",
+        "release": "",
+        "client": {
+          "deviceType": "PC",
+          "os": "Windows",
+          "osVersion": "Windows 10",
+          "deviceName": "Windows PC",
+          "clientId": "00000000000000000000",
+          "screenWidth": 1600,
+          "screenHeight": 1000,
+          "isIn": {
+            "ie": false,
+            "chrome": true,
+            "chrome49": false,
+            "wechat": false,
+            "firefox": false,
+            "ios": false,
+            "android": false
+          },
+          "isModernBrowser": true,
+          "browser": "Chrome",
+          "browserVersion": "151",
+          "platform": "pc",
+          "technology": "web"
+        },
+        "ubt": {
+          "pageid": "10650078260",
+          "pvid": 3,
+          "sid": 5,
+          "vid": "0000000000000.xxxxxxxxxxxx",
+          "fp": "00000A-00000B-00000C",
+          "rmsToken": "fp=00000A-00000B-00000C&vid=0000000000000.xxxxxxxxxxxx&pageId=00000000000&r=00000000000000000000000000000000&ip=0.0.0.0&rg=00&kpData=0_0_0&kpControl=0_0_0-0_0_0&kpEmp=0_0_0_0_0_0_0"
+        },
+        "gps": {
+          "coord": "",
+          "lat": "",
+          "lng": "",
+          "cid": 0,
+          "cnm": ""
+        },
+        "protocal": "https:"
+      },
+      "head": {
+        "cid": "00000000000000000000",
+        "ctok": "",
+        "cver": "1.0",
+        "lang": "01",
+        "sid": "8888",
+        "syscode": "09",
+        "auth": "",
+        "xsid": "",
+        "extension": []
+      }
+    },
+    "content_type": "application/json"
+  },
+  "https://ebooking.ctrip.com/restapi/soa2/32885/getAiAssistant": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/restapi/soa2/32885/getAiAssistant?_fxpcqlniredt=00000000000000000000&x-traceID=00000000000000000000-0000000000000-0000000",
+    "query_params": {
+      "_fxpcqlniredt": "00000000000000000000",
+      "x-traceID": "00000000000000000000-0000000000000-0000000"
+    },
+    "body": {
+      "threadId": "5b2a2526caf74a19be42e93625300135",
+      "messages": [
+        {
+          "id": "5b2a2526caf74a19be42e93625300135_1787442754206_A",
+          "role": "user",
+          "content": "帮我统计上月预订销售额和订单量",
+          "extra": {
+            "localId": "5b2a2526caf74a19be42e93625300135_1787442754206_A",
+            "questionId": ""
+          }
+        }
+      ],
+      "tools": [],
+      "context": [],
+      "forwardedProps": {
+        "pageId": "10650078260",
+        "locale": "zh-CN",
+        "conversationId": "5b2a2526caf74a19be42e93625300135",
+        "platform": "pc",
+        "version": "1.1.67",
+        "scene": "ebkhotel",
+        "createTime": 1787442754207,
+        "localId": "5b2a2526caf74a19be42e93625300135_1787442754206_A",
+        "questionId": "",
+        "entrypoint": "datacenter",
+        "businessData": {
+          "timeContext": {
+            "userTime": "2026-08-23 07:52:34"
+          }
+        }
+      },
+      "head": {
+        "cid": "00000000000000000000",
+        "ctok": "",
+        "cver": "1.0",
+        "lang": "01",
+        "sid": "8888",
+        "syscode": "09",
+        "auth": "",
+        "xsid": "",
+        "extension": []
+      }
+    },
+    "content_type": "application/json"
+  },
+  "https://ebooking.ctrip.com/restapi/soa2/32885/getRecommendQuestions": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/restapi/soa2/32885/getRecommendQuestions?_fxpcqlniredt=00000000000000000000&x-traceID=00000000000000000000-0000000000000-0000000",
+    "query_params": {
+      "_fxpcqlniredt": "00000000000000000000",
+      "x-traceID": "00000000000000000000-0000000000000-0000000"
+    },
+    "body": {
+      "reqHead": {
+        "host": "ebooking.ctrip.com",
+        "pathName": "/datacenter/inland/businessreport/beneficialdata",
+        "locale": "zh-CN",
+        "release": "",
+        "client": {
+          "deviceType": "PC",
+          "os": "Windows",
+          "osVersion": "Windows 10",
+          "deviceName": "Windows PC",
+          "clientId": "00000000000000000000",
+          "screenWidth": 1600,
+          "screenHeight": 1000,
+          "isIn": {
+            "ie": false,
+            "chrome": true,
+            "chrome49": false,
+            "wechat": false,
+            "firefox": false,
+            "ios": false,
+            "android": false
+          },
+          "isModernBrowser": true,
+          "browser": "Chrome",
+          "browserVersion": "151",
+          "platform": "pc",
+          "technology": "web"
+        },
+        "ubt": {
+          "pageid": "10650078260",
+          "pvid": 3,
+          "sid": 5,
+          "vid": "0000000000000.xxxxxxxxxxxx",
+          "fp": "00000A-00000B-00000C",
+          "rmsToken": "fp=00000A-00000B-00000C&vid=0000000000000.xxxxxxxxxxxx&pageId=00000000000&r=00000000000000000000000000000000&ip=0.0.0.0&rg=00&kpData=0_0_0&kpControl=0_0_0-0_0_0&kpEmp=0_0_0_0_0_0_0"
+        },
+        "gps": {
+          "coord": "",
+          "lat": "",
+          "lng": "",
+          "cid": 0,
+          "cnm": ""
+        },
+        "protocal": "https:"
+      },
+      "conversationId": "5b2a2526caf74a19be42e93625300135",
+      "scene": "ebkhotel",
+      "needHistory": true,
+      "head": {
+        "cid": "00000000000000000000",
+        "ctok": "",
+        "cver": "1.0",
+        "lang": "01",
+        "sid": "8888",
+        "syscode": "09",
+        "auth": "",
+        "xsid": "",
+        "extension": []
+      }
+    },
+    "content_type": "application/json"
+  },
+  "https://ebooking.ctrip.com/restapi/soa2/24521/getFeedbackOptions": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/restapi/soa2/24521/getFeedbackOptions?_fxpcqlniredt=00000000000000000000&x-traceID=00000000000000000000-0000000000000-0000000",
+    "query_params": {
+      "_fxpcqlniredt": "00000000000000000000",
+      "x-traceID": "00000000000000000000-0000000000000-0000000"
+    },
+    "body": {
+      "reqHead": {
+        "host": "ebooking.ctrip.com",
+        "pathName": "/datacenter/inland/businessreport/beneficialdata",
+        "locale": "zh-CN",
+        "release": "",
+        "client": {
+          "deviceType": "PC",
+          "os": "Windows",
+          "osVersion": "Windows 10",
+          "deviceName": "Windows PC",
+          "clientId": "00000000000000000000",
+          "screenWidth": 1600,
+          "screenHeight": 1000,
+          "isIn": {
+            "ie": false,
+            "chrome": true,
+            "chrome49": false,
+            "wechat": false,
+            "firefox": false,
+            "ios": false,
+            "android": false
+          },
+          "isModernBrowser": true,
+          "browser": "Chrome",
+          "browserVersion": "151",
+          "platform": "pc",
+          "technology": "web"
+        },
+        "ubt": {
+          "pageid": "10650078260",
+          "pvid": 3,
+          "sid": 5,
+          "vid": "0000000000000.xxxxxxxxxxxx",
+          "fp": "00000A-00000B-00000C",
+          "rmsToken": "fp=00000A-00000B-00000C&vid=0000000000000.xxxxxxxxxxxx&pageId=00000000000&r=00000000000000000000000000000000&ip=0.0.0.0&rg=00&kpData=0_0_0&kpControl=0_0_0-0_0_0&kpEmp=0_0_0_0_0_0_0"
+        },
+        "gps": {
+          "coord": "",
+          "lat": "",
+          "lng": "",
+          "cid": 0,
+          "cnm": ""
+        },
+        "protocal": "https:"
+      },
+      "conversationId": "5b2a2526caf74a19be42e93625300135",
+      "messageId": "8dc26333-e189-4c5c-92df-9b86feda5268_2",
+      "question": {
+        "questionContent": ""
+      },
+      "answer": "[{\"id\":\"d16685f1-b81d-4f11-b276-5ca78184d966\",\"packageName\":\"@ctrip/he-agui-kit\",\"componentName\":\"MarkdownBlock\",\"version\":\"0.0.1\",\"props\":{\"content\":\"上月（2026年7月1日-2026年7月31日）总平台离店销售额为3818.46，去年同期为667，同比增加472.48%\\n\\n上月（2026年7月1日-2026年7月31日）总平台预订订单量为12，去年同期为6，同比增加100%，竞争圈均值为80.69，竞争圈排名第11名\\n\\n\"}},{\"id\":\"8a363565-2d54-4666-b297-8a69da940377\",\"packageName\":\"@ctrip/he-agui-kit\",\"componentName\":\"Chart\",\"version\":\"1.0.0\",\"props\":{\"yAxis\":[{\"name\":\"销售额\",\"type\":\"value\"},{\"axisLabel\":{\"formatter\":\"{value}%\"},\"name\":\"同比(%)\",\"type\":\"value\"}],\"xAxis\":{\"axisLabel\":{\"interval\":5},\"data\":[\"7月1日\",\"7月2日\",\"7月3日\",\"7月4日\",\"7月5日\",\"7月6日\",\"7月7日\",\"7月8日\",\"7月9日\",\"7月10日\",\"7月11日\",\"7月12日\",\"7月13日\",\"7月14日\",\"7月15日\",\"7月16日\",\"7月17日\",\"7月18日\",\"7月19日\",\"7月20日\",\"7月21日\",\"7月22日\",\"7月23日\",\"7月24日\",\"7月25日\",\"7月26日\",\"7月27日\",\"7月28日\",\"7月29日\",\"7月30日\",\"7月31日\"],\"type\":\"category\"},\"legend\":{\"data\":[\"销售额\",\"去年同期\",\"同比\"],\"bottom\":0,\"selected\":{\"去年同期\":true,\"同比\":false,\"销售额\":true}},\"series\":[{\"data\":[129,0,0,0,0,246,0,0,0,0,0,0,0,228.96,0,457.92,0,457.92,228.96,0,0,0,0,0,651.9,0,434.6,0,434.6,114,434.6],\"name\":\"销售额\",\"type\":\"bar\"},{\"data\":[0,0,0,106,108,124,105,0,107,0,0,0,0,0,0,117,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"name\":\"去年同期\",\"type\":\"bar\"},{\"data\":[0,0,0,-100,-100,98.39,-100,0,-100,0,0,0,0,0,0,291.38,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"name\":\"同比\",\"tooltip\":{\"formatter\":\"{b}<br/>{a}: {c}%\"},\"type\":\"line\",\"yAxisIndex\":1}],\"tooltip\":{\"formatter\":\"{b}<br/>{a}: {c}\",\"axisPointer\":{\"type\":\"shadow\"},\"trigger\":\"item\"}}},{\"id\":\"2a034111-2148-4917-a64d-778163f4304f\",\"packageName\":\"@ctrip/he-agui-kit\",\"componentName\":\"MarkdownBlock\",\"version\":\"0.0.1\",\"props\":{\"content\":\"\\n\\n查看更多数据[【点击这里】](https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata)\\n\\n\"}},{\"id\":\"b47fc40e-711f-4230-b6fe-1db0b8b4946d\",\"packageName\":\"@ctrip/he-agui-kit\",\"componentName\":\"Chart\",\"version\":\"1.0.0\",\"props\":{\"yAxis\":[{\"name\":\"订单量\",\"type\":\"value\"},{\"axisLabel\":{\"formatter\":\"{value}%\"},\"name\":\"同比(%)\",\"type\":\"value\"}],\"xAxis\":{\"axisLabel\":{\"interval\":5},\"data\":[\"7月1日\",\"7月2日\",\"7月3日\",\"7月4日\",\"7月5日\",\"7月6日\",\"7月7日\",\"7月8日\",\"7月9日\",\"7月10日\",\"7月11日\",\"7月12日\",\"7月13日\",\"7月14日\",\"7月15日\",\"7月16日\",\"7月17日\",\"7月18日\",\"7月19日\",\"7月20日\",\"7月21日\",\"7月22日\",\"7月23日\",\"7月24日\",\"7月25日\",\"7月26日\",\"7月27日\",\"7月28日\",\"7月29日\",\"7月30日\",\"7月31日\"],\"type\":\"category\"},\"legend\":{\"data\":[\"订单量\",\"去年同期\",\"同比\"],\"bottom\":0,\"selected\":{\"去年同期\":true,\"同比\":false,\"订单量\":true}},\"series\":[{\"data\":[0,0,0,1,0,0,0,0,0,0,0,1,1,0,1,0,1,0,0,0,0,1,0,0,1,0,1,0,2,1,1],\"name\":\"订单量\",\"type\":\"bar\"},{\"data\":[0,0,1,1,1,1,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"name\":\"去年同期\",\"type\":\"bar\"},{\"data\":[0,0,-100,0,-100,-100,0,-100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],\"name\":\"同比\",\"tooltip\":{\"formatter\":\"{b}<br/>{a}: {c}%\"},\"type\":\"line\",\"yAxisIndex\":1}],\"tooltip\":{\"formatter\":\"{b}<br/>{a}: {c}\",\"axisPointer\":{\"type\":\"shadow\"},\"trigger\":\"item\"}}},{\"id\":\"cf35bfd3-082b-45ad-bf46-c4abd8397d96\",\"packageName\":\"@ctrip/he-agui-kit\",\"componentName\":\"MarkdownBlock\",\"version\":\"0.0.1\",\"props\":{\"content\":\"\\n\\n查看更多数据[【点击这里】](https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata)\"}}]",
+      "head": {
+        "cid": "00000000000000000000",
+        "ctok": "",
+        "cver": "1.0",
+        "lang": "01",
+        "sid": "8888",
+        "syscode": "09",
+        "auth": "",
+        "xsid": "",
+        "extension": []
+      }
+    },
+    "content_type": "application/json"
+  },
+  "https://ebooking.ctrip.com/datacenter/inland/businessreport/flowdata": {
+    "method": "GET",
+    "url": "https://ebooking.ctrip.com/datacenter/inland/businessreport/flowdata?micro=true&microJump=true",
+    "query_params": {
+      "micro": "true",
+      "microJump": "true"
+    },
+    "body": null,
+    "content_type": ""
+  },
+  "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/queryScanFlowDetailsV2": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/queryScanFlowDetailsV2?hostType=Ebooking&v=0.44873903067433973",
+    "query_params": {
+      "hostType": "Ebooking"
+    },
+    "body": {
+      "platform": "Qunar",
+      "channelType": "0",
+      "dateDimension": "0",
+      "startDate": "2026-07-23",
+      "endDate": "2026-08-22",
+      "dataType": 3,
+      "fingerPrintKeys": "",
+      "spiderkey": "1006-common-otzwd4W7PwpUvPDYAhIOLwkFyg3Wqpy4XisqJGLj15Y4sRAzWqsYX9v0ajHmWSAJb0J84vU8wdcvcFYdPy5pEMSW96iFfrlNwsLE0TIs7ylXJ44e1NjgYcvs4xFDvcfRdQyG0jOByaOEtnEzqYqZyaqyXBE69jMNy7bwPhesOx1AWMYZ5elgEzTRcAKSzjqGjF6ElOyaEDsimhYbEL6YSoytEogYOByc3jdhJXTionik1rZTeH5YoNxloIL1wUpjpPwNGe0GEFUIhbw4FifFR0ESAYLdyt6ybAE39jQ8EcFwqXjfmYknj61jsbwDEM7Y30ysPeFoYk0WHOEDZYspyBEGnYh8y61J5kv0NyzMeDtYhsjmXyDZycgwTkjMzEzniPbwoLjhEm5YDbylBv3MWmZiTFKXcyPkEA1j7pEGEAsim8y4oR74em7w8AwAhi7pKAhvXDRqPE7EdUiPaJ5kjLgwB4vM1jgwDdRlSR9YlFEbFr04IqaRHByqfjTMyDPYt5WHoighvU5EfTWBAjmojFBi6UI3FyMXjNsjsFEfoeFQr07Y9HwZLiTOxHpw9pE6gENsYP6j7YdFyOZjgSYo7jnDjdmJO5iB6EBnimHJQSwUfeBmW1qjHaJT5E31edZEFkE9NvFmjples5vNUiabjh4Ek5eoXRsSvZ7WF7J8kw90iUqRB8yOfRfHyoUR5qwN0EbqYHSE6Y7BItDvG9rlsw78yFGYPXw1djbQwp5YzawGGxQsISEsYmZRk7rm5yNqY6PEaTEk3ja9RDYkwabIthE16vAgezlYdFi4kY6se91eXhwmYNbvdNyoEHdefZEp5jF4WG8JXvQlE6Yf5IpDE9QW65r9NK1ceHSE7XWtyQTJNTIbYQHWQsinqEgaRF1wLPWTcWNmeSORNZWpPWZnW7ZwF3J7nyXYtZws6IHy9bRMtwq7Wb8WTAeQBRBXWpSWTAWmXvPMiUDYAY3TwG9YnAyB0i8aJs5JOMeq1whAwMYNcW99xMmwgSK5OjL5Jbkyg8wq8esLxDFjacwcqYqzeqcIcYAZIMfwzXKA3JkTJggxZ5K5YAlxFpEAGr91jLbw1Gv9pjaGjQdWP5Y1Y0ZRqZwbtYt3YsLwB9va8jXY3arb7Yt8EqbjPbw9mvUBjHaWFUYaUyHYhAy6FI16vB9Y6fJT3Wqne39Ks6W9YaXwBQEqgwgHiUSrmOxcYmqrpMRanifkRS5Wz5wMoJhkWltWQpyHZjGMYB5w6bYPMrSTxSNr8YFqekSyd1wzDRtAwD3WTzWcae1QRg1WthWT4WFqwcXIDsvLYPQK6aE4aYnSRbkwS8W14W63eGURXbWlUWz9WUkIDzjlb",
+      "spiderVersion": "2.0"
+    },
+    "content_type": "application/json;|cas"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/queryFlowTransforNewV1": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/queryFlowTransforNewV1?hostType=Ebooking&v=0.5299928968474407",
+    "query_params": {
+      "hostType": "Ebooking"
+    },
+    "body": {
+      "platform": "Ctrip",
+      "startDate": "2026-08-22",
+      "endDate": "2026-08-22",
+      "fingerPrintKeys": "",
+      "spiderkey": "1006-common-dlLr7swm6x8TR3zrGtELoW3sKS6jnHj9oI3AEkUvAaEtpjhFJUAy6Qxm1WB3wfqW14ikBY6qjmAW0zR8BIGnwNzWLkEdOwcfE7Fi3awQaWFaeAkjXgW3YU1IMGJ1GYToRtoys8jZOyMUELtE5fYUAyTFyX5EqLimkYh5WBdrgw6ZxqYD6KUmW7ZY94KHPjNMj3tEFZyoE9hiNFYlEPzYl6y3EhSY9Qy8njq0Jgsi14ikorMNeDMYUDxolIhGw5AjhDwa4e4zEokIFfw97iSMRMElMYkzyDgyaPEFcj30E89w75jHQYsPjZ5jn3wsEF8Y9Qy4ceUdYpOWGUEmDY7OyQEmqYpByklJq4vzlydkebgYaGjLdymTyMNwbQjtzEHtiNMwzTjHEfqYOzyzgvpSWoXi10KpbyhLEs6jPpESEF3iB8yc4RMoedbwapwSUi6PKDdvBORHqETEmoiDqJ78j0DwckvUcjtGJSwAoicYfqIl7egNxH4Raly4Tj6Ny0QYmhWN0if3vB6EZUW3NjF5jQNi4tILPyg8j3PjX1ENQeMUrn9YBAwhUiDgxOHwaZEG3eT8iXDEdYX9In6iz6KhnEAmw8TvoXiaAjM3JtqwgOvzDe5ZiSfjGkW63ESXe94EtmEb9J1aYPFeMhEaFjtUiqpjHnez8JGnYPbjpmRFowmgvNLJaswc5J45v6GW8oJtPwcfv9EtYgjgdi3svQBwNgyAsYgFwPAjZ7wUbYPcwScel1xNPEbY4zw8LYkUEXhY7QEkdi1ByzNrLYlXwU8WcLxk1v0me6OY6kiUqYQhW7LxmMEOYFMy6crTPwdDenPENgj9mWXXxdtIccKlY4tROMRk8IMQr6nKX8eSLEA3WOMJTDiAMyFYbgYZtKnSxc5RPgw46WoAW4oe1mR9oWqDWOnW76j1gyTXxfYpQyGfYN1I0kRhsw4zWq5WAqeMhR1TWQcW50WTsyLHYlZIsYdnipPi0GxHPipGY0Fi56ITMWd4IOYHLef5rqLeNcK4NjgqJ9tycZwoneDdx36j4Zwoze0kYo8rXYSqJ0OIcBYtcJLNwQtYB8y5YApjUlrc4J7LjNZwB3vagjP1ELMxH0WtYMbrb8j5JzHY96Rt3WOmJ4Yhhx69WlSjc8jbzwDtvADj6txXbW7BedY5TrQ6RfAed1YsMJ8LWcgvLDIQGYNY88xpMxFdj0FJM1xsaWdYD1v01Y8PEdDR6kW10wQ4J8MW4fWsXykcR63jX0wA6JMsekfjXHWBYq3YPBiBdjlMRtQw3zWzqWbzeTSRUFWgkWh3WHtvqyAUi6YTBYcME3LWPARZ8wt0WklWMkeloRqpWkzWtlWb5R3zW8",
+      "spiderVersion": "2.0"
+    },
+    "content_type": "application/json;"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/getPictureQualityScore": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/getPictureQualityScore",
+    "query_params": {},
+    "body": null,
+    "content_type": ""
+  },
+  "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/fetchOrderOverView": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/fetchOrderOverView",
+    "query_params": {},
+    "body": null,
+    "content_type": "application/x-www-form-urlencoded;charset=utf-8"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/biddingajax/fetchCurrentHotelSeqInfoV1": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/biddingajax/fetchCurrentHotelSeqInfoV1",
+    "query_params": {},
+    "body": "statDate=2026-08-23",
+    "content_type": "application/json;charset=UTF-8"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/dataCenter/comment/getCommentsScoreV2": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/comment/getCommentsScoreV2",
+    "query_params": {},
+    "body": {
+      "fingerPrintKeys": "",
+      "spiderkey": "1006-common-3fcvkQIkgYQUicSWdsR39xNMKbtJ41ysojF5WOqEBcEHGY7PR83wnSEPqRUPykGEDAwTHYcmvUgWpqvN4v57E5HYdow10Rf8RHcYtXWTDjczYmtIc8v7Y75rZPy9AyATRb4yTzj5GyXfEHXEQaYbkyStyolE1Ljg1Y1GWb4EXpIaaKXYt6idhIoLvn1KHNj4TeDcE3Ly6E7siakY8E9LYL4ybE3zY1OylfjaTJZAi5ziX9raSeLqYTgxHPIQzw96jdDwpOeOpES8ITdw6HiDkRcEmlYh9yZdyhBEnsjFUED1w6AjN3Ynajpgjg8w1E5cYt6ytUep8YSNWaAEMpY5byPE8dYbaympJDavqhy05ehfYp3jDZyPly3Bwkaj7FEOpibpwS8jpEc9Y9hyhGv9FWomimkKDTyFpE6XjdtEtEkFiBLyqsRkPegowGhwFLiLfKHzv5dRflEkEhOiltJtLj4bwtSvGnj44xMAePSy5Y4oe10wzGynmRsAy6XjdcyP4YqfWUGiMzvodE6lWFXjGHj03izBItNy6LjFnjndEBleXdrfTYtAwNFiZGxOzwGaEpyqyhwGYZcjp1IMSR3ayGQYS8vznYAovhavO8ygTE9ce7AjTAigmi61ylge5TE3tyg8j6lyFoeO6EH8Efbj9aEHGe4tyFtisXiodEQpRBcE8qyXbvpbJqBvZBw4dy7zy06I5mKgYTPeQlrSDe7pwzSylcY3hwH1j4cwUAYOAwbFJGEHyXYl6iXoRctJtpY7hEAzIQ8Y8Pi7Y71Yt8i4TIoGv38ecTYkNiLlYzArNARl1y0YnLEqseO9WT7eB1EXUj1MWXsE8GjXOyTYlmJc4rFMetsr0sKcLeoHEdkW34EABKtbrSYhQEthJccKL4R4GwN5W4NWfHeMpRAlW7kW0aWp0r4SW6PjfY6wkMeMaWMbRbswPXWZHWHae8mR5dWH9WqSW48xbOiH5vOYn1I4qidOjb8iotJkzJfDe0pILhebY4LYAlrgbI51KSfjmGJ39ykFwT0ehFxZHjd3wt5WHajU1jZYlmI8GjM6eHqJtawXjZfITYMGvzsWASRLSjldwsBvzMjQdxomWNQiQYU7ylse4nK54Yn0ymqRH0xFY44xtQwkQRZcjH4wG1vgzjNUe0mJanJcYUUKGBipaIM3YtcJlkWddxNbKHQyUYhprTnjZMJTOIGSWf0EUYo6J08wM4xb6RM4WSAwfqJc6WMXW6Lyp5j6aYApwFUYgQj6ZYNLiBYTkeN5Iharh4RaSwUNW7AWsleXmRpQW5oWhtWGFwB5wdmimYsTjbDy75ez7RL0wQ7WGhWc3ea5RhmWGtWN0WGsrh6i7k",
+      "spiderVersion": "2.0"
+    },
+    "content_type": "application/json;charset=UTF-8"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/fetchVisitorTitleV2": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/dataCenter/current/fetchVisitorTitleV2",
+    "query_params": {},
+    "body": {
+      "fingerPrintKeys": "",
+      "spiderkey": "1006-common-zf0w0mIgDr46xPDekhyogw0Pe1FEcNj7sENGyaXj3TvmqEADvtkYFmJALRU9jNcR4qxTAEF7E0BJpzy4Lw45J5ORFpWzSEn4J5PehHy8pjPpiOSIP1vGY1bWowGkRSdRpzyoDjLNyaDEGhEz9Yadyl7yfDEaSjfowb1WTqEb7jggxZYLvmpwHOKMOKkTjlOjNkEp7ykEaPi8hYFE8nYqcykE64YGByzNj0MJb7iTOiHSr7PepOYlLxc6IdUwohjgSwsaeUbEfcI0hwN3icGR3EbNYBoy4ky6HEs9jOcEzMw6AjUPYn1jlSj5TwBEq9Yh0yUteMbYPcWQXE40Y9zy0EtdYPdy0OJlFv1kylPe3hYbdjHly6SycmwQzjsLEMQi3Fw8SjQEqZYDqyNLvcHWU4i9ZKM8yUTEQljXGE3EHTipgyhQRMFe1OwmqwcXi6mKoBvnLR9HEUEn0iBHJUgjAPw5Lv7bjQzeMai4BYbY5meG4I7UwOMRs4yhdjSsyH3YtoWsmiM0vh0EMZWQbjfhjNciG6I0oyb8jhGjDLETQeF9rHsYpmwoQizDxm9wPDEoSyzGRbFefYsdv7vQfjTpW4AELpETtJsSR7qRt0wtmwSUeqmJ1Gj4mythWmFeloEGZYSzW4kE1te4Sv6qY0ty1XE5MeG3ypAyQNifAE5aysMwHzYb6vOAYa4jqavBXJZsyGUEPPxGYM9r1OrMXjZhwgQyNXYplwTUj1AwGBYAfwSqRNZKpFKqYP5rUhJq8inBYFtE6bE6pJDarMYs1eafwHOIBAvTpe45YoNinOY93icws0EoYZ8JNOrUZJpAeAfEZNjtFWabrkqi75JPYLOWtgws7WBpra5KOAezkEP9WNwLgEb7j5YBhrhgx9EaBRd9wXPW53WOmeH6R0PWaFWSoW04YgwBDIFY7Aj8kIzHKPHRsLwLQW8MWG5eNmRbFWXQWZNWgGvz8iU9WgY5hJ0gwHqK8filPJFUJnUrXtYPNyHYLGjbFecsKU8KMnjz1JXbySBwf5eTbx37jSowqhWB8WH1yhYh3RHkK5TvlXJ7Bwm0YhQeqYbZeNTWgSJNqj9Ow1AvM6jm8IhmETcv3YS5Rk4j5Ui08Yz7WUGWNZY3Y4BWlhYMkrtOjbtw6LvOtja7x5Qj78xSYSSKfOEtGR59Y81JSlWZtyT7jpBiTYsZxosR5nJFfWq4KZpidYqOrNTi9gxFGRfDWdbw1kJAhWLsWdTyQfjTqYGHw6PYzUvqPrfMK4Y8fjABvUJPqR9fwbaWGsW3ze9TRBaWQBWF4WBbx3HEU9wpY0wXTI15KMdROBwDcWlaWBPe57RA1WNmWnhWdzRsfIUl",
+      "spiderVersion": "2.0"
+    },
+    "content_type": "application/json;charset=UTF-8"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/queryFlowSource": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/queryFlowSource?hostType=Ebooking&v=0.419188752735532",
+    "query_params": {
+      "hostType": "Ebooking"
+    },
+    "body": "platform=Ctrip&startDate=2026-08-22&endDate=2026-08-22",
+    "content_type": "application/x-www-form-urlencoded;charset=UTF-8;"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/queryCityHotKeywords": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/queryCityHotKeywords?hostType=Ebooking&v=0.71131956432471",
+    "query_params": {
+      "hostType": "Ebooking"
+    },
+    "body": "startDate=2026-08-22&endDate=2026-08-22",
+    "content_type": "application/x-www-form-urlencoded;charset=UTF-8;"
+  },
+  "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/querySearchFlowDetails": {
+    "method": "POST",
+    "url": "https://ebooking.ctrip.com/datacenter/api/inland/marketanalysis/flowanalysis/querySearchFlowDetails?hostType=Ebooking&v=0.3285915027402866",
+    "query_params": {
+      "hostType": "Ebooking"
+    },
+    "body": {
+      "platform": "Ctrip",
+      "dataType": 3,
+      "searchType": "1",
+      "fingerPrintKeys": "",
+      "spiderkey": "1006-common-4dnYbJlTis5EoMwLXJBZj7cRl4RnzvpnyzqJfHyoAj65EsMjGbxBLR0sia4v7zJsURGdwptwLDJ4UEzNJDQRQnv1tJBZRhDWFBjUDv3awqEcdj8gj5YP7yXAWG1Yo6RZ1ygcjBPy4TE9MEhQYnOjgTWspwPpJm4J8kRDOW8LIFqx4Y3NIgnE45KXnKdNjO0jNXEzmysEPaiSAY9Ef7YznyAEm8YgNyg8j1mJcOi0FiQLr1XefMYSlxQAIpHwTzjtZw5MeD3EkfI0BwgQiXoRTESXYQny8HyTXEpZjgsEcfwO9jGQY8ojAajzlw6Eq8Y8FylXepXY5zW9GE8PYoXy5E8qYdpykGJzHvbFy37eHcYb7jLNyOtyFTwDHjNQE0NiGswsQjGEUtYczyFcvZBW9GindKzsyOAE8AjZaE3E1aiBhyoORk8eFhwkFwZDiM7K5Xv6mR3SE4E1hilqJ6BjLNwlsv7pjSqWSswGyoY9fRP1JoFJHoRX7yZojF5yZ7Y6sWXNiqpvgnEabWDqjPLjz0if8IaUysljlZjStEPUeF0r7lYk0wfXi51xZDwPsEOFRl8J6dIZYDOJ3TwLURBcvM6ySLwHdyolwhGW9AyftiQaesOE3ZWcURZOR9zeNLEqnRkqRcHYo5eokEQpv13y0TE9oegHvO8Jl4yZ1W0dJmFwc8wcmj6NEMaJtUvstEali95W79RoYPv01rONK7OwN3y8PYDcw0tjzqw49YBHwtsKF6KpFynYD8wO1wQpv69YMpEHXxmLJf5j7Y95yzQwOkW4Xv73eD1Y81iZHY09I5XigpvtYt3xkaetTy4GeOhEbXjHDWhBI0kYZPRoYfBe5tWXnr0dr8DKNleb0E76WqMrFAyZlr3YLnWzPWOEa8R7LwFpW9dWlBePaR8FWlqWHNWzqjsgvmOwcYcOJqlyNHYFDRTzwn8WTBW86ed7RLBW30WfOWd4E6de8OrSYoLW8Zxpkx6Niz5wn6YP7EQmilPYPYQgEcpiUZrFqK3QjZAJTtyoXwzde9sxALjgdwZ9E34KFHENYMtEtmRZFrqZJoQizzK4OwtYtsEkj6TyZcjFdwntvc9jLljB6yO1R0YA0KozEthRqFYNzJPAyZ4KNYz6rOTrX5rHpjbGw3qvQNjqniZoKl4wcYN4eO4yOpyXZJTtWNQRaOx1cvgYSBRFPIHpxqUELpjbLwgYtni4oiHSjDcRphWd7wAbJPsWGSWMGyPhjzXYNXwBFY6JQawB7ycYn0R3lRsXwLcRfZwAtWomWGgezGR4nW67Wl3WLGJbZWlmrUYLfy4HybQwpQRfTwc8W7BWtoeM1R1LW4HWn5WdJ8dKqz",
+      "spiderVersion": "2.0"
+    },
+    "content_type": "application/json;"
+  }
+}

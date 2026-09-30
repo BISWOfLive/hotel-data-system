@@ -1,0 +1,16 @@
+page='经营报告'
+  page_level_screenshot_modules=[]
+page='竞争圈动态'
+  page_level_screenshot_modules=[]
+page='市场分析'
+  page_level_screenshot_modules=[]
+page='用户行为'
+  page_level_screenshot_modules=[]
+page='广告营销'
+  page_level_screenshot_modules=[]
+page='挂牌管理'
+  page_level_screenshot_modules=[]
+page='商机中心'
+  page_level_screenshot_modules=[]
+page='点评'
+  page_level_screenshot_modules=[]

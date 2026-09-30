@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}登录态{% endblock %}
+{% block sub %}共 {{ items | length }} 条{% endblock %}
+{% block desc %}<p class="page-desc">
+  登录态按 <b>(platform, role, alias) 三元组</b>寻址,<b>路径由三元组推导、不入库</b>
+  (避免"路径存两处"的第二来源)。旧系统是「四类登录态、四种存法、三个位置」——
+  包括把前台登录态放在<b>根目录</b>的 <span class="mono">storage_state_*.json</span> 绕开账号库。
+  <br>★ <b>商家后台</b>(<span class="mono">ebooking</span>)与<b>前台</b>
+  (<span class="mono">ota</span> / <span class="mono">ota_meituan</span>)是两套完全不同的登录态。
+</p>{% endblock %}
+
+{% block content %}
+
+<div class="hint-box">
+  <b>登录态是缓存,过期了就得重登</b>(架构上无额外代价):
+  <br>· 商家后台(段1):<span class="mono">hoteldata login --platform ctrip --alias ctrip001</span>
+  <br>· 前台比价(段3):<span class="mono">hoteldata price login --platform ctrip</span>
+  <br>主动续登阈值 {{ max_age }} 天;超过后巡检会尝试自动续登,滑块必须人工(程序不破解)。
+</div>
+
+<div class="card">
+  {% if items %}
+  <table>
+    <thead><tr><th>平台</th><th>角色</th><th>别名</th><th>状态</th>
+      <th>文件</th><th class="num">cookies</th><th>最后登录</th><th>最后检查</th><th>需续登</th></tr></thead>
+    <tbody>
+    {% for i in items %}
+      <tr>
+        <td class="mono">{{ i.platform }}</td>
+        <td class="mono">
+          {{ i.role }}
+          {% if i.role == 'ebooking' %}<span class="badge dim">商家后台</span>
+          {% elif i.role.startswith('ota') %}<span class="badge info">前台</span>{% endif %}
+        </td>
+        <td class="mono">{{ i.alias }}</td>
+        <td><span class="badge {{ {'valid':'ok','invalid':'err','stale':'warn'}.get(i.status,'dim') }}">
+          {{ i.status }}</span></td>
+        <td>
+          {% if i.file_exists %}
+            <span class="badge ok">有</span>
+            <span class="note">{{ (i.file_size / 1024) | round(1) }}KB</span>
+          {% else %}<span class="badge err">缺失</span>{% endif %}
+        </td>
+        <td class="num">{{ (i.file_size / 1024) | round(1) }}K</td>
+        <td class="mono">{{ i.last_login_at | dt('%m-%d %H:%M') }}</td>
+        <td class="mono">{{ i.last_check_at | dt('%m-%d %H:%M') }}</td>
+        <td>{% if i.need_renew %}<span class="badge warn">是</span>{% else %}否{% endif %}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<div class="empty">还没有任何登录态。先跑一次 <span class="mono">hoteldata login</span>。</div>{% endif %}
+</div>
+
+{% endblock %}

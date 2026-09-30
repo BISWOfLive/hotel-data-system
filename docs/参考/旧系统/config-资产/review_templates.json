@@ -1,0 +1,28 @@
+{
+  "_comment": "计划书⑤ 点评自动回复 模板库/店级策略/规则(模板文案为示例先行 R5-Q3,甲方提供后替换,模板红线:无广告/无绕平台规则话术)",
+  "templates": {
+    "g01": "尊敬的宾客您好,感谢您的好评!{{酒店名}}会继续保持,期待再次为您服务~",
+    "b01": "非常抱歉未能让您满意,您的 {{星级}} 分反馈我们已转达店长,欢迎再次入住检验改进!",
+    "b03": "感谢您的建议,{{问题}} 已列入整改计划,期待您下次入住看到变化!"
+  },
+  "overrides": {
+    "隐欲民宿": {
+      "bad": "silent"
+    }
+  },
+  "rules": {
+    "good_min_star": 4,
+    "bad_max_star": 3,
+    "reply_interval_s": 120,
+    "draft_limit": 10
+  },
+  "auto": {
+    "_comment": "实时自动回复(2026-08-25 甲方口径):新评论来即按逻辑回复(好评模板/差评模板;差评店级 silent=统一不回复只回好评);hotel_whitelist=灰度店;only_sentiment=both(差评遵守店级策略);submit 通道 ready 与否见 review_sources.json(未就绪则失败入人工队列)",
+    "enabled": true,
+    "hotel_whitelist": [
+      "隐欲民宿"
+    ],
+    "only_sentiment": "both",
+    "zero_error_days_required": 3
+  }
+}

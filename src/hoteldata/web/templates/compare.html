@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}比价历史{% endblock %}
+{% block sub %}{{ day }} · {{ stats.rows }} 条{% endblock %}
+{% block desc %}<p class="page-desc">
+  <b>按天 + slot 组织</b>(slot = <span class="mono">YYYY-MM-DD-HHMM</span>)——
+  同一天三次采集<b>各留一份</b>,所以能看出价格一天怎么变;
+  同一 slot 重跑则幂等(UNIQUE + UPSERT)。
+  <br><b>起价</b>是列表页的「¥236起」,不是确定的房价(<span class="mono">price_scope=from</span>)。
+</p>{% endblock %}
+
+{% block content %}
+
+{% if not include_demo %}
+<div class="hint-box">默认<b>不显示演示数据</b>(<span class="mono">is_demo=true</span> 的行)。
+  验收器产生的 <span class="mono">验收3-*</span> 样本属于演示数据,不会污染这个视图。</div>
+{% endif %}
+
+<div class="toolbar">
+  <form method="get" action="/admin/compare" class="toolbar" style="margin:0">
+    <div class="field"><label>锚点</label>
+      <select name="anchor" onchange="this.form.submit()">
+        <option value="">全部</option>
+        {% for a in anchors %}
+          <option value="{{ a }}" {% if a == anchor %}selected{% endif %}>{{ a }}</option>
+        {% endfor %}
+      </select></div>
+    <div class="field"><label>日期</label>
+      <input type="date" name="day" value="{{ day }}" onchange="this.form.submit()"></div>
+    <div class="field checkbox"><input type="checkbox" name="demo" value="1" id="demo"
+        {% if include_demo %}checked{% endif %} onchange="this.form.submit()">
+      <label for="demo">含演示数据</label></div>
+    <button class="tiny" type="submit">查询</button>
+  </form>
+  <div class="spacer"></div>
+  <span class="badge info">报价 {{ stats.priced }}</span>
+  <span class="badge {{ 'ok' if stats.with_dist == stats.rows and stats.rows else 'warn' }}">
+    有距离 {{ stats.with_dist }}</span>
+  {% if stats.manual %}<span class="badge err">待人工确认 {{ stats.manual }}</span>{% endif %}
+  <span class="badge dim">slot {{ slots | length }} 个</span>
+</div>
+
+<div class="card">
+  {% if rows %}
+  <table>
+    <thead><tr><th>平台</th><th>酒店</th><th class="num">价格</th><th>口径</th>
+      <th class="num">距离</th><th>坐标来源</th><th>价格来源</th><th>slot</th><th>标记</th></tr></thead>
+    <tbody>
+    {% for r in rows %}
+      <tr>
+        <td><span class="badge {{ 'info' if r.platform == 'ctrip' else 'warn' }}">{{ r.platform }}</span></td>
+        <td>{{ r.hotel_name }}</td>
+        <td class="num">
+          {% if r.price %}<b>¥{{ '%g' % r.price }}</b>
+          {% else %}<span class="badge dim">未取到</span>{% endif %}
+        </td>
+        <td>
+          {% if r.price_scope == 'from' %}<span class="badge dim">起价</span>
+          {% else %}<span class="badge ok">确定价</span>{% endif %}
+        </td>
+        <td class="num">
+          {% if r.distance_km is not none %}{{ '%.2f' % r.distance_km }} km
+          {% else %}<span class="badge warn">不可用</span>{% endif %}
+        </td>
+        <td class="mono">{{ r.coord_source or '—' }}</td>
+        <td class="mono">{{ r.price_source or '—' }}</td>
+        <td class="mono">{{ r.query_slot }}</td>
+        <td>
+          {% if r.need_manual_check %}<span class="badge err">待人工确认</span>{% endif %}
+          {% if r.degraded %}<span class="badge warn">降级</span>{% endif %}
+          {% if r.price_rejected %}<span class="badge dim" title="{{ r.price_rejected | join(' | ') }}">
+            已过滤 {{ r.price_rejected | length }} 条券价</span>{% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <div class="empty">
+      这一天没有比价记录。<br>
+      <span class="mono">hoteldata compare --name "…"</span> 或
+      <span class="mono">hoteldata task run compare.collect</span>
+    </div>
+  {% endif %}
+</div>
+
+{% endblock %}

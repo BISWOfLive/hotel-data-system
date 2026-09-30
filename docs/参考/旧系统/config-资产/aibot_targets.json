@@ -1,0 +1,10 @@
+{
+  "_note": "★ 已脱敏:userid / chatid 换成保形占位符(长度与形态不变,值不是真的)。原件含真实企微用户与群标识,不入库。",
+  "targets": [
+    {
+      "userid": "UserA",
+      "chatid": "wrXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "first_seen": "2026-08-19T16:21:19.540Z"
+    }
+  ]
+}

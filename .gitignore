@@ -1,0 +1,68 @@
+# ============================================================================
+# ★ 旧系统的 D4 缺陷:`.gitignore` 漏洞导致
+#   ① storage_states/ 下 4 个真实酒店账号会话 Cookie 被 git 跟踪(D2)
+#   ② .edge-profile/ 1,936 个含凭据的浏览器配置文件被跟踪(D3)
+#   新项目必须堵死这两条 —— 下面第 1、2 节是**红线**,不允许删除。
+# ============================================================================
+
+# ---- ① 登录态(新布局 var/states/<platform>__<role>__<alias>.json)★ 红线 ----
+var/states/
+var/states/**
+storage_states/
+storage_state.json
+storage_state_*.json
+storage_state_*.json.*
+*storage_state*.json
+
+# ---- ② 浏览器用户目录 ★ 红线 ----
+.edge-profile/
+.chrome-profile/
+.edge-profile/**
+.chrome-profile/**
+**/.edge-profile/
+**/.chrome-profile/
+*.edge-profile
+User Data/
+
+# ---- 密钥 ----
+.env
+.env.local
+config/secret.key
+*.key
+
+# ---- 运行时产物 ----
+var/
+!var/.gitkeep
+logs/
+*.log
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+.venv*/
+venv/
+build/
+dist/
+
+# ---- 数据库 ----
+*.db
+*.db-wal
+*.db-shm
+db/
+pgdata/
+
+# ---- 旧代码冻结区(保留占位,内容不入库) ----
+legacy/*
+!legacy/.gitkeep
+
+# ---- IDE / OS ----
+.idea/
+.vscode/
+*.swp
+Thumbs.db
+desktop.ini

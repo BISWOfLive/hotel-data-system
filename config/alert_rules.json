@@ -1,0 +1,199 @@
+{
+  "_comment": "④ 预警规则(v2.3,6+1)。字段来源=《docs/采集域盘点表-预警.md》实锤版与《计划书04_执行清单.md》§1。D 规则字段名:ctrip: visitor_total/visitor_avg/min_price/min_price_rank/competitor_total/ratingall/rating_avg/rating_rank;qunar: visitor_total/visitor_avg/ratingall/rating_avg/rating_rank/competitor_total。房价均值无直采字段(R4-1)→min_price 走 rank_fallbacks;去哪儿起价无数据(R4-2)→单渠道携程;热度阈值量纲不符(实测 0~5)→heat_value<=20 视为未配置跳过过滤。 | 2026-08-25 按甲方'三个数据'收窄: channel_below_mean=携程渠道 访客量/实时起价/点评分(原含去哪儿两项已移除)。 | 2026-08-26 甲方口径: 关房提醒仅保留连续7天(room_closed_7d),当日关房提醒(room_closed_today)退役。",
+  "rules": [
+    {
+      "id": "room_closed_7d",
+      "name": "关房预警(连续7天)",
+      "type": "keep_closed",
+      "source": "room_states",
+      "condition": {
+        "field": "unavailable_days",
+        "op": ">=",
+        "value": 7
+      },
+      "state_key": "hotel:room_type",
+      "reset_when_ok": true,
+      "check_times": [
+        "09:00",
+        "14:30",
+        "19:00"
+      ],
+      "push": {
+        "to": [
+          "group",
+          "ops"
+        ],
+        "template": "alert_room_closed_7d"
+      },
+      "dedup": "once_per_day"
+    },
+    {
+      "id": "hot_event_price",
+      "name": "热点日历·重要日期价格预警",
+      "type": "lead_days",
+      "source": "portal_columns:hot_calendar",
+      "condition": {
+        "op": "in",
+        "field": "lead_days",
+        "value": [
+          10,
+          3
+        ]
+      },
+      "state_key": "hotel:event:date",
+      "reset_when_ok": true,
+      "check_times": [
+        "09:00"
+      ],
+      "push": {
+        "to": [
+          "group",
+          "ops"
+        ],
+        "template": "alert_hot_event_price"
+      },
+      "dedup": "once_per_day"
+    },
+    {
+      "id": "channel_below_mean",
+      "name": "渠道数据低于竞争圈均值(双渠道)",
+      "type": "below_mean",
+      "source": "portal_columns:channel_ctrip + channel_qunar",
+      "condition": {
+        "op": "any_below_mean",
+        "fields": [
+          "ctrip.visitor_total",
+          "ctrip.min_price",
+          "ctrip.ratingall"
+        ],
+        "means": {
+          "ctrip.visitor_total": "ctrip.visitor_avg",
+          "ctrip.ratingall": "ctrip.rating_avg"
+        },
+        "rank_fallbacks": {
+          "ctrip.min_price": {
+            "rank": "ctrip.min_price_rank",
+            "total": "ctrip.competitor_total",
+            "below_if": "rank_gt_half"
+          },
+          "ctrip.ratingall": {
+            "rank": "ctrip.rating_rank",
+            "total": "ctrip.competitor_total",
+            "below_if": "rank_gt_half"
+          }
+        }
+      },
+      "state_key": "hotel",
+      "reset_when_ok": true,
+      "check_times": [
+        "09:00"
+      ],
+      "push": {
+        "to": [
+          "group",
+          "ops"
+        ],
+        "template": "alert_channel_below_mean"
+      },
+      "dedup": "once_per_day"
+    },
+    {
+      "id": "home_pending",
+      "name": "首页待办/待办事项预警",
+      "type": "pending_counts",
+      "source": "portal_columns:home_pending",
+      "condition": {
+        "op": "any_gt",
+        "fields": [
+          "comment_pending",
+          "qa_pending",
+          "audit_pending",
+          "violation_pending",
+          "todo_more"
+        ],
+        "value": 0
+      },
+      "state_key": "hotel",
+      "reset_when_ok": true,
+      "check_times": [
+        "09:00"
+      ],
+      "push": {
+        "to": [
+          "ops",
+          "group"
+        ],
+        "template": "alert_home_pending"
+      },
+      "dedup": "once_per_day"
+    },
+    {
+      "id": "city_heat_remind",
+      "name": "城市热点提前提醒",
+      "type": "lead_days",
+      "source": "module_records:market_heat:next_14d",
+      "condition": {
+        "op": "in",
+        "field": "lead_days",
+        "value": [
+          10,
+          3
+        ]
+      },
+      "value_from": {
+        "heat_threshold": 80
+      },
+      "state_key": "hotel:city:date",
+      "reset_when_ok": true,
+      "check_times": [
+        "09:00"
+      ],
+      "push": {
+        "to": [
+          "group",
+          "ops"
+        ],
+        "template": "alert_city_heat"
+      },
+      "dedup": "once_per_day"
+    },
+    {
+      "id": "price_line_optional",
+      "name": "房价高/低固定线(可选)",
+      "type": "threshold_extreme",
+      "source": "hotel_prices_db",
+      "condition": {
+        "op": "or",
+        "items": [
+          {
+            "field": "price",
+            "op": ">=",
+            "value_from": "config.high_line"
+          },
+          {
+            "field": "price",
+            "op": "<=",
+            "value_from": "config.low_line"
+          }
+        ]
+      },
+      "value_from": {
+        "high_line": "config.high_line",
+        "low_line": "config.low_line"
+      },
+      "state_key": "hotel",
+      "reset_when_ok": true,
+      "check_times": [
+        "09:00"
+      ],
+      "push": {
+        "to": [
+          "group",
+          "ops"
+        ],
+        "template": "alert_price_line"
+      },
+      "dedup": "once_per_day"
+    }
+  ]
+}

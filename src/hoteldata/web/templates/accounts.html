@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}账号{% endblock %}
+{% block sub %}共 {{ accounts | length }} 个{% endblock %}
+{% block desc %}<p class="page-desc">
+  账号凭据用 <span class="mono">infra/crypto</span> 的 Fernet <b>加密落库,明文永不落盘</b>。
+  页面<b>不回显任何明文</b> —— 编辑时密码留空表示「不改动」。
+  这是总纲 R4「旧仓库携带真实凭据」的直接对策。
+</p>{% endblock %}
+
+{% block content %}
+
+<div class="hint-box">
+  <b>「商家后台」与「前台」是两套登录态</b>,不要混:
+  <br>· 经营数据(段1)用 <span class="mono">role=ebooking</span>,登录入口 <span class="mono">ebooking.ctrip.com</span>
+  <br>· 比价(段3)用 <span class="mono">role=ota / ota_meituan</span>,登录入口是<b>公开前台</b>
+  <br>前台登录态用 <span class="mono">hoteldata price login --platform …</span> 建立,不在这里维护密码。
+</div>
+
+<div class="card" style="margin-bottom:16px">
+  <h2>新增账号</h2>
+  <form method="post" action="/admin/accounts/create">
+    <div class="form-grid">
+      <div class="field"><label>别名 <span style="color:var(--err)">*</span></label>
+        <input type="text" name="alias" required placeholder="如 ctrip001">
+        <span class="hint">唯一;登录态文件按它命名</span></div>
+      <div class="field"><label>平台</label>
+        <select name="platform"><option value="ctrip">ctrip</option><option value="meituan">meituan</option></select></div>
+      <div class="field"><label>用户名 <span style="color:var(--err)">*</span></label>
+        <input type="text" name="username" required autocomplete="off"></div>
+      <div class="field"><label>密码 <span style="color:var(--err)">*</span></label>
+        <input type="password" name="password" required autocomplete="new-password"></div>
+      <div class="field checkbox"><input type="checkbox" name="is_multi" id="is_multi" value="1">
+        <label for="is_multi">多店账号(一个账号管多家店)</label></div>
+    </div>
+    <div style="margin-top:11px"><button class="primary" type="submit">新增</button></div>
+  </form>
+</div>
+
+<div class="card">
+  <h2>账号列表</h2>
+  {% if accounts %}
+  <table>
+    <thead><tr><th>ID</th><th>别名</th><th>平台</th><th>状态</th><th>多店</th>
+      <th>凭据</th><th>最后登录</th><th>该别名下的登录态</th><th style="width:30%">编辑</th></tr></thead>
+    <tbody>
+    {% for a in accounts %}
+      <tr>
+        <td class="mono">{{ a.id }}</td>
+        <td><b>{{ a.alias }}</b></td>
+        <td class="mono">{{ a.platform }}</td>
+        <td>
+          <span class="badge {{ 'ok' if a.status == 'active' else ('warn' if a.status == 'pending_login' else 'err') }}">
+            {{ a.status }}</span>
+        </td>
+        <td>{{ '是' if a.is_multi else '否' }}</td>
+        <td class="mono">{{ a.username_enc | short(12) }}…
+          <span class="badge dim">已加密 {{ a.password_enc | length }}B</span></td>
+        <td class="mono">{{ a.last_login_at | dt('%m-%d %H:%M') }}</td>
+        <td>
+          {% for sr in sessions.get(a.alias, []) %}
+            <div class="mono" style="font-size:11px">
+              {{ sr.role }}:
+              <span class="badge {{ 'ok' if sr.status == 'valid' else 'err' }}">{{ sr.status }}</span>
+            </div>
+          {% else %}<span class="note">—</span>{% endfor %}
+        </td>
+        <td>
+          <details>
+            <summary>修改 / 删除</summary>
+            <form method="post" action="/admin/accounts/{{ a.id }}/update" style="margin-bottom:8px">
+              <div class="form-grid">
+                <div class="field"><label>状态</label>
+                  <select name="status">
+                    {% for st in ['active', 'pending_login', 'blocked'] %}
+                      <option value="{{ st }}" {% if a.status == st %}selected{% endif %}>{{ st }}</option>
+                    {% endfor %}
+                  </select></div>
+                <div class="field"><label>新密码(留空不改)</label>
+                  <input type="password" name="password" autocomplete="new-password" placeholder="留空 = 不改动"></div>
+                <div class="field checkbox">
+                  <input type="checkbox" name="is_multi" id="m{{ a.id }}" value="1" {% if a.is_multi %}checked{% endif %}>
+                  <label for="m{{ a.id }}">多店账号</label></div>
+              </div>
+              <div style="margin-top:8px"><button class="tiny primary" type="submit">保存</button></div>
+            </form>
+            <form method="post" action="/admin/accounts/{{ a.id }}/delete"
+                  onsubmit="return confirm('确认删除账号「{{ a.alias }}」?\n\n该账号下酒店的 account_id 会被置空(不会删酒店)。')">
+              <button class="tiny danger" type="submit">删除该账号</button>
+            </form>
+          </details>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<div class="empty">还没有账号</div>{% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,175 @@
+/* 酒店数据系统 · 后台样式(手写,零前端构建链 —— 总纲 §7.8)
+ *
+ * 为什么不用 Tailwind/Bootstrap:总纲 §7.8 明确"保持服务端渲染,不引入前端构建链",
+ * §7.1 否决记录里也把"前端构建链(Vue/React)"列为否决项。
+ * 后台是**单机、低频、内部用**的运维界面,一份手写 CSS 足够且没有构建依赖。
+ */
+
+:root {
+  --bg: #0f1419;
+  --surface: #171d24;
+  --surface-2: #1f272f;
+  --border: #2b353f;
+  --text: #e6edf3;
+  --text-dim: #8b98a5;
+  --text-faint: #5c6a76;
+  --accent: #ff6a00;      /* 与比价报告同一主色(report.py 的 #ff6a00) */
+  --accent-dim: #b34b00;
+  --ok: #3fb950;
+  --warn: #d29922;
+  --err: #f85149;
+  --info: #58a6ff;
+  --radius: 6px;
+  --mono: ui-monospace, "Cascadia Mono", "Consolas", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.6 "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+}
+
+a { color: var(--info); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- 布局 ---------- */
+.layout { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 210px; flex: 0 0 210px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 16px 0;
+  position: sticky; top: 0; height: 100vh; overflow-y: auto;
+}
+.sidebar .brand {
+  padding: 0 16px 14px; font-size: 15px; font-weight: 700;
+  border-bottom: 1px solid var(--border); margin-bottom: 10px;
+}
+.sidebar .brand small { display: block; font-weight: 400; color: var(--text-faint); font-size: 11px; margin-top: 3px; }
+.sidebar nav a {
+  display: block; padding: 7px 16px; color: var(--text-dim);
+  border-left: 3px solid transparent; font-size: 13px;
+}
+.sidebar nav a:hover { background: var(--surface-2); color: var(--text); text-decoration: none; }
+.sidebar nav a.active { color: var(--accent); border-left-color: var(--accent); background: var(--surface-2); }
+.sidebar nav .group {
+  padding: 12px 16px 4px; font-size: 11px; color: var(--text-faint);
+  text-transform: uppercase; letter-spacing: .5px;
+}
+
+.main { flex: 1; min-width: 0; padding: 22px 26px 60px; }
+.page-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 6px; flex-wrap: wrap; }
+.page-head h1 { font-size: 20px; margin: 0; }
+.page-head .sub { color: var(--text-faint); font-size: 12px; }
+.page-desc { color: var(--text-dim); font-size: 13px; margin: 0 0 18px; }
+
+/* ---------- 卡片 / 网格 ---------- */
+.grid { display: grid; gap: 14px; }
+.grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.grid.cols-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.grid.cols-4 { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px;
+}
+.card h2 { font-size: 14px; margin: 0 0 12px; color: var(--text-dim); font-weight: 600; }
+.card .body { font-size: 13px; }
+
+.stat { text-align: left; }
+.stat .k { font-size: 12px; color: var(--text-faint); }
+.stat .v { font-size: 24px; font-weight: 700; font-family: var(--mono); margin-top: 2px; }
+.stat .v.small { font-size: 16px; }
+.stat .note { font-size: 11px; color: var(--text-faint); margin-top: 2px; }
+
+/* ---------- 表格 ---------- */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { color: var(--text-faint); font-weight: 600; font-size: 12px; white-space: nowrap; }
+tbody tr:hover { background: var(--surface-2); }
+td.mono, .mono { font-family: var(--mono); font-size: 12px; }
+td.num { text-align: right; font-family: var(--mono); }
+.empty { padding: 26px; text-align: center; color: var(--text-faint); }
+
+/* ---------- 徽章 ---------- */
+.badge {
+  display: inline-block; padding: 1px 7px; border-radius: 10px;
+  font-size: 11px; font-family: var(--mono); white-space: nowrap;
+}
+.badge.ok   { background: rgba(63,185,80,.15);  color: var(--ok); }
+.badge.warn { background: rgba(210,153,34,.15); color: var(--warn); }
+.badge.err  { background: rgba(248,81,73,.15);  color: var(--err); }
+.badge.info { background: rgba(88,166,255,.15); color: var(--info); }
+.badge.dim  { background: var(--surface-2); color: var(--text-faint); }
+
+/* ---------- 表单 ---------- */
+form.inline { display: inline; }
+.form-grid { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label { font-size: 12px; color: var(--text-dim); }
+.field .hint { font-size: 11px; color: var(--text-faint); }
+input[type=text], input[type=password], input[type=number], select, textarea {
+  background: var(--bg); border: 1px solid var(--border); color: var(--text);
+  padding: 6px 9px; border-radius: 4px; font: inherit; font-size: 13px; width: 100%;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent-dim); }
+.checkbox { flex-direction: row; align-items: center; gap: 6px; }
+.checkbox input { width: auto; }
+
+button, .btn {
+  background: var(--surface-2); color: var(--text); border: 1px solid var(--border);
+  padding: 6px 13px; border-radius: 4px; font: inherit; font-size: 13px; cursor: pointer;
+  display: inline-block;
+}
+button:hover, .btn:hover { border-color: var(--accent-dim); color: var(--accent); text-decoration: none; }
+button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+button.primary:hover { background: var(--accent-dim); color: #fff; }
+button.danger { color: var(--err); }
+button.danger:hover { border-color: var(--err); color: var(--err); }
+button.tiny { padding: 3px 9px; font-size: 12px; }
+
+/* ---------- 提示条 ---------- */
+.flash { padding: 9px 13px; border-radius: var(--radius); margin-bottom: 16px; font-size: 13px; }
+.flash.ok   { background: rgba(63,185,80,.12);  border: 1px solid rgba(63,185,80,.35);  color: #7ee787; }
+.flash.err  { background: rgba(248,81,73,.12);  border: 1px solid rgba(248,81,73,.35);  color: #ff9d95; }
+.flash.warn { background: rgba(210,153,34,.12); border: 1px solid rgba(210,153,34,.35); color: #e3b341; }
+.flash.info { background: rgba(88,166,255,.12); border: 1px solid rgba(88,166,255,.35); color: #79c0ff; }
+
+.hint-box {
+  background: var(--surface-2); border-left: 3px solid var(--info);
+  padding: 9px 13px; border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 12px; color: var(--text-dim); margin: 12px 0;
+}
+.hint-box.warn { border-left-color: var(--warn); }
+.hint-box.danger { border-left-color: var(--err); }
+.hint-box code { background: var(--bg); padding: 1px 5px; border-radius: 3px; font-family: var(--mono); }
+
+/* ---------- 登录页 ---------- */
+.login-wrap {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+}
+.login-box {
+  width: 340px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 26px 26px 22px;
+}
+.login-box h1 { font-size: 17px; margin: 0 0 4px; }
+.login-box .sub { color: var(--text-faint); font-size: 12px; margin-bottom: 20px; }
+.login-box .field { margin-bottom: 13px; }
+.login-box button { width: 100%; margin-top: 6px; }
+
+.toolbar { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+.toolbar .spacer { flex: 1; }
+
+details summary { cursor: pointer; color: var(--text-dim); font-size: 12px; }
+details[open] summary { margin-bottom: 8px; }
+pre {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 4px;
+  padding: 10px; overflow-x: auto; font-family: var(--mono); font-size: 12px; margin: 6px 0;
+  max-height: 380px;
+}
+.truncate { max-width: 380px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.footer { margin-top: 26px; color: var(--text-faint); font-size: 11px; }

@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}酒店{% endblock %}
+{% block sub %}共 {{ hotels | length }} 家{% endblock %}
+{% block desc %}<p class="page-desc">
+  酒店是<b>数据归属的根实体</b>。<code>ebk_hotel_id</code> 是携程 eBooking 的酒店 ID
+  —— <b>段3 比价的锚点直达靠它</b>(有它就不用走名称匹配,零页面访问)。
+</p>{% endblock %}
+
+{% block content %}
+
+<div class="card" style="margin-bottom:16px">
+  <h2>新增酒店</h2>
+  <form method="post" action="/admin/hotels/create">
+    <div class="form-grid">
+      <div class="field">
+        <label>酒店名 <span style="color:var(--err)">*</span></label>
+        <input type="text" name="name" required placeholder="与携程后台一致">
+        <span class="hint">唯一;比价目标的锚点名要与此一致</span>
+      </div>
+      <div class="field">
+        <label>城市</label>
+        <input type="text" name="city" placeholder="如:莱州">
+      </div>
+      <div class="field">
+        <label>归属账号</label>
+        <select name="account_id">
+          <option value="">(不绑定)</option>
+          {% for aid, alias in accounts.items() %}
+            <option value="{{ aid }}">{{ alias }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="field">
+        <label>ebk_hotel_id</label>
+        <input type="text" name="ebk_hotel_id" placeholder="如 127826116">
+        <span class="hint">★ 填了它,段3 比价可直达锚点</span>
+      </div>
+    </div>
+    <div style="margin-top:11px"><button class="primary" type="submit">新增</button></div>
+  </form>
+</div>
+
+<div class="card">
+  <h2>酒店列表</h2>
+  {% if hotels %}
+  <table>
+    <thead>
+      <tr><th>ID</th><th>酒店名</th><th>城市</th><th>账号</th><th>ebk_hotel_id</th>
+          <th class="num">群绑定</th><th class="num">比价目标</th><th style="width:44%">编辑</th></tr>
+    </thead>
+    <tbody>
+    {% for h in hotels %}
+      <tr>
+        <td class="mono">{{ h.id }}</td>
+        <td><b>{{ h.name }}</b></td>
+        <td>{{ h.city or '—' }}</td>
+        <td class="mono">{{ accounts.get(h.account_id, '—') }}</td>
+        <td class="mono">
+          {% if h.ebk_hotel_id %}{{ h.ebk_hotel_id }}
+          {% else %}<span class="badge warn">未登记</span>{% endif %}
+        </td>
+        <td class="num">{{ binds.get(h.id, 0) }}</td>
+        <td class="num">{{ targets.get(h.id, 0) }}</td>
+        <td>
+          <details>
+            <summary>修改 / 删除</summary>
+            <form method="post" action="/admin/hotels/{{ h.id }}/update" style="margin-bottom:8px">
+              <div class="form-grid">
+                <div class="field"><label>酒店名</label>
+                  <input type="text" name="name" value="{{ h.name }}" required></div>
+                <div class="field"><label>城市</label>
+                  <input type="text" name="city" value="{{ h.city or '' }}"></div>
+                <div class="field"><label>归属账号</label>
+                  <select name="account_id">
+                    <option value="">(不绑定)</option>
+                    {% for aid, alias in accounts.items() %}
+                      <option value="{{ aid }}" {% if h.account_id == aid %}selected{% endif %}>{{ alias }}</option>
+                    {% endfor %}
+                  </select></div>
+                <div class="field"><label>ebk_hotel_id</label>
+                  <input type="text" name="ebk_hotel_id" value="{{ h.ebk_hotel_id or '' }}"></div>
+              </div>
+              <div style="margin-top:8px">
+                <button class="tiny primary" type="submit">保存</button>
+              </div>
+            </form>
+            <form method="post" action="/admin/hotels/{{ h.id }}/delete"
+                  onsubmit="return confirm('确认删除「{{ h.name }}」?\n\n会级联删除它的群绑定;比价历史保留(anchor_name 为文本键)。')">
+              <button class="tiny danger" type="submit">删除该酒店</button>
+            </form>
+          </details>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <div class="empty">还没有酒店。先在上面新增,或用 <span class="mono">scripts/import_accounts.py</span> 从旧库导入。</div>
+  {% endif %}
+</div>
+
+{% endblock %}

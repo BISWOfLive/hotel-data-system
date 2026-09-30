@@ -1,0 +1,5 @@
+
+不同 (sub_url, selector) 键数 = 22；重复键组数 = 0
+screenshot_modules 条目总数 = 22
+
+按 selector 单键分组（跨页/跨子模块同选择器）:

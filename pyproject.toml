@@ -1,0 +1,61 @@
+[tool.poetry]
+name = "hoteldata"
+version = "0.1.0"
+description = "酒店经营数据自动化系统 · 段1 提取功能(携程 eBooking 经营数据自动化)"
+authors = ["hotel-data-system"]
+readme = "README.md"
+package-mode = true
+packages = [{ include = "hoteldata", from = "src" }]
+
+[tool.poetry.dependencies]
+# ★ 必须标准版 3.14,禁止 free-threaded(no-GIL)构建:依赖只有 cp314 轮子,没有 cp314t
+python = ">=3.14,<3.15"
+
+fastapi = "^0.141"
+uvicorn = { version = "^0.52", extras = ["standard"] }
+sqlalchemy = { version = "^2.1", extras = ["asyncio"] }
+asyncpg = "^0.31"
+alembic = "^1.20"
+pydantic = "^2.13"
+pydantic-settings = "^2"
+httpx = "^0.28"
+playwright = "^1.62"
+# ★ 硬上界:4.x 至今 alpha(PyPI 标注 pre-release)
+apscheduler = ">=3.11,<4"
+tenacity = "^9.1"
+cryptography = "^50.0"
+loguru = "^0.7"
+typer = "^0.27"
+jinja2 = "^3.1"
+python-multipart = "^0.0.32"
+itsdangerous = "^2.2"
+# ★ Windows 上 zoneinfo 找 Asia/Shanghai 依赖它
+tzdata = "^2026.3"
+# 仅截图质量校验用,默认关闭(VISION_ENABLED=0)
+zhipuai = "^2.1"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.16"
+
+[tool.poetry.scripts]
+hoteldata = "hoteldata.cli:app"
+
+[build-system]
+requires = ["poetry-core>=2.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 110
+target-version = "py314"
+# `docs/参考/` 是**归档的参考证据**(旧系统扫描/复核脚本、段1 验证脚本原文),
+# 不是受维护的代码 —— 它们带着旧系统的 `# -*- coding: utf-8 -*-`、
+# 顶层 `sys.path` 注入后的延迟 import 等写法,lint 报的 17 条全是"归档文物",
+# 不修(改了就不再是证据)。所以从 lint 范围里排除。
+exclude = ["legacy", ".venv", "var", "docs/参考"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/hoteldata/infra/migrations/versions/*.py" = ["E", "F", "I", "UP", "B"]

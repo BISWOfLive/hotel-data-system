@@ -1,0 +1,328 @@
+====================================================================================================
+### A. api_rules.json pages[*].sub_modules[*].screenshot_modules[*] 全量资产
+====================================================================================================
+
+[01] page='经营报告' sub_module='离店'
+     sub_url='https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true'
+     name='离店'
+     selector="div.manage-mode:has-text('离店')"
+
+[02] page='经营报告' sub_module='预订销售数据'
+     sub_url='https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true'
+     name='预订销售数据'
+     selector="div.manage-mode:has-text('预订')"
+
+[03] page='经营报告' sub_module='热卖房型'
+     sub_url='https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true'
+     name='热卖房型'
+     selector='.hot-rooms[data-bind="visible: showHotOrNot"]'
+     clicks=['房型']
+
+[04] page='经营报告' sub_module='问题房型'
+     sub_url='https://ebooking.ctrip.com/datacenter/inland/businessreport/beneficialdata?microJump=true'
+     name='问题房型'
+     selector='.hot-rooms[data-bind="visible: !showHotOrNot()"]'
+     clicks=['房型', '问题房型']
+
+[05] page='经营报告' sub_module='流量数据概况'
+     sub_url='https://ebooking.ctrip.com/datacenter/inland/businessreport/flowdata?microJump=true'
+     name='流量数据概况'
+     selector='div.manage-flux-con.manage-mode'
+     tabs='div.manage-mode'
+     click='今日实时'
+
+[06] page='经营报告' sub_module='流量来源分析'
+     sub_url='https://ebooking.ctrip.com/datacenter/inland/businessreport/flowdata?microJump=true'
+     name='流量来源分析'
+     selector='div.manage-mode.date-sources-box'
+     clicks=['过去7天', '昨天', '查看更多']
+
+[07] page='经营报告' sub_module='未来30天搜索热度'
+     sub_url='https://ebooking.ctrip.com/datacenter/inland/businessreport/flowdata?microJump=true'
+     name='未来30天搜索热度'
+     selector='div.manage-mode.app-transition-box'
+
+[08] page='竞争圈动态' sub_module='经营对比'
+     sub_url='https://ebooking.ctrip.com/ebkgrowth/datacenter/competition/competitionprofile?microJump=true'
+     name='经营对比'
+     selector="[class*='managementWrapper']"
+     tabs="[class*='managementWrapper']"
+     click='实时'
+     skip_click_on=['monday', 'month1']
+
+[09] page='竞争圈动态' sub_module='APP流量转化对比'
+     sub_url='https://ebooking.ctrip.com/ebkgrowth/datacenter/competition/competitionprofile?microJump=true'
+     name='APP流量转化对比'
+     selector="[class*='flowDataWrapper']"
+     tabs="[class*='flowDataWrapper']"
+     click='昨日'
+     skip_click_on=['monday', 'month1']
+
+[10] page='竞争圈动态' sub_module='服务质量对比'
+     sub_url='https://ebooking.ctrip.com/ebkgrowth/datacenter/competition/competitionprofile?microJump=true'
+     name='服务质量对比'
+     selector="[class*='cardWrapper']:has-text('服务质量')"
+
+[11] page='竞争圈动态' sub_module='实时流失订单及去向'
+     sub_url='https://ebooking.ctrip.com/ebkgrowth/datacenter/competition/lossanalysis?microJump=true'
+     name='实时流失订单及去向'
+     selector="div[class*='cardWrapper']:has-text('流失订单及去向')"
+     tabs="div[class*='cardWrapper']:has-text('流失订单及去向')"
+     click='昨日'
+     skip_click_on=['monday', 'month1']
+
+[12] page='竞争圈动态' sub_module='竞争圈榜单-销售排名'
+     sub_url='https://ebooking.ctrip.com/ebkgrowth/datacenter/competition/competitionlist?microJump=true'
+     name='竞争圈榜单-销售排名'
+     selector="div[class*='cardWrapper']:has-text('销售排名')"
+     tabs="div[class*='cardWrapper']:has-text('销售排名')"
+     click='实时'
+     skip_click_on=['monday', 'month1']
+
+[13] page='竞争圈动态' sub_module='竞争圈榜单-流量排名'
+     sub_url='https://ebooking.ctrip.com/ebkgrowth/datacenter/competition/competitionlist?microJump=true'
+     name='竞争圈榜单-流量排名'
+     selector="div[class*='cardWrapper']:has-text('流量排名')"
+     tabs="div[class*='cardWrapper']:has-text('流量排名')"
+     click='实时'
+     skip_click_on=['monday', 'month1']
+
+[14] page='市场分析' sub_module='每日热度-未来14日热度'
+     sub_url='https://ebooking.ctrip.com/ebkgrowth/datacenter/marketanalysis/marketheat?microJump=true'
+     name='每日热度-未来14日热度'
+     selector="div[class*='dcenter-']:has-text('我的出租率')"
+
+[15] page='用户行为' sub_module='用户行为'
+     sub_url='https://ebooking.ctrip.com/datacenter/inland/userbehavior/user?microJump=true'
+     name='用户行为'
+     selector='div#J_UserPanel'
+
+[16] page='广告营销' sub_module='金字塔-首页'
+     sub_url='https://ebooking.ctrip.com/toolcenter/cpc/pyramid?microJump=true'
+     name='金字塔-首页'
+     selector='div.pyramid-mode.data-overview-box'
+
+[17] page='广告营销' sub_module='金字塔-每日'
+     sub_url='https://ebooking.ctrip.com/toolcenter/cpc/dataReport?microJump=true'
+     name='金字塔-每日'
+     selector='div.data-report'
+
+[18] page='广告营销' sub_module='金字塔-数据报告-同行对比'
+     sub_url='https://ebooking.ctrip.com/toolcenter/cpc/comparison?microJump=true'
+     name='金字塔-数据报告-同行对比-效果'
+     selector='div.pyramid-comparison .pyramid-diagnostic-chart-row'
+     tabs='div.pyramid-comparison'
+     click='效果类数据'
+     skip_click_on=['monday', 'month1']
+
+[19] page='广告营销' sub_module='金字塔-数据报告-同行对比'
+     sub_url='https://ebooking.ctrip.com/toolcenter/cpc/comparison?microJump=true'
+     name='金字塔-数据报告-同行对比-计划'
+     selector='div.pyramid-comparison'
+     tabs='div.pyramid-comparison'
+     click='计划类数据'
+     skip_click_on=['monday', 'month1']
+
+[20] page='挂牌管理' sub_module='审核记录'
+     sub_url='https://ebooking.ctrip.com/ebkgrowth/preferredpartnerV2?microJump=true'
+     name='审核记录'
+     selector="table:has-text('权益状态')"
+     clicks=['审核记录', '权益情况']
+     require_text='审核记录'
+
+[21] page='商机中心' sub_module='HOS分/PSI分析'
+     sub_url='https://ebooking.ctrip.com/toolcenter/psi/index?fromType=menu&microJump=true'
+     name='HOS分/PSI分析'
+     selector='div.panel.psi-info'
+
+[22] page='商机中心' sub_module='违约看板/违规中心'
+     sub_url='https://ebooking.ctrip.com/toolcenter/psi/honestscore?fromType=menu&microJump=true'
+     name='违约看板/违规中心'
+     selector='div.ment-table'
+
+====================================================================================================
+screenshot_modules 条目总数 = 22
+====================================================================================================
+
+### B. 扩展键出现次数与所属模块
+
+clicks: 4 次
+    page=经营报告 / sub_module=热卖房型 / screenshot_module=热卖房型 -> ['房型']
+    page=经营报告 / sub_module=问题房型 / screenshot_module=问题房型 -> ['房型', '问题房型']
+    page=经营报告 / sub_module=流量来源分析 / screenshot_module=流量来源分析 -> ['过去7天', '昨天', '查看更多']
+    page=挂牌管理 / sub_module=审核记录 / screenshot_module=审核记录 -> ['审核记录', '权益情况']
+
+tabs: 8 次
+    page=经营报告 / sub_module=流量数据概况 / screenshot_module=流量数据概况 -> 'div.manage-mode'
+    page=竞争圈动态 / sub_module=经营对比 / screenshot_module=经营对比 -> "[class*='managementWrapper']"
+    page=竞争圈动态 / sub_module=APP流量转化对比 / screenshot_module=APP流量转化对比 -> "[class*='flowDataWrapper']"
+    page=竞争圈动态 / sub_module=实时流失订单及去向 / screenshot_module=实时流失订单及去向 -> "div[class*='cardWrapper']:has-text('流失订单及去向')"
+    page=竞争圈动态 / sub_module=竞争圈榜单-销售排名 / screenshot_module=竞争圈榜单-销售排名 -> "div[class*='cardWrapper']:has-text('销售排名')"
+    page=竞争圈动态 / sub_module=竞争圈榜单-流量排名 / screenshot_module=竞争圈榜单-流量排名 -> "div[class*='cardWrapper']:has-text('流量排名')"
+    page=广告营销 / sub_module=金字塔-数据报告-同行对比 / screenshot_module=金字塔-数据报告-同行对比-效果 -> 'div.pyramid-comparison'
+    page=广告营销 / sub_module=金字塔-数据报告-同行对比 / screenshot_module=金字塔-数据报告-同行对比-计划 -> 'div.pyramid-comparison'
+
+click: 8 次
+    page=经营报告 / sub_module=流量数据概况 / screenshot_module=流量数据概况 -> '今日实时'
+    page=竞争圈动态 / sub_module=经营对比 / screenshot_module=经营对比 -> '实时'
+    page=竞争圈动态 / sub_module=APP流量转化对比 / screenshot_module=APP流量转化对比 -> '昨日'
+    page=竞争圈动态 / sub_module=实时流失订单及去向 / screenshot_module=实时流失订单及去向 -> '昨日'
+    page=竞争圈动态 / sub_module=竞争圈榜单-销售排名 / screenshot_module=竞争圈榜单-销售排名 -> '实时'
+    page=竞争圈动态 / sub_module=竞争圈榜单-流量排名 / screenshot_module=竞争圈榜单-流量排名 -> '实时'
+    page=广告营销 / sub_module=金字塔-数据报告-同行对比 / screenshot_module=金字塔-数据报告-同行对比-效果 -> '效果类数据'
+    page=广告营销 / sub_module=金字塔-数据报告-同行对比 / screenshot_module=金字塔-数据报告-同行对比-计划 -> '计划类数据'
+
+skip_click_on: 7 次
+    page=竞争圈动态 / sub_module=经营对比 / screenshot_module=经营对比 -> ['monday', 'month1']
+    page=竞争圈动态 / sub_module=APP流量转化对比 / screenshot_module=APP流量转化对比 -> ['monday', 'month1']
+    page=竞争圈动态 / sub_module=实时流失订单及去向 / screenshot_module=实时流失订单及去向 -> ['monday', 'month1']
+    page=竞争圈动态 / sub_module=竞争圈榜单-销售排名 / screenshot_module=竞争圈榜单-销售排名 -> ['monday', 'month1']
+    page=竞争圈动态 / sub_module=竞争圈榜单-流量排名 / screenshot_module=竞争圈榜单-流量排名 -> ['monday', 'month1']
+    page=广告营销 / sub_module=金字塔-数据报告-同行对比 / screenshot_module=金字塔-数据报告-同行对比-效果 -> ['monday', 'month1']
+    page=广告营销 / sub_module=金字塔-数据报告-同行对比 / screenshot_module=金字塔-数据报告-同行对比-计划 -> ['monday', 'month1']
+
+require_text: 1 次
+    page=挂牌管理 / sub_module=审核记录 / screenshot_module=审核记录 -> '审核记录'
+
+### B2. 其它未声明的扩展键
+
+====================================================================================================
+### C. 轮换清单 vs api_rules sub_modules
+====================================================================================================
+api_rules sub_modules 总数 = 24；去重 name 数 = 24
+
+push_rotation.json daily_count=5 items 数=21
+  # name                     page         type               in_sub  alias
+  1 离店                       经营报告         module_screenshot  True    ['离店']
+  2 预订销售数据                   经营报告         module_screenshot  True    ['预订销售数据']
+  3 热卖房型                     经营报告         module_screenshot  True    ['热卖房型']
+  4 问题房型                     经营报告         module_screenshot  True    ['问题房型']
+  5 流量数据概况                   经营报告         module_screenshot  True    ['流量数据概况']
+  6 流量来源分析                   经营报告         module_screenshot  True    ['流量来源分析']
+  7 未来30天搜索热度                经营报告         module_screenshot  True    ['未来30天搜索热度']
+  8 经营对比                     竞争圈动态        module_screenshot  True    ['经营对比']
+  9 APP流量转化对比                竞争圈动态        module_screenshot  True    ['APP流量转化对比']
+ 10 服务质量对比                   竞争圈动态        module_screenshot  True    ['服务质量对比']
+ 11 实时流失订单及去向                竞争圈动态        module_screenshot  True    ['实时流失订单及去向']
+ 12 每日热度-未来14日热度             市场分析         module_screenshot  True    ['每日热度-未来14日热度']
+ 13 用户行为                     用户行为         fullpage           True    ['用户行为']
+ 14 审核记录                     挂牌管理         module_screenshot  True    ['审核记录']
+ 15 金字塔-首页                   广告营销         module_screenshot  True    ['金字塔-首页']
+ 16 金字塔-每日                   广告营销         module_screenshot  True    ['金字塔-每日']
+ 17 HOS分/PSI分析               商机中心         module_screenshot  True    ['HOS分/PSI分析']
+ 18 违约看板/违规中心                商机中心         module_screenshot  True    ['违约看板/违规中心']
+ 19 市场分析                     市场分析         fullpage           False   ['市场分析']
+ 20 点评分析                     点评           fullpage           True    ['点评分析', '点评分析-列表']
+ 21 预警-热点日历                  预警           fullpage           False   ['预警-热点日历']
+
+不在 sub_modules 的轮换项 = 2 项：
+    - name='市场分析' page='市场分析' type='fullpage' collect=None alias=['市场分析'] url='https://ebooking.ctrip.com/ebkgrowth/datacenter/marketanalysis/marketheat?microJump=true' shot_name='市场分析-整页'
+    - name='预警-热点日历' page='预警' type='fullpage' collect=True alias=['预警-热点日历'] url='https://ebooking.ctrip.com/ebkovsroom/inventory/calendar?microJump=true' shot_name='预警-热点日历'
+
+### C2. 轮换项 name 在 sub_modules 中的页面归属（同名跨页检查）
+  1 离店                       出现于页面=['经营报告'] 清单声明 page='经营报告'
+  2 预订销售数据                   出现于页面=['经营报告'] 清单声明 page='经营报告'
+  3 热卖房型                     出现于页面=['经营报告'] 清单声明 page='经营报告'
+  4 问题房型                     出现于页面=['经营报告'] 清单声明 page='经营报告'
+  5 流量数据概况                   出现于页面=['经营报告'] 清单声明 page='经营报告'
+  6 流量来源分析                   出现于页面=['经营报告'] 清单声明 page='经营报告'
+  7 未来30天搜索热度                出现于页面=['经营报告'] 清单声明 page='经营报告'
+  8 经营对比                     出现于页面=['竞争圈动态'] 清单声明 page='竞争圈动态'
+  9 APP流量转化对比                出现于页面=['竞争圈动态'] 清单声明 page='竞争圈动态'
+ 10 服务质量对比                   出现于页面=['竞争圈动态'] 清单声明 page='竞争圈动态'
+ 11 实时流失订单及去向                出现于页面=['竞争圈动态'] 清单声明 page='竞争圈动态'
+ 12 每日热度-未来14日热度             出现于页面=['市场分析'] 清单声明 page='市场分析'
+ 13 用户行为                     出现于页面=['用户行为'] 清单声明 page='用户行为'
+ 14 审核记录                     出现于页面=['挂牌管理'] 清单声明 page='挂牌管理'
+ 15 金字塔-首页                   出现于页面=['广告营销'] 清单声明 page='广告营销'
+ 16 金字塔-每日                   出现于页面=['广告营销'] 清单声明 page='广告营销'
+ 17 HOS分/PSI分析               出现于页面=['商机中心'] 清单声明 page='商机中心'
+ 18 违约看板/违规中心                出现于页面=['商机中心'] 清单声明 page='商机中心'
+ 19 市场分析                     出现于页面=[] 清单声明 page='市场分析'
+ 20 点评分析                     出现于页面=['点评'] 清单声明 page='点评'
+ 21 预警-热点日历                  出现于页面=[] 清单声明 page='预警'
+
+### C3. 轮换项 name 与 screenshot_modules[*].name 的交集
+screenshot_modules name 去重数 = 22
+  1 离店                       alias=['离店'] 命中 screenshot_modules.name=['离店']
+  2 预订销售数据                   alias=['预订销售数据'] 命中 screenshot_modules.name=['预订销售数据']
+  3 热卖房型                     alias=['热卖房型'] 命中 screenshot_modules.name=['热卖房型']
+  4 问题房型                     alias=['问题房型'] 命中 screenshot_modules.name=['问题房型']
+  5 流量数据概况                   alias=['流量数据概况'] 命中 screenshot_modules.name=['流量数据概况']
+  6 流量来源分析                   alias=['流量来源分析'] 命中 screenshot_modules.name=['流量来源分析']
+  7 未来30天搜索热度                alias=['未来30天搜索热度'] 命中 screenshot_modules.name=['未来30天搜索热度']
+  8 经营对比                     alias=['经营对比'] 命中 screenshot_modules.name=['经营对比']
+  9 APP流量转化对比                alias=['APP流量转化对比'] 命中 screenshot_modules.name=['APP流量转化对比']
+ 10 服务质量对比                   alias=['服务质量对比'] 命中 screenshot_modules.name=['服务质量对比']
+ 11 实时流失订单及去向                alias=['实时流失订单及去向'] 命中 screenshot_modules.name=['实时流失订单及去向']
+ 12 每日热度-未来14日热度             alias=['每日热度-未来14日热度'] 命中 screenshot_modules.name=['每日热度-未来14日热度']
+ 13 用户行为                     alias=['用户行为'] 命中 screenshot_modules.name=['用户行为']
+ 14 审核记录                     alias=['审核记录'] 命中 screenshot_modules.name=['审核记录']
+ 15 金字塔-首页                   alias=['金字塔-首页'] 命中 screenshot_modules.name=['金字塔-首页']
+ 16 金字塔-每日                   alias=['金字塔-每日'] 命中 screenshot_modules.name=['金字塔-每日']
+ 17 HOS分/PSI分析               alias=['HOS分/PSI分析'] 命中 screenshot_modules.name=['HOS分/PSI分析']
+ 18 违约看板/违规中心                alias=['违约看板/违规中心'] 命中 screenshot_modules.name=['违约看板/违规中心']
+ 19 市场分析                     alias=['市场分析'] 命中 screenshot_modules.name=[]
+ 20 点评分析                     alias=['点评分析', '点评分析-列表'] 命中 screenshot_modules.name=[]
+ 21 预警-热点日历                  alias=['预警-热点日历'] 命中 screenshot_modules.name=[]
+
+### D. type 分布
+Counter({'module_screenshot': 17, 'fullpage': 4})
+collect=true 的项: ['用户行为', '预警-热点日历']
+
+### E. 今日轮换（复刻 app/rotation.py:daily_rotation）
+today=2026-09-30 toordinal=739889 len(items)=21 offset=17 n=5
+  [0] 违约看板/违规中心 / 商机中心 / module_screenshot
+  [1] 市场分析 / 市场分析 / fullpage
+  [2] 点评分析 / 点评 / fullpage
+  [3] 预警-热点日历 / 预警 / fullpage
+  [4] 离店 / 经营报告 / module_screenshot
+今日轮换项中 collectible（type!=fullpage 或 collect=true）: ['违约看板/违规中心', '预警-热点日历', '离店']
+
+### F. report_schedule.json 中的模块名单（供截图需求裁剪对照）
+report_schedule items 数 = 22
+  name='服务概览' windows={'daily': ['昨日']} daily_except_monday=True in_rotation=False in_sub=True
+  name='服务概览(周报)' windows={'monday': ['昨日']} daily_except_monday=None in_rotation=False in_sub=False
+  name='离店' windows={'daily': ['昨日'], 'monday': ['上周'], 'month1': ['上月']} daily_except_monday=None in_rotation=True in_sub=True
+  name='预订销售数据' windows={'daily': ['昨日'], 'monday': ['上周'], 'month1': ['上月']} daily_except_monday=None in_rotation=True in_sub=True
+  name='热卖房型' windows={'daily': ['昨日']} daily_except_monday=None in_rotation=True in_sub=True
+  name='问题房型' windows={'daily': ['昨日']} daily_except_monday=None in_rotation=True in_sub=True
+  name='流量数据概况' windows={'daily': ['昨日', '今日实时'], 'monday': ['过去7天'], 'month1': ['过去30天']} daily_except_monday=None in_rotation=True in_sub=True
+  name='流量来源分析' windows={'daily': ['昨日', '今日实时'], 'monday': ['过去7天'], 'month1': ['过去30天']} daily_except_monday=None in_rotation=True in_sub=True
+  name='未来30天搜索热度' windows={'daily': ['未来30天']} daily_except_monday=None in_rotation=True in_sub=True
+  name='经营对比' windows={'daily': ['昨日', '今日实时'], 'monday': ['过去7天'], 'month1': ['过去30天']} daily_except_monday=None in_rotation=True in_sub=True
+  name='APP流量转化对比' windows={'daily': ['昨日', '今日实时'], 'monday': ['过去7天'], 'month1': ['过去30天']} daily_except_monday=None in_rotation=True in_sub=True
+  name='服务质量对比' windows={'monday': ['上周']} daily_except_monday=None in_rotation=True in_sub=True
+  name='实时流失订单及去向' windows={'daily': ['昨日'], 'monday': ['上周'], 'month1': ['上月']} daily_except_monday=None in_rotation=True in_sub=True
+  name='竞争圈榜单-销售排名' windows={'daily': ['今日实时', '昨日']} daily_except_monday=None in_rotation=False in_sub=True
+  name='竞争圈榜单-流量排名' windows={'daily': ['今日实时', '昨日']} daily_except_monday=None in_rotation=False in_sub=True
+  name='每日热度-未来14日热度' windows={'daily': ['未来14天']} daily_except_monday=None in_rotation=True in_sub=True
+  name='用户行为' windows={'daily': ['昨日']} daily_except_monday=None in_rotation=True in_sub=True
+  name='金字塔-首页' windows={'daily': ['今日实时', '昨日']} daily_except_monday=None in_rotation=True in_sub=True
+  name='金字塔-数据报告-我的数据' windows={'daily': ['过去7天']} daily_except_monday=None in_rotation=False in_sub=False
+  name='金字塔-数据报告-同行对比' windows={'monday': ['上周'], 'month1': ['上月']} daily_except_monday=None in_rotation=False in_sub=True
+  name='审核记录' windows={'daily': ['昨日']} daily_except_monday=None in_rotation=True in_sub=True
+  name='HOS分/PSI分析' windows={'daily': ['实时']} daily_except_monday=None in_rotation=True in_sub=True
+
+### G. 21 项轮换 name 是否在 report_schedule 中
+  1 离店                       in_report_schedule=True
+  2 预订销售数据                   in_report_schedule=True
+  3 热卖房型                     in_report_schedule=True
+  4 问题房型                     in_report_schedule=True
+  5 流量数据概况                   in_report_schedule=True
+  6 流量来源分析                   in_report_schedule=True
+  7 未来30天搜索热度                in_report_schedule=True
+  8 经营对比                     in_report_schedule=True
+  9 APP流量转化对比                in_report_schedule=True
+ 10 服务质量对比                   in_report_schedule=True
+ 11 实时流失订单及去向                in_report_schedule=True
+ 12 每日热度-未来14日热度             in_report_schedule=True
+ 13 用户行为                     in_report_schedule=True
+ 14 审核记录                     in_report_schedule=True
+ 15 金字塔-首页                   in_report_schedule=True
+ 16 金字塔-每日                   in_report_schedule=False
+ 17 HOS分/PSI分析               in_report_schedule=True
+ 18 违约看板/违规中心                in_report_schedule=False
+ 19 市场分析                     in_report_schedule=False
+ 20 点评分析                     in_report_schedule=False
+ 21 预警-热点日历                  in_report_schedule=False

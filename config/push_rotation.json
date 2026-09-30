@@ -1,0 +1,186 @@
+{
+  "daily_count": 5,
+  "rotation": "按日期偏移取 5 个模块循环轮换(见 app/rotation.py);采集+截图+推送共用本清单",
+  "_comment": "甲方《企微机器人汇报要求》28 推送项中 #3~#22 模块级项(20 条)。name/page 与 config/api_rules.json pages[*].sub_modules[*] 对应;alias=模块截图键(screenshot_modules[*].name,缺失时按策略跳过)。顺序=甲方要求顺序。@2026-08-25 采集侧轮换整改:每日仅采集+截图本清单 5 项;如需纳入服务概览等其余项,直接向 items 追加即可。",
+  "items": [
+    {
+      "name": "离店",
+      "page": "经营报告",
+      "type": "module_screenshot",
+      "alias": [
+        "离店"
+      ]
+    },
+    {
+      "name": "预订销售数据",
+      "page": "经营报告",
+      "type": "module_screenshot",
+      "alias": [
+        "预订销售数据"
+      ]
+    },
+    {
+      "name": "热卖房型",
+      "page": "经营报告",
+      "type": "module_screenshot",
+      "alias": [
+        "热卖房型"
+      ]
+    },
+    {
+      "name": "问题房型",
+      "page": "经营报告",
+      "type": "module_screenshot",
+      "alias": [
+        "问题房型"
+      ]
+    },
+    {
+      "name": "流量数据概况",
+      "page": "经营报告",
+      "type": "module_screenshot",
+      "alias": [
+        "流量数据概况"
+      ]
+    },
+    {
+      "name": "流量来源分析",
+      "page": "经营报告",
+      "type": "module_screenshot",
+      "alias": [
+        "流量来源分析"
+      ]
+    },
+    {
+      "name": "未来30天搜索热度",
+      "page": "经营报告",
+      "type": "module_screenshot",
+      "alias": [
+        "未来30天搜索热度"
+      ]
+    },
+    {
+      "name": "经营对比",
+      "page": "竞争圈动态",
+      "type": "module_screenshot",
+      "alias": [
+        "经营对比"
+      ]
+    },
+    {
+      "name": "APP流量转化对比",
+      "page": "竞争圈动态",
+      "type": "module_screenshot",
+      "alias": [
+        "APP流量转化对比"
+      ]
+    },
+    {
+      "name": "服务质量对比",
+      "page": "竞争圈动态",
+      "type": "module_screenshot",
+      "alias": [
+        "服务质量对比"
+      ]
+    },
+    {
+      "name": "实时流失订单及去向",
+      "page": "竞争圈动态",
+      "type": "module_screenshot",
+      "alias": [
+        "实时流失订单及去向"
+      ]
+    },
+    {
+      "name": "每日热度-未来14日热度",
+      "page": "市场分析",
+      "type": "module_screenshot",
+      "alias": [
+        "每日热度-未来14日热度"
+      ]
+    },
+    {
+      "name": "用户行为",
+      "page": "用户行为",
+      "type": "fullpage",
+      "collect": true,
+      "alias": [
+        "用户行为"
+      ],
+      "url": "https://ebooking.ctrip.com/datacenter/inland/userbehavior/user?microJump=true",
+      "shot_name": "用户行为-整页"
+    },
+    {
+      "name": "审核记录",
+      "page": "挂牌管理",
+      "type": "module_screenshot",
+      "alias": [
+        "审核记录"
+      ]
+    },
+    {
+      "name": "金字塔-首页",
+      "page": "广告营销",
+      "type": "module_screenshot",
+      "alias": [
+        "金字塔-首页"
+      ]
+    },
+    {
+      "name": "金字塔-每日",
+      "page": "广告营销",
+      "type": "module_screenshot",
+      "alias": [
+        "金字塔-每日"
+      ]
+    },
+    {
+      "name": "HOS分/PSI分析",
+      "page": "商机中心",
+      "type": "module_screenshot",
+      "alias": [
+        "HOS分/PSI分析"
+      ]
+    },
+    {
+      "name": "违约看板/违规中心",
+      "page": "商机中心",
+      "type": "module_screenshot",
+      "alias": [
+        "违约看板/违规中心"
+      ]
+    },
+    {
+      "name": "市场分析",
+      "page": "市场分析",
+      "type": "fullpage",
+      "alias": [
+        "市场分析"
+      ],
+      "url": "https://ebooking.ctrip.com/ebkgrowth/datacenter/marketanalysis/marketheat?microJump=true",
+      "shot_name": "市场分析-整页"
+    },
+    {
+      "name": "点评分析",
+      "page": "点评",
+      "type": "fullpage",
+      "alias": [
+        "点评分析",
+        "点评分析-列表"
+      ],
+      "url": "https://ebooking.ctrip.com/comment/commentList?microJump=true",
+      "shot_name": "点评分析-整页"
+    },
+    {
+      "name": "预警-热点日历",
+      "page": "预警",
+      "type": "fullpage",
+      "collect": true,
+      "alias": [
+        "预警-热点日历"
+      ],
+      "url": "https://ebooking.ctrip.com/ebkovsroom/inventory/calendar?microJump=true",
+      "shot_name": "预警-热点日历"
+    }
+  ]
+}

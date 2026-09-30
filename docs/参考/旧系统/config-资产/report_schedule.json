@@ -1,0 +1,382 @@
+{
+  "_comment": "计划书③ 报告节奏配置(v2.0,纯数据模式;2026-08-25 按用户决定移除 AI 分析)。桶: daily=每日/monday=周一/month1=每月1号/realtime=实时(问答触发)。窗口:① §19.1 中文七窗口 + 未来30天(模块9)+ 未来14天(模块15,以②实测校准)。mode: data(内容=数据模板直接渲染,不自带 LLM 调用)。daily_except_monday=true 表示周一让位给周报(服务概览)。【2026-08-25 恢复】服务概览日报/周报 2 项(以模块级每日固定采集恢复,数据源=module_records;周报=近 7 天按字段 sum/avg/last 聚合,见 item.aggregate)。",
+  "defaults": {
+    "push_time": "09:00"
+  },
+  "items": [
+    {
+      "id": "svc_daily",
+      "name": "服务概览",
+      "page": "经营报告",
+      "windows": {
+        "daily": [
+          "昨日"
+        ]
+      },
+      "mode": "data",
+      "daily_except_monday": true
+    },
+    {
+      "id": "svc_weekly",
+      "name": "服务概览(周报)",
+      "page": "经营报告",
+      "windows": {
+        "monday": [
+          "昨日"
+        ]
+      },
+      "mode": "data",
+      "aggregate": {
+        "days": 7,
+        "sum": [
+          "交易额(元)",
+          "已售间夜",
+          "订单量",
+          "今日访客量",
+          "今日订单量",
+          "竞争订单量",
+          "竞争交易额(元)"
+        ],
+        "avg": [
+          "出租率(%)",
+          "出租率(市场,%)",
+          "平均房价(元)",
+          "竞争度(%)",
+          "热度",
+          "服务分",
+          "收藏数",
+          "5分钟回复率(%)",
+          "IM评分"
+        ],
+        "last": [
+          "携程评分",
+          "经营综合得分",
+          "得分等级"
+        ]
+      }
+    },
+    {
+      "id": "checkout",
+      "name": "离店",
+      "page": "经营报告",
+      "windows": {
+        "daily": [
+          "昨日"
+        ],
+        "monday": [
+          "上周"
+        ],
+        "month1": [
+          "上月"
+        ]
+      },
+      "mode": "data",
+      "realtime_ask": true
+    },
+    {
+      "id": "booking",
+      "name": "预订销售数据",
+      "page": "经营报告",
+      "windows": {
+        "daily": [
+          "昨日"
+        ],
+        "monday": [
+          "上周"
+        ],
+        "month1": [
+          "上月"
+        ]
+      },
+      "mode": "data",
+      "realtime_ask": true
+    },
+    {
+      "id": "hot_room",
+      "name": "热卖房型",
+      "page": "经营报告",
+      "windows": {
+        "daily": [
+          "昨日"
+        ]
+      },
+      "mode": "data"
+    },
+    {
+      "id": "issue_room",
+      "name": "问题房型",
+      "page": "经营报告",
+      "windows": {
+        "daily": [
+          "昨日"
+        ]
+      },
+      "mode": "data"
+    },
+    {
+      "id": "flow_overview",
+      "name": "流量数据概况",
+      "page": "经营报告",
+      "windows": {
+        "daily": [
+          "昨日",
+          "今日实时"
+        ],
+        "monday": [
+          "过去7天"
+        ],
+        "month1": [
+          "过去30天"
+        ]
+      },
+      "mode": "data",
+      "images": [
+        {
+          "page": "经营报告",
+          "module": "流量数据概况"
+        }
+      ]
+    },
+    {
+      "id": "flow_source",
+      "name": "流量来源分析",
+      "page": "经营报告",
+      "windows": {
+        "daily": [
+          "昨日",
+          "今日实时"
+        ],
+        "monday": [
+          "过去7天"
+        ],
+        "month1": [
+          "过去30天"
+        ]
+      },
+      "mode": "data"
+    },
+    {
+      "id": "search_heat_30d",
+      "name": "未来30天搜索热度",
+      "page": "经营报告",
+      "windows": {
+        "daily": [
+          "未来30天"
+        ]
+      },
+      "mode": "data",
+      "pick_rule": {
+        "field_from": [
+          "pv",
+          "uv",
+          "order_convert_rate"
+        ],
+        "default": "pv"
+      }
+    },
+    {
+      "id": "biz_compare",
+      "name": "经营对比",
+      "page": "竞争圈动态",
+      "windows": {
+        "daily": [
+          "昨日",
+          "今日实时"
+        ],
+        "monday": [
+          "过去7天"
+        ],
+        "month1": [
+          "过去30天"
+        ]
+      },
+      "mode": "data",
+      "images": [
+        {
+          "page": "竞争圈动态",
+          "module": "经营对比"
+        }
+      ]
+    },
+    {
+      "id": "app_flow_compare",
+      "name": "APP流量转化对比",
+      "page": "竞争圈动态",
+      "windows": {
+        "daily": [
+          "昨日",
+          "今日实时"
+        ],
+        "monday": [
+          "过去7天"
+        ],
+        "month1": [
+          "过去30天"
+        ]
+      },
+      "mode": "data"
+    },
+    {
+      "id": "svc_compare",
+      "name": "服务质量对比",
+      "page": "竞争圈动态",
+      "windows": {
+        "monday": [
+          "上周"
+        ]
+      },
+      "mode": "data"
+    },
+    {
+      "id": "loss_order",
+      "name": "实时流失订单及去向",
+      "page": "竞争圈动态",
+      "windows": {
+        "daily": [
+          "昨日"
+        ],
+        "monday": [
+          "上周"
+        ],
+        "month1": [
+          "上月"
+        ]
+      },
+      "mode": "data"
+    },
+    {
+      "id": "compete_sell_rank",
+      "name": "竞争圈榜单-销售排名",
+      "page": "竞争圈动态",
+      "windows": {
+        "daily": [
+          "今日实时",
+          "昨日"
+        ]
+      },
+      "mode": "data"
+    },
+    {
+      "id": "compete_flow_rank",
+      "name": "竞争圈榜单-流量排名",
+      "page": "竞争圈动态",
+      "windows": {
+        "daily": [
+          "今日实时",
+          "昨日"
+        ]
+      },
+      "mode": "data"
+    },
+    {
+      "id": "market_heat",
+      "name": "每日热度-未来14日热度",
+      "page": "市场分析",
+      "windows": {
+        "daily": [
+          "未来14天"
+        ]
+      },
+      "mode": "data"
+    },
+    {
+      "id": "user_behavior",
+      "name": "用户行为",
+      "page": "用户行为",
+      "windows": {
+        "daily": [
+          "昨日"
+        ]
+      },
+      "mode": "data"
+    },
+    {
+      "id": "pyramid_home",
+      "name": "金字塔-首页",
+      "page": "广告营销",
+      "windows": {
+        "daily": [
+          "今日实时",
+          "昨日"
+        ]
+      },
+      "mode": "data"
+    },
+    {
+      "id": "pyramid_daily",
+      "name": "金字塔-数据报告-我的数据",
+      "page": "广告营销",
+      "windows": {
+        "daily": [
+          "过去7天"
+        ]
+      },
+      "mode": "data",
+      "condition": {
+        "field": "投产比",
+        "op": ">",
+        "value": 3
+      },
+      "module": "金字塔-每日"
+    },
+    {
+      "id": "peer_compare",
+      "name": "金字塔-数据报告-同行对比",
+      "page": "广告营销",
+      "windows": {
+        "monday": [
+          "上周"
+        ],
+        "month1": [
+          "上月"
+        ]
+      },
+      "mode": "data",
+      "on_demand": true,
+      "images": [
+        {
+          "shot": true,
+          "url": "https://ebooking.ctrip.com/toolcenter/cpc/comparison?microJump=true",
+          "selector": ".pyramid-comparison-box .pyramid-diagnostic-chart-row",
+          "name": "同行对比-效果"
+        },
+        {
+          "shot": true,
+          "url": "https://ebooking.ctrip.com/toolcenter/cpc/comparison?microJump=true",
+          "selector": ".pyramid-comparison-box",
+          "click": "计划类数据",
+          "name": "同行对比-计划"
+        }
+      ]
+    },
+    {
+      "id": "audit_records",
+      "name": "审核记录",
+      "page": "挂牌管理",
+      "windows": {
+        "daily": [
+          "昨日"
+        ]
+      },
+      "mode": "data",
+      "condition": {
+        "field": "公示内容",
+        "present": true
+      }
+    },
+    {
+      "id": "hos_psi",
+      "name": "HOS分/PSI分析",
+      "page": "商机中心",
+      "windows": {
+        "daily": [
+          "实时"
+        ]
+      },
+      "mode": "data",
+      "condition": {
+        "present": true
+      }
+    }
+  ]
+}
