@@ -140,6 +140,69 @@ poetry run hoteldata serve
 
 ---
 
+## 技术要点索引
+
+> 每条都给出**文件路径**,可直接在仓库中查看实现。
+
+### 架构
+
+| 要点 | 实现位置 | 说明 |
+|---|---|---|
+| 分层与域隔离 | `src/hoteldata/domains/`、`runtime.py` | 业务域 / 基础设施 / 装配三层;域间不互相依赖,注入点收敛到装配层 |
+| 统一状态机 | `domains/collect/contract.py` | `ok / degraded / no_data / failed` —— **"无数据"与"失败"在类型层面分开** |
+| 任务注册表为唯一事实源 | `src/hoteldata/jobs.py` | 22 个任务的时刻表集中定义,`.env` 只放开关 |
+
+### 并发与资源管理
+
+| 要点 | 实现位置 | 说明 |
+|---|---|---|
+| 会话资源池 + LRU 淘汰 | `infra/browser.py` | 上限 `max_contexts=4`;超出淘汰**空闲**上下文,全忙时排队等待 |
+| 双层令牌桶限速 | `infra/rate_limit.py` | **平台级** + **账号级**两层;平台限频 0.6s/请求(风控闸门) |
+| 异步长连接 | `domains/bot/client.py` | `websockets` + `asyncio.Task`,单进程多路连接;心跳保活、分片传输 |
+
+### 可靠性
+
+| 要点 | 实现位置 | 说明 |
+|---|---|---|
+| 三级异常分类 | `domains/compare/contract.py` | `可重试` / `不可重试` / `需人工验证` 分开建模,处置方式各不相同 |
+| 全链路幂等 | 18 处 `on_conflict_do_*` | 会话、群绑定、告警状态、比价行等均以唯一约束保证重跑不产生重复 |
+| 任务抢占 + 补跑 | `infra/tasks.py` | 「抢占即执行」防并发重跑;停机后按时间窗补跑,超 `max_delay` 记 `skipped` |
+| 唯一约束陷阱修复 | `migrations/versions/0006_*.py` | PostgreSQL 中 `NULL` 在 UNIQUE 约束里互不相等 → 改用 `NULLS NOT DISTINCT` |
+
+### 反爬与浏览器自动化
+
+| 要点 | 实现位置 | 说明 |
+|---|---|---|
+| 拟人化行为集 | `domains/compare/human.py` | 逐字符变速打字、分步鼠标移动、随机滚动、抖动、弹窗自动关闭 |
+| 验证码检测 | `domains/compare/human.py` | 识别到验证码即停止,交由人工处理 |
+| 双通道取价 | `domains/compare/platforms/` | 接口取元数据(ID/坐标/评分)+ 页面取价格,按名称归一化合并 |
+| 视觉读价兜底 | `domains/compare/vision.py` | 页面结构无法解析时,用视觉模型读截图;带预算控制 |
+
+### 安全
+
+| 要点 | 实现位置 | 说明 |
+|---|---|---|
+| 凭据加密 | `infra/crypto.py` | Fernet 加密,支持 `kid` 密钥轮换;明文不落盘 |
+| 后台认证 | `web/auth.py` | PBKDF2-HMAC-SHA256 / **600,000** 次迭代(OWASP 2023 建议值) |
+| 会话与审计 | `web/auth.py`、表 `ops_admin_audit` | 签名 cookie;审计表**只追加** |
+
+### 数据层
+
+| 要点 | 实现位置 | 说明 |
+|---|---|---|
+| 21 张表 / 7 个版本化迁移 | `infra/models/`、`infra/migrations/` | 数据库变更进代码评审 |
+| 异步驱动 | SQLAlchemy 2 异步 + asyncpg | 全链路异步,无阻塞调用 |
+
+### 工程化
+
+| 要点 | 实现位置 | 说明 |
+|---|---|---|
+| 编号验收体系 | `scripts/verify_acceptance{,2,3}.py` | **84 项**(V1–V84),每项输出**可核验证据**而非仅通过/失败 |
+| 自检断言 | `check_compare_{units,platforms}.py`、`check_admin_web.py` | **167 条**(88 + 48 + 31) |
+| 平台改版诊断 | `hoteldata price probe`、`scripts/diag_*` | 逐条报选择器命中数,快速定位失效点 |
+
+---
+
 ## 定时任务
 
 所有定时任务的时刻表集中定义在代码里的任务注册表中(`src/hoteldata/jobs.py`),
